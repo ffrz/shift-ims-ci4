@@ -176,7 +176,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?= base_url('/profile/') ?>" class="nav-link <?= nav_active($this, 'profile') ?>">
+              <a href="<?= base_url('/users/profile/') ?>" class="nav-link <?= nav_active($this, 'profile') ?>">
                 <i class="nav-icon fas fa-user"></i>
                 <p>Profil Saya</p>
               </a>

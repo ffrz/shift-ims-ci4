@@ -141,7 +141,7 @@ abstract class BaseController extends Controller
         return $this->models['stock_adjustment'];
     }
 
-        /**
+    /**
      * 
      * @return \App\Models\StockUpdateDetailModel
      */
@@ -152,5 +152,18 @@ abstract class BaseController extends Controller
         }
 
         return $this->models['stock_update_detail'];
+    }
+
+    /**
+     * 
+     * @return \App\Models\UserModel
+     */
+    public function getUserModel()
+    {
+        if (!isset($this->models['user'])) {
+            $this->models['user'] = new \App\Models\UserModel($this->db);
+        }
+
+        return $this->models['user'];
     }
 }

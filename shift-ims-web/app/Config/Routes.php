@@ -100,6 +100,18 @@ $routes->group('stock-updates', function($routes) {
     $routes->post('delete/(:num)', 'StockUpdateController::delete/$1');
 });
 
+$routes->group('users', function($routes) {
+    $routes->get('', 'UserController::index');
+    $routes->match(['get', 'post'], 'edit/(:num)', 'UserController::edit/$1');
+    $routes->match(['get', 'post'], 'profile', 'UserController::profile');
+    $routes->get('delete/(:num)', 'UserController::delete/$1');
+});
+
+$routes->group('auth', function($routes) {
+    $routes->match(['get', 'post'], 'login', 'AuthController::login');
+    $routes->get('logout', 'AuthController::logout');
+});
+
 
 /*
  * --------------------------------------------------------------------
