@@ -10,31 +10,34 @@ $this->extend('_layouts/default')
     <form class="form-horizontal quick-form" method="POST">
         <div class="card-body">
             <?= csrf_field() ?>
-            <div class="form-group row">
-                <label for="name" class="col-sm-2 col-form-label">Nama</label>
-                <div class="col-sm-10">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="name">Nama</label>
                     <input type="text" class="form-control <?= !empty($errors['name']) ? 'is-invalid' : '' ?>" id="name" placeholder="Nama" name="name" value="<?= esc($data->name) ?>">
+                    <?php if (!empty($errors['name'])) : ?>
+                        <span class="error form-error">
+                            <?= $errors['name'] ?>
+                        </span>
+                    <?php endif ?>
                 </div>
-                <?php if (!empty($errors['name'])) : ?>
-                    <span class="offset-sm-2 col-sm-10 error form-error">
-                        <?= $errors['name'] ?>
-                    </span>
-                <?php endif ?>
-            </div>
-            <div class="form-group row">
-                <label for="contacts" class="col-sm-2 col-form-label">Kontak</label>
-                <div class="col-sm-10">
+                <div class="form-group col-md-4">
+                    <label for="contacts">Kontak</label>
                     <input type="text" class="form-control" id="contacts" placeholder="Kontak" name="contacts" value="<?= esc($data->contacts) ?>">
                 </div>
+                <div class="form-group col-md-4">
+                    <label for="url">URL</label>
+                    <input type="text" class="form-control" id="url" placeholder="URL" name="url" value="<?= esc($data->url) ?>">
+
+                </div>
             </div>
-            <div class="form-group row">
-                <label for="address" class="col-sm-2 col-form-label">Alamat</label>
-                <div class="col-sm-10">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="address">Alamat</label>
                     <textarea class="form-control" id="address" placeholder="Alamat" name="address"><?= esc($data->address) ?></textarea>
                 </div>
             </div>
-            <div class="form-group row">
-                <div class="offset-sm-2 col-sm-10">
+            <div class="form-row">
+                <div class="form-group col-sm-12">
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="active" name="active" value="1" <?= $data->active ? 'checked="checked"' : '' ?>>
                         <label class="custom-control-label" for="active">Aktif</label>
@@ -43,8 +46,8 @@ $this->extend('_layouts/default')
             </div>
         </div>
         <div class="card-footer">
-            <button type="submit" class="btn btn-primary mr-2"><i class="fas fa-save mr-2"></i> Simpan</button>
-            <a href="<?= base_url('/suppliers/') ?>" class="btn btn-default"><i class="fas fa-arrow-left mr-2"></i> Batal</a>
+            <a href="<?= base_url('/suppliers/') ?>" class="btn btn-default"><i class="fas fa-arrow-left mr-2"></i> Kembali</a>
+            <button type="submit" class="btn btn-primary float-right"><i class="fas fa-save mr-2"></i> Simpan</button>
         </div>
     </form>
 </div>

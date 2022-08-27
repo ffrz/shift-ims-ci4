@@ -21,7 +21,6 @@ $this->extend('_layouts/default')
 
 <?= $this->section('content') ?>
 <div class="card card-primary">
-    <div class="card-header line"></div>
     <div class="card-body">
         <form method="post">
         <div class="row">

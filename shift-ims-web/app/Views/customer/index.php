@@ -31,8 +31,9 @@ $this->addButtonLink = [
                                 <td><?= esc($item->address) ?></td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <a href="<?= base_url('/customers/edit/' . $item->id) ?>" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></a>
-                                        <a href="<?= base_url('/customers/delete/' . $item->id) ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
+                                        <a href="<?= base_url("/customers/view/$item->id") ?>" class="btn btn-default btn-xs"><i class="fa fa-eye"></i></a>
+                                        <a href="<?= base_url("/customers/edit/$item->id") ?>" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></a>
+                                        <a href="<?= base_url("/customers/delete/$item->id") ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
                                     </div>
                                 </td>
                             </tr>

@@ -20,6 +20,13 @@ class ServiceOrderModel extends Model
         'notes'
     ];
 
+    public function getAllByCustomerId($id)
+    {
+        return $this->db->query(
+            'select * from service_orders where customer_id=:id: order by date desc', ['id' => $id]
+        )->getResultObject();
+    }
+
     public function getAll($filter)
     {
         $sql = 'select * from service_orders';

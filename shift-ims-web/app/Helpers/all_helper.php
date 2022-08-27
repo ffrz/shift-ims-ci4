@@ -48,9 +48,10 @@ function str_to_int($str)
 
 function format_service_order_status($status) {
     switch ($status) {
-        case 0: return 'Aktif';
-        case 1: return 'Selesai';
+        case 1: return 'Aktif';
+        case 2: return 'Selesai';
     }
+    return 'unknown status';
 }
 
 function format_service_status($status) {

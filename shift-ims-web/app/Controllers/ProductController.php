@@ -37,6 +37,28 @@ class ProductController extends BaseController
         ]);
     }
 
+    public function view($id)
+    {
+        $data = $this->getProductModel()->find($id);
+        $data->category = $this->getProductCategoryModel()->find((int)$data->category_id);
+        $data->supplier = $this->getPartyModel()->find((int)$data->supplier_id);   
+
+        $stockUpdates = $this->db->query(
+            "select
+             sud.quantity, sud.cost, sud.price,
+             su.code, su.id, su.type, su.datetime,
+             p.name party_name
+             from stock_update_details sud
+             inner join stock_updates su on su.id = sud.parent_id
+             left join parties p on p.id = su.party_id
+             where sud.product_id=$data->id"
+        )->getResultObject();
+        return view('product/view', [
+            'data' => $data,
+            'stockUpdates' => $stockUpdates
+        ]);
+    }
+
     public function edit($id, $duplicate = false)
     {
         $model = $this->getProductModel();

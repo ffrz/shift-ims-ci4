@@ -28,6 +28,10 @@ class UserController extends BaseController
             }
         }
 
+        if ($item->username == 'admin') {
+            return redirect()->to(base_url('users'))->with('error', 'Akun ini tidak dapat diubah.');
+        }
+
         $errors = [];
 
         if ($this->request->getMethod() === 'post') {
@@ -122,6 +126,12 @@ class UserController extends BaseController
     {
         $model = $this->getUserModel();
         $user = $model->find($id);
+
+        if ($user->username == 'admin') {
+            return redirect()->to(base_url('users'))
+                ->with('error', 'Akun <b>' . esc($user->username) . '</b> tidak dapat dihapus.');
+        }
+
         $user->active = 0;
         $model->save($user);
         return redirect()->to(base_url('users'))->with('info', 'Pengguna telah dinonaktifkan.');

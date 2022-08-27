@@ -64,7 +64,7 @@ $this->extend('_layouts/default')
                                 <td class="text-right"><?= format_number($item->total_cost) ?></td>
                                 <td><?= $item->notes ?></td>
                                 <td class="text-center">
-                                    <a href="<?= base_url('/stock-updates/view/' . $item->id) ?>" class="btn btn-primary btn-xs mr-2"><i class="fa fa-eye"></i></a>
+                                    <a href="<?= base_url("/purchase-orders/view/$item->id") ?>" class="btn btn-default btn-xs mr-2"><i class="fa fa-eye"></i></a>
                                 </td>
                             </tr>
                         <?php endforeach ?>

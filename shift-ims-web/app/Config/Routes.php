@@ -41,12 +41,14 @@ $routes->group('customers', static function($routes) {
     $routes->get('', 'CustomerController::index');
     $routes->match(['get', 'post'], 'edit/(:num)', 'CustomerController::edit/$1');
     $routes->get('delete/(:num)', 'CustomerController::delete/$1');
+    $routes->get('view/(:num)', 'CustomerController::view/$1');
 });
 
 $routes->group('suppliers', static function($routes) {
     $routes->get('', 'SupplierController::index');
     $routes->match(['get', 'post'], 'edit/(:num)', 'SupplierController::edit/$1');
     $routes->get('delete/(:num)', 'SupplierController::delete/$1');
+    $routes->get('view/(:num)', 'SupplierController::view/$1');
 });
 
 
@@ -62,6 +64,7 @@ $routes->group('products', function($routes) {
     $routes->match(['get', 'post'], 'edit/(:num)', 'ProductController::edit/$1');
     $routes->match(['get', 'post'], 'duplicate/(:num)', 'ProductController::duplicate/$1');
     $routes->get('delete/(:num)', 'ProductController::delete/$1');
+    $routes->get('view/(:num)', 'ProductController::view/$1');
 });
 
 $routes->group('service-orders', function($routes) {
@@ -80,6 +83,7 @@ $routes->group('stock-adjustments', function($routes) {
 $routes->group('purchase-orders', function($routes) {
     $routes->get('', 'PurchaseOrderController::index');
     $routes->match(['get', 'post'], 'add', 'PurchaseOrderController::add');
+    $routes->get('view/(:num)', 'PurchaseOrderController::view/$1');
 });
 
 $routes->group('sales-orders', function($routes) {

@@ -18,7 +18,7 @@ $this->extend('_layouts/default')
             <div class="col-md-12">
                 <table class="data-table display table table-bordered table-striped table-condensed">
                     <thead>
-                        <tr>
+                        <tr style="text-align:center">
                             <th>Nama</th>
                             <th>Kontak</th>
                             <th>Alamat</th>
@@ -35,8 +35,9 @@ $this->extend('_layouts/default')
                                 <td><?= esc($item->url) ?></td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                    <a href="<?= base_url('/suppliers/edit/' . $item->id) ?>" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></a>
-                                    <a href="<?= base_url('/suppliers/delete/' . $item->id) ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
+                                    <a href="<?= base_url("/suppliers/view/$item->id") ?>" class="btn btn-default btn-xs"><i class="fa fa-eye"></i></a>
+                                    <a href="<?= base_url("/suppliers/edit/$item->id") ?>" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></a>
+                                    <a href="<?= base_url("/suppliers/delete/$item->id") ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
                                     </div>
                                 </td>
                             </tr>

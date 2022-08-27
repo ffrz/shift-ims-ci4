@@ -47,6 +47,27 @@ class PurchaseOrderController extends BaseController
         ]);
     }
 
+
+    public function view($id)
+    {
+        $model = $this->getStockUpdateModel();
+        $order = $model->find($id);
+        $order->supplier = null;
+        if ($order->party_id) {
+            $order->supplier = $this->getPartyModel()->find($order->party_id);
+        }
+        $order->items = $this->db->query("
+            select d.*, p.name, p.uom
+            from stock_update_details d
+            inner join products p on p.id = d.product_id
+            where parent_id=$order->id")
+            ->getResultObject();
+
+        return view('purchase-order/view', [
+            'data' => $order
+        ]);
+    }
+
     public function add()
     {
         $model = $this->getStockUpdateModel();

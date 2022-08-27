@@ -85,4 +85,14 @@ class StockUpdateModel extends Model
         }
     }
 
+    public function getAllByPartyId($partyId)
+    {
+        return $this->db->query('
+            select * from stock_updates
+            where party_id=:party_id:
+            order by datetime desc',
+            [ 'party_id' => $partyId])
+            ->getResultObject();
+    }
+
 }
