@@ -9,22 +9,50 @@
 -
 
 # IMPLEMENTASI FITUR
-- Login
-- Logout
-- Retur Pembelian
-  - Daftar
-  - Tambah
-  - Hapus
-  - View Detail
-- Retur Penjualan
-  - Daftar
-  - Tambah
-  - Hapus
-  - View Detail
+☐ Dashboard
+☐ Penjualan
+  ☐ Daftar
+  ☐ Tambah
+  ☐ Detail
+  ☐ Print
+
+☐ Pelanggan
+  ☐ Daftar
+  ☐ Tambah
+  ☐ Edit
+  ☐ Hapus
+  ☐ Nonaktif
+  ☐ Detail
+  ☐ Riwayat Transaksi
+
+☐ Pembelian
+☐ Pemasok
+☐ Produk
+☐ Kategori Produk
+☐ Stok Opname
+☐ Riwayat Stok
+☐ Auth
+  ✓ Login
+  ✓ Logout
+  ☐ Remember session
+
+☐ Retur Pembelian
+  ☐ Daftar
+  ☐ Tambah
+  ☐ Hapus
+  ☐ View Detail
+
+☐ Retur Penjualan
+  ☐ Daftar
+  ☐ Tambah
+  ☐ Hapus
+  ☐ View Detail
+
 - User
-  - Daftar
-  - Tambah
-  - Edit
-  - Hapus
-  - View Detail
-  - Edit Profile
+  ✓ Daftar
+  ✓ Tambah
+  ✓ Edit
+  ✓ Nonaktifkan
+  ✓ Edit Profile
+  ? Hapus
+  ? View Detail
