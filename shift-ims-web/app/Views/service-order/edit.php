@@ -13,8 +13,8 @@ $this->menuActive = 'add-service-order';
 <?= $this->section('content') ?>
 <div class="card card-primary">
     <form class="form-horizontal quick-form" method="POST">
+        <?= csrf_field() ?>
         <div class="card-body">
-            <?= csrf_field() ?>
             <input type="hidden" name="id" value="<?= $data->id ?>">
             <div class="row">
                 <h5 class="col-md-12">Info Order</h5>
@@ -27,11 +27,7 @@ $this->menuActive = 'add-service-order';
                 <div class="form-group col-md-4">
                     <label for="date">Tanggal</label>
                     <div class="input-group date" id="date" data-target-input="nearest">
-                        <input type="text" class="form-control datetimepicker-input" data-target="#date"
-                            name="date" value="<?= esc($data->date) ?>"/>
-                        <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
-                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                        </div>
+                        <input type="date" class="form-control" data-target="#date" name="date" value="<?= esc($data->date) ?>" lang="id_ID">
                     </div>
                 </div>
                 <div class="form-group col-md-4">

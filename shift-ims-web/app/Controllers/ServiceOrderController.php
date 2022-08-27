@@ -31,7 +31,7 @@ class ServiceOrderController extends BaseController
 
         if ($id == 0) {
             $item = new \App\Entities\ServiceOrder();
-            $item->date = date('d/m/Y');
+            $item->date = date('Y-m-d');
         }
         else {
             $item = $model->find($id);
@@ -48,7 +48,6 @@ class ServiceOrderController extends BaseController
 
         if ($this->request->getMethod() === 'post') {
             $item->date = trim($this->request->getPost('date'));
-            $item->date = DateTime::createFromFormat('d/m/Y', $item->date)->format('Y-m-d');
             $item->status = intval($this->request->getPost('status'));
             $item->customer_id = intval($this->request->getPost('customer_id'));
             $item->customer_name = trim($this->request->getPost('customer_name'));

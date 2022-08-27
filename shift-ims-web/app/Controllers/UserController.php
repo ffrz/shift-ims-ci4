@@ -35,7 +35,11 @@ class UserController extends BaseController
         $errors = [];
 
         if ($this->request->getMethod() === 'post') {
-            $item->username = trim($this->request->getPost('username'));
+            if (!$id) {
+                // username tidak boleh diganti
+                $item->username = trim($this->request->getPost('username'));
+            }
+
             $item->fullname = trim($this->request->getPost('fullname'));
             $item->password = $this->request->getPost('password');
             $item->is_admin = (int)$this->request->getPost('is_admin');
@@ -44,16 +48,13 @@ class UserController extends BaseController
             if ($item->username == '') {
                 $errors['username'] = 'Username harus diisi.';
             }
-
-            if ($model->exists($item->username, $item->id)) {
+            else if ($model->exists($item->username, $item->id)) {
                 $errors['username'] = 'Username sudah digunakan, harap gunakan nama lain.';
             }
-            
-            if ($item->fullname == '') {
+            else if ($item->fullname == '') {
                 $errors['fullname'] = 'Nama lengkap harus diisi.';
             }
-
-            if (!$item->id) {
+            else if (!$item->id) {
                 if ($item->password == '') {
                     $errors['password'] = 'Kata sandi harus diisi.';
                 }

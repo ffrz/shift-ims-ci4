@@ -12,17 +12,11 @@ $this->addButtonLink = [
 $this->extend('_layouts/default')
 ?>
 
-<?= $this->section('headstyles') ?>
-<link rel="stylesheet" href="<?= base_url('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') ?>">
-<link rel="stylesheet" href="<?= base_url('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') ?>">
-<link rel="stylesheet" href="<?= base_url('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') ?>">
-<link rel="stylesheet" href="<?= base_url('plugins/daterangepicker/daterangepicker.css') ?>">
-<?= $this->endSection() ?>
-
 <?= $this->section('content') ?>
 <div class="card card-primary">
     <div class="card-body">
         <form method="GET">
+            <?= csrf_field() ?>
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label>Tanggal:</label>
@@ -75,16 +69,6 @@ $this->extend('_layouts/default')
     </div>
 </div>
 <?= $this->endSection() ?>
-
-<?= $this->section('footscripts') ?>
-<script src="<?= base_url('plugins/datatables/jquery.dataTables.min.js') ?>"></script>
-<script src="<?= base_url('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') ?>"></script>
-<script src="<?= base_url('plugins/datatables-responsive/js/dataTables.responsive.min.js') ?>"></script>
-<script src="<?= base_url('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') ?>"></script>
-<script src="<?= base_url('plugins/moment/moment.min.js') ?>"></script>
-<script src="<?= base_url('plugins/daterangepicker/daterangepicker.js') ?>"></script>
-<?= $this->endSection() ?>
-
 <?= $this->section('footscript') ?>
 <script>
     $(function() {

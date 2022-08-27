@@ -14,6 +14,7 @@ $this->extend('_layouts/default')
 <div class="card card-primary">
     <div class="card-body">
         <form method="GET">
+        <?= csrf_field() ?>
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label>Tanggal:</label>

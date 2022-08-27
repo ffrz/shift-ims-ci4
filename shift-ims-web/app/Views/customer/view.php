@@ -92,7 +92,7 @@ $this->extend('_layouts/default')
                         </thead>
                         <tbody>
                             <?php if (empty($services)): ?>
-                                <tr><td colspan="6">Belum ada rekaman servis.</td></tr>
+                                <tr><td colspan="6" class="text-center text-muted font-italic">Belum ada rekaman servis.</td></tr>
                             <?php endif ?>
                             <?php foreach ($services as $item): ?>
                                 <tr>

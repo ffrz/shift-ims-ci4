@@ -17,6 +17,7 @@ $this->extend('_layouts/default');
         <div class="row">
             <div class="col-md-12 mt-3" id="filter">
                 <form class="form-horizontal quick-form" method="GET">
+                <?= csrf_field() ?>
                     <div>
                         <?= csrf_field() ?>
                         <div class="form-group row">

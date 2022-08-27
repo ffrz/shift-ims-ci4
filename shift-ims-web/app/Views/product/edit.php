@@ -1,4 +1,7 @@
 <?php
+
+use App\Entities\Product;
+
 if ($duplicate) {
     $this->title = 'Duplikat Produk';
 } else {
@@ -30,9 +33,15 @@ $this->navActive = 'product';
                 <label for="type" class="col-sm-2 col-form-label">Jenis Produk</label>
                 <div class="col-sm-10">
                     <select class="custom-select" id="type" name="type">
-                        <option value="0" <?= $data->type == 0 ? 'selected' : '' ?>>Non Stok</option>
-                        <option value="1" <?= $data->type == 1 ? 'selected' : '' ?>>Stok</option>
-                        <option value="2" <?= $data->type == 2 ? 'selected' : '' ?>>Servis</option>
+                        <option value="<?= Product::TYPE_NON_STOCKED ?>" <?= $data->type == Product::TYPE_NON_STOCKED ? 'selected' : '' ?>>
+                            <?= format_product_type(Product::TYPE_NON_STOCKED) ?>
+                        </option>
+                        <option value="<?= Product::TYPE_STOCKED ?>" <?= $data->type == Product::TYPE_STOCKED ? 'selected' : '' ?>>
+                            <?= format_product_type(Product::TYPE_STOCKED) ?>
+                        </option>
+                        <option value="<?= Product::TYPE_SERVICE ?>" <?= $data->type == Product::TYPE_SERVICE ? 'selected' : '' ?>>
+                            <?= format_product_type(Product::TYPE_SERVICE) ?>
+                        </option>
                     </select>
                 </div>
             </div>

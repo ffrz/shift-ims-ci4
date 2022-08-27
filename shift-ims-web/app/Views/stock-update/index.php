@@ -6,20 +6,12 @@ $this->menuActive = 'inventory';
 $this->navActive = 'stock-update';
 $this->extend('_layouts/default')
 ?>
-
-<?= $this->section('headstyles') ?>
-<link rel="stylesheet" href="<?= base_url('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') ?>">
-<link rel="stylesheet" href="<?= base_url('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') ?>">
-<link rel="stylesheet" href="<?= base_url('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') ?>">
-<link rel="stylesheet" href="<?= base_url('plugins/daterangepicker/daterangepicker.css') ?>">
-<?= $this->endSection() ?>
-
 <?= $this->section('content') ?>
           
-<div class="card card-primary">
-    
+<div class="card card-primary">    
     <div class="card-body">
         <form method="GET">
+        <?= csrf_field() ?>
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label>Tanggal:</label>

@@ -41,7 +41,8 @@ class ProductController extends BaseController
     {
         $data = $this->getProductModel()->find($id);
         $data->category = $this->getProductCategoryModel()->find((int)$data->category_id);
-        $data->supplier = $this->getPartyModel()->find((int)$data->supplier_id);   
+        $data->supplier = $this->getPartyModel()->find((int)$data->supplier_id);
+        $data->last_supplier = $this->getPartyModel()->find((int)$data->last_supplier_id);
 
         $stockUpdates = $this->db->query(
             "select

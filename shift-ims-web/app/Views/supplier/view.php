@@ -33,6 +33,11 @@ $this->extend('_layouts/default')
                             <td><?= esc($data->contacts) ?></td>
                         </tr>
                         <tr>
+                            <td>URL</td>
+                            <td>:</td>
+                            <td><a target="_blank" href="<?= esc($data->url) ?>"><?= esc($data->url) ?></a></td>
+                        </tr>
+                        <tr>
                             <td>Alamat</td>
                             <td>:</td>
                             <td><?= esc($data->address) ?></td>

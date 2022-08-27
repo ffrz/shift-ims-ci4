@@ -17,6 +17,7 @@ $this->extend('_layouts/default')
 
 <?= $this->section('content') ?>
 <form method="post">
+<?= csrf_field() ?>
 <div class="card card-primary">
     <div class="card-body">
         <div class="form-row">

@@ -42,15 +42,7 @@
             </div>
           </div>
         </div>
-        <div class="row"><?php /*
-          <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="remember" name="remember" value="1" <?= $remember ? 'checked' : '' ?>>
-              <label for="remember">
-                Ingat saya
-              </label>
-            </div>
-          </div> */ ?>
+        <div class="row">
           <div class="col-12">
             <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-right-to-bracket mr-2"></i> Masuk</button>
           </div>

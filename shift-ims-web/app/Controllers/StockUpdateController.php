@@ -66,14 +66,7 @@ class StockUpdateController extends BaseController
                 ->with('warning', 'Tidak ditemukan.');            
         }
 
-        $items = $this->db->query(
-            "select d.id, d.quantity, d.cost, d.price,
-            p.name, p.uom
-            from stock_update_details d
-            inner join products p on p.id=d.product_id
-            where d.parent_id=$id
-            order by d.id asc"
-        )->getResultObject();
+        $items = $this->getStockUpdateDetailModel()->getAllByUpdateId($id);
 
         return view('stock-update/view', [
             'data' => $data,

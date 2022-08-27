@@ -9,12 +9,12 @@ $this->extend('_layouts/default')
 <?= $this->section('content') ?>
 <div class="card card-primary">
     <form class="form-horizontal quick-form" method="POST">
+    <?= csrf_field() ?>
         <div class="card-body">
-            <?= csrf_field() ?>
             <div class="form-row">
                 <div class="form-group col-md-4">
-                    <label for="username">Username</label>
-                    <input type="text" class="form-control <?= !empty($errors['username']) ? 'is-invalid' : '' ?>"
+                    <label for="username">Username <span class="text-muted">(tidak bisa diganti)</span></label>
+                    <input type="text" <?= $data->id ? 'readonly' : '' ?> class="form-control <?= !empty($errors['username']) ? 'is-invalid' : '' ?>"
                         autofocus id="username" placeholder="Username" name="username" value="<?= esc($data->username) ?>">
                     <?php if (!empty($errors['username'])) : ?>
                         <span class="error form-error">

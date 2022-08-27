@@ -23,24 +23,59 @@ $this->extend('_layouts/default')
                 <table class="table table-condensed table-striped">
                     <tbody>
                         <tr>
-                            <td style="width:5rem;">Nama</td>
+                            <td style="width:10rem;">Nama Produk</td>
                             <td style="width:1rem;">:</td>
                             <td><?= esc($data->name) ?></td>
                         </tr>
                         <tr>
-                            <td>Kontak</td>
+                            <td>Jenis</td>
                             <td>:</td>
-                            <td><?= esc($data->contacts) ?></td>
-                        </tr>
-                        <tr>
-                            <td>Alamat</td>
-                            <td>:</td>
-                            <td><?= esc($data->address) ?></td>
+                            <td><?= format_product_type($data->type) ?></td>
                         </tr>
                         <tr>
                             <td>Status</td>
                             <td>:</td>
-                            <td><?= $data->active ? 'Aktif' : 'Non Aktif' ?></td>
+                            <td><?= ($data->active ? 'Aktif' : 'Tidak Aktif') ?></td>
+                        </tr>
+                        <tr>
+                            <td>Kategori</td>
+                            <td>:</td>
+                            <td><?= ($data->category ? esc($data->category->name) : '-') ?></td>
+                        </tr>
+                        <tr>
+                            <td>Stok</td>
+                            <td>:</td>
+                            <td><?= format_number($data->stock) . ' ' . esc($data->uom) ?></td>
+                        </tr>
+                        <tr>
+                            <td>Harga Beli</td>
+                            <td>:</td>
+                            <td>Rp. <?= format_number($data->cost) ?></td>
+                        </tr>
+                        <tr>
+                            <td>Harga Jual</td>
+                            <td>:</td>
+                            <td>Rp. <?= format_number($data->price) ?></td>
+                        </tr>
+                        <tr>
+                            <td>Metode Penentuan Modal</td>
+                            <td>:</td>
+                            <td><?= format_product_costing_method($data->costing_method) ?></td>
+                        </tr>
+                        <tr>
+                            <td>Pemasok</td>
+                            <td>:</td>
+                            <td><?= ($data->supplier ? esc($data->supplier->name) : '-') ?></td>
+                        </tr>
+                        <tr>
+                            <td>Pemasok Terakhir</td>
+                            <td>:</td>
+                            <td><?= ($data->last_supplier ? esc($data->last_supplier->name) : '-') ?></td>
+                        </tr>
+                        <tr>
+                            <td>Catatan</td>
+                            <td>:</td>
+                            <td><?= esc($data->notes) ?></td>
                         </tr>
                     </tbody>
                 </table>
@@ -61,7 +96,7 @@ $this->extend('_layouts/default')
                         </thead>
                         <tbody>
                             <?php if (empty($stockUpdates)): ?>
-                                <tr><td colspan="5" class="text-center font-italic text-muted">Belum ada rekaman penjualan.</td></tr>
+                                <tr><td colspan="8" class="text-center font-italic text-muted">Belum ada rekaman transaksi.</td></tr>
                             <?php endif ?>
                             <?php foreach ($stockUpdates as $item): ?>
                                 <tr>

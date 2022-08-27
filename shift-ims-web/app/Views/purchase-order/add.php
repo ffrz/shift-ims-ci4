@@ -23,6 +23,7 @@ $this->extend('_layouts/default')
 <div class="card card-primary">
     <div class="card-body">
         <form method="post">
+        <?= csrf_field() ?>
         <div class="row">
             <h4 class="col-md-12">Info Order</h4>
         </div>

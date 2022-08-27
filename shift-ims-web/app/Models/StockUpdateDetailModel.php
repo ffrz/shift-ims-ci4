@@ -16,4 +16,17 @@ class StockUpdateDetailModel extends Model
     protected $allowedFields = [
         'id', 'parent_id', 'product_id', 'cost', 'price', 'quantity'
     ];
+
+    public function getAllByUpdateId($id) 
+    {
+        return $this->db->query(
+            "select d.id, d.quantity, d.cost, d.price,
+            p.name, p.uom
+            from stock_update_details d
+            inner join products p on p.id=d.product_id
+            where d.parent_id=$id
+            order by d.id asc"
+        )->getResultObject();
+
+    }
 }

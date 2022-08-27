@@ -31,6 +31,16 @@ function extract_daterange($daterange) {
     }
     return false;
 }
+
+function format_product_costing_method($cm)
+{
+    switch ($cm) {
+        case 0: return 'Harga Beli Manual';
+        case 1: return 'Harga Beli Terakhir';
+        case 2: return 'Rata-rata Harga Beli';
+    }
+}
+
 function format_number($number, int $prec = 0)
 {
     return number_format($number, $prec, ',', '.');
