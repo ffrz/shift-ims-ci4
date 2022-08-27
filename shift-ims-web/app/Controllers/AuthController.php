@@ -42,7 +42,6 @@ class AuthController extends BaseController
                         'is_admin' => $user->is_admin
                     ]
                 ]);
-                // TODO: start session
                 return redirect()->to(base_url('/'));
             }
         }
