@@ -26,11 +26,11 @@ class DashboardController extends BaseController
      * Untuk mengambil data total transaksi stock update pada hari yang ditentukan
      * @param $type jenis stok update
      * @param $date tanggal transaksi
-     * @return string|float total penjualan
+     * @return float total penjualan
      */
     private function _getTodaySales($type, $date)
     {
-        return $this->db->query("
+        return (float)$this->db->query("
             select sum(total_price) total from stock_updates where type=$type
             and date(datetime)='$date'
         ")->getRow()->total;
@@ -40,18 +40,18 @@ class DashboardController extends BaseController
      * Untuk mengambil data total transaksi stock update pada hari yang ditentukan
      * @param $type jenis stok update
      * @param $date tanggal transaksi
-     * @return string|float total penjualan
+     * @return int total servis yang sedang aktif
      */
     private function _getActiveServiceOrder()
     {
-        return $this->db->query(
+        return (int)$this->db->query(
             'select count(0) count from service_orders where status=1'
         )->getRow()->count;
     }
 
     private function _getMonthlySalesIncome($type, $startDate, $endDate)
     {
-        return $this->db->query("
+        return (float)$this->db->query("
             select sum(total_price) total from stock_updates where type=$type
             and (date(datetime) between '$startDate' and '$endDate')
         ")->getRow()->total;
@@ -59,7 +59,7 @@ class DashboardController extends BaseController
 
     private function _getMonthlyServiceIncome($startDate, $endDate)
     {
-        return $this->db->query("
+        return (float)$this->db->query("
             select sum(total_cost) total from service_orders where
             date between '$startDate' and '$endDate' and status=2
         ")->getRow()->total;
