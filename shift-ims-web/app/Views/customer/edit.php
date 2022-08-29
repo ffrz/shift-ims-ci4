@@ -27,7 +27,6 @@ $this->extend('_layouts/default')
                 <div class="form-group col-md-4">
                     <label for="url">URL</label>
                     <input type="text" class="form-control" id="url" placeholder="URL" name="url" value="<?= esc($data->url) ?>">
-
                 </div>
             </div>
             <div class="form-row">

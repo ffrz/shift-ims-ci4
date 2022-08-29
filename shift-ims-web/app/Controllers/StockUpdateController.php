@@ -15,18 +15,17 @@ class StockUpdateController extends BaseController
             $filter->dateEnd = date('Y-m-d');
         }
         
-        $where = [];
-        $params = [];
         if (strlen($filter->daterange) == 23) {
             $daterange = explode(' - ', $filter->daterange);
             $filter->dateStart = datetime_from_input($daterange[0]);
             $filter->dateEnd = datetime_from_input($daterange[1]);
-            $where[] = "(date(datetime) between :d1: and :d2:)";
-            $params = [
-                'd1' => $filter->dateStart,
-                'd2' => $filter->dateEnd,
-            ];
         }
+
+        $where[] = "(date(datetime) between :d1: and :d2:)";
+        $params = [
+            'd1' => $filter->dateStart,
+            'd2' => $filter->dateEnd,
+        ];
 
         $sql = 'select * from stock_updates';
         $where = implode(' and ', $where);

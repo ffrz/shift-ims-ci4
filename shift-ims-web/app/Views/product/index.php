@@ -94,10 +94,10 @@ $this->extend('_layouts/default')
                                 <td class="text-right"><?= format_number($item->price) ?></td>
                                 <td class="text-center">
                                     <div class="btn-group" role="group" aria-label="Actions">
-                                    <a href="<?= base_url("/products/view/$item->id") ?>" class="btn btn-default btn-xs"><i class="fa fa-eye"></i></a>
-                                    <a href="<?= base_url("/products/duplicate/$item->id") ?>" class="btn btn-default btn-xs"><i class="fa fa-copy"></i></a>
-                                    <a href="<?= base_url("/products/edit/$item->id") ?>" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></a>
-                                    <a href="<?= base_url("/products/delete/$item->id") ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
+                                    <a href="<?= base_url("/products/view/$item->id") ?>" class="btn btn-default btn-sm"><i class="fa fa-eye"></i></a>
+                                    <a href="<?= base_url("/products/duplicate/$item->id") ?>" class="btn btn-default btn-sm"><i class="fa fa-copy"></i></a>
+                                    <a href="<?= base_url("/products/edit/$item->id") ?>" class="btn btn-default btn-sm"><i class="fa fa-edit"></i></a>
+                                    <a href="<?= base_url("/products/delete/$item->id") ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                                     </div>
                                 </td>
                             </tr>
@@ -114,7 +114,7 @@ $this->extend('_layouts/default')
     $(function() {
         $('.data-table').DataTable({
             paging: true,
-            "pageLength": 100,
+            "pageLength": 50,
             "ordering": true,
             "info": true,
             "responsive": true,

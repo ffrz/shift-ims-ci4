@@ -17,9 +17,6 @@ class PurchaseOrderController extends BaseController
             $filter->dateEnd = date('Y-m-t');
         }
         
-        $where = [];
-        $params = [];
-        
         if (strlen($filter->daterange) == 23) {
             $daterange = explode(' - ', $filter->daterange);
             $filter->dateStart = datetime_from_input($daterange[0]);

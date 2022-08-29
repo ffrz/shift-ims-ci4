@@ -97,6 +97,16 @@ function format_service_order_payment_status($status)
 
 use \App\Entities\StockUpdate;
 
+function is_admin()
+{
+    return session()->get('current_user')['is_admin'];
+}
+
+function current_user()
+{
+    return session()->get('current_user');
+}
+
 function format_service_order_code($id) {
     return 'SVC-' . str_pad($id, 5, '0', STR_PAD_LEFT);;
 }

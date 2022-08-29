@@ -14,22 +14,21 @@ class StockAdjustmentController extends BaseController
         $filter = new \StdClass();
         $filter->daterange = (string)$this->request->getGet('daterange');
         if (null == $filter->daterange) {
-            $filter->dateStart = date('Y-m-d');
-            $filter->dateEnd = date('Y-m-d');
+            $filter->dateStart = date('Y-m-01');
+            $filter->dateEnd = date('Y-m-t');
         }
         
-        $where = [];
-        $params = [];
         if (strlen($filter->daterange) == 23) {
             $daterange = explode(' - ', $filter->daterange);
             $filter->dateStart = datetime_from_input($daterange[0]);
             $filter->dateEnd = datetime_from_input($daterange[1]);
-            $where[] = "(date(datetime) between :d1: and :d2:)";
-            $params = [
-                'd1' => $filter->dateStart,
-                'd2' => $filter->dateEnd,
-            ];
         }
+
+        $where[] = "(date(datetime) between :d1: and :d2:)";
+        $params = [
+            'd1' => $filter->dateStart,
+            'd2' => $filter->dateEnd,
+        ];
 
         $where[] = '(type=' . StockUpdate::UPDATE_TYPE_INITIAL_STOCK
               . ' or type=' . StockUpdate::UPDATE_TYPE_MANUAL_AJDUSTMENT

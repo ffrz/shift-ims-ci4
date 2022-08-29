@@ -34,8 +34,8 @@ $this->extend('_layouts/default')
                                 <td><?= $item->is_admin ? 'Administrator' : 'Pengguna Biasa' ?></td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <a href="<?= base_url("/users/edit/$item->id") ?>" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></a>
-                                        <a href="<?= base_url("/users/delete/$item->id") ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
+                                        <a href="<?= base_url("/users/edit/$item->id") ?>" class="btn btn-default btn-sm"><i class="fa fa-edit"></i></a>
+                                        <a href="<?= base_url("/users/delete/$item->id") ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                                     </div>
                                 </td>
                             </tr>
@@ -52,7 +52,6 @@ $this->extend('_layouts/default')
     $(function() {
         $('.data-table').DataTable({
             paging: true,
-            scrollY: 400,
             "ordering": true,
             "info": true,
             "responsive": true,

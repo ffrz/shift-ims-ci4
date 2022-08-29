@@ -58,7 +58,7 @@ $this->extend('_layouts/default')
                                 <td class="text-right"><?= format_number($item->total_price) ?></td>
                                 <td><?= $item->notes ?></td>
                                 <td class="text-center">
-                                    <a href="<?= base_url("/sales-orders/view/$item->id") ?>" class="btn btn-default btn-xs mr-2"><i class="fa fa-eye"></i></a>
+                                    <a href="<?= base_url("/sales-orders/view/$item->id") ?>" class="btn btn-default btn-sm"><i class="fa fa-eye"></i></a>
                                 </td>
                             </tr>
                         <?php endforeach ?>
@@ -77,7 +77,6 @@ $this->extend('_layouts/default')
         }});
         $('.data-table').DataTable({
             paging: true,
-            scrollY: 400,
             length: 50,
             "ordering": true,
             "info": true,

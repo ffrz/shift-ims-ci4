@@ -78,7 +78,6 @@ $this->extend('_layouts/default')
         }});
         $('.data-table').DataTable({
             paging: true,
-            scrollY: 400,
             length: 50,
             "ordering": true,
             "info": true,
