@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <link rel="stylesheet" href="<?= base_url('plugins/fontawesome-free/css/all.min.css') ?>">
   <link rel="stylesheet" href="<?= base_url('plugins/toastr/toastr.min.css') ?>">
+  <link rel="stylesheet" href="<?= base_url('plugins/pace-progress/themes/blue/pace-theme-flash.css') ?>">
   <link rel="stylesheet" href="<?= base_url('plugins/select2/css/select2.min.css') ?>">
   <link rel="stylesheet" href="<?= base_url('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') ?>">
   <link rel="stylesheet" href="<?= base_url('plugins/daterangepicker/daterangepicker.css') ?>">
@@ -111,6 +112,7 @@
     </div>
     <script src="<?= base_url('plugins/jquery/jquery.min.js') ?>"></script>
     <script src="<?= base_url('plugins/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
+    <script src="<?= base_url('plugins/pace-progress/pace.min.js') ?>"></script>
     <script src="<?= base_url('plugins/toastr/toastr.min.js') ?>"></script>
     <script src="<?= base_url('plugins/select2/js/select2.full.min.js') ?>"></script>
     <script src="<?= base_url('plugins/moment/moment.min.js') ?>"></script>
