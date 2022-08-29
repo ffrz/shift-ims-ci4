@@ -4,17 +4,23 @@ namespace App\Controllers;
 
 use App\Entities\Product;
 use App\Entities\StockUpdate;
-use DateTime;
 use stdClass;
 
 class ReportsController extends BaseController
 {
-    public function dailyIncomeStatement()
+    public function incomeStatement()
     {
-        $dateRange = (string)$this->request->getGet('daterange');
+        $filter = new \StdClass();
+        $filter->daterange = (string)$this->request->getGet('daterange');
+        if (null == $filter->daterange) {
+            $filter->dateStart = date('Y-m-01');
+            $filter->dateEnd = date('Y-m-t');
+        }
         
-        if (!($dateRange = extract_daterange($dateRange))) {
-            $dateRange = [date('Y-m-01'), date('Y-m-t')];
+        if (strlen($filter->daterange) == 23) {
+            $daterange = explode(' - ', $filter->daterange);
+            $filter->dateStart = datetime_from_input($daterange[0]);
+            $filter->dateEnd = datetime_from_input($daterange[1]);
         }
 
         $sales = $this->db->query('
@@ -25,8 +31,8 @@ class ReportsController extends BaseController
             and (date(datetime) between :date1: and :date2:)
             order by date(datetime) asc
         ', [
-            'date1' => $dateRange[0],
-            'date2' => $dateRange[1],
+            'date1' => $filter->dateStart,
+            'date2' => $filter->dateEnd,
         ])->getResultObject();
 
         $items = [];
@@ -46,18 +52,25 @@ class ReportsController extends BaseController
             $a->profit += $item->price - $item->cost;
         }
 
-        return view('reports/daily-income-statement', [
-            'daterange' => "$$dateRange[0] - $dateRange[1]",
+        return view('reports/income-statement', [
+            'filter' => $filter,
             'items' => $items
         ]);
     }
 
     public function salesByCategory()
     {
-        $dateRange = (string)$this->request->getGet('daterange');
+        $filter = new \StdClass();
+        $filter->daterange = (string)$this->request->getGet('daterange');
+        if (null == $filter->daterange) {
+            $filter->dateStart = date('Y-m-01');
+            $filter->dateEnd = date('Y-m-t');
+        }
         
-        if (!($dateRange = extract_daterange($dateRange))) {
-            $dateRange = [date('Y-m-01'), date('Y-m-t')];
+        if (strlen($filter->daterange) == 23) {
+            $daterange = explode(' - ', $filter->daterange);
+            $filter->dateStart = datetime_from_input($daterange[0]);
+            $filter->dateEnd = datetime_from_input($daterange[1]);
         }
 
         $sales_details = $this->db->query('
@@ -71,8 +84,8 @@ class ReportsController extends BaseController
             and (date(su.datetime) between :date1: and :date2:)
             order by pc.name asc
         ', [
-            'date1' => $dateRange[0],
-            'date2' => $dateRange[1],
+            'date1' => $filter->dateStart,
+            'date2' => $filter->dateEnd,
         ])->getResultObject();
 
         $noCategory = new stdClass;
@@ -99,7 +112,7 @@ class ReportsController extends BaseController
         }
 
         return view('reports/sales-by-category', [
-            'daterange' => "$$dateRange[0] - $dateRange[1]",
+            'filter' => $filter,
             'items' => $categories
         ]);
     }

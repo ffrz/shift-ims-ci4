@@ -19,7 +19,8 @@ $this->extend('_layouts/default')
                                 <i class="far fa-calendar-alt"></i>
                             </span>
                         </div>
-                        <input type="text" name="daterange" class="form-control float-right" id="daterange" value="<?= "$daterange" ?>">
+                        <input type="text" name="daterange" class="form-control float-right" id="daterange"
+                            value="<?= format_date($filter->dateStart) . ' - ' . format_date($filter->dateEnd) ?>">
                     </div>
                 </div>
             </div>
@@ -79,7 +80,7 @@ $this->extend('_layouts/default')
 <script>
     $(function() {
         $('#daterange').daterangepicker({locale: {
-            format: 'YYYY-MM-DD'
+            format: 'DD-MM-YYYY'
         }});
     });
 </script>

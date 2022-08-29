@@ -13,18 +13,21 @@ class SalesOrderController extends BaseController
         $filter = new \StdClass();
         $filter->daterange = (string)$this->request->getGet('daterange');
         if (null == $filter->daterange) {
-            $filter->daterange = date('Y-m-d') . ' - ' . date('Y-m-d');
+            $filter->dateStart = date('Y-m-d');
+            $filter->dateEnd = date('Y-m-d');
         }
         
         $where = [];
         $params = [];
-
+        
         if (strlen($filter->daterange) == 23) {
             $daterange = explode(' - ', $filter->daterange);
-            $where[] = "(date(su.datetime) between :d1: and :d2:)";
+            $filter->dateStart = datetime_from_input($daterange[0]);
+            $filter->dateEnd = datetime_from_input($daterange[1]);
+            $where[] = "(date(datetime) between :d1: and :d2:)";
             $params = [
-                'd1' => $daterange[0],
-                'd2' => $daterange[1],
+                'd1' => $filter->dateStart,
+                'd2' => $filter->dateEnd,
             ];
         }
 

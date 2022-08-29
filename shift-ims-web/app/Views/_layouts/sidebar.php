@@ -24,7 +24,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="<?= base_url('/reports/daily-income-statement') ?>" class="nav-link <?= nav_active($this, 'income-statement-report') ?>">
+              <a href="<?= base_url('/reports/income-statement') ?>" class="nav-link <?= nav_active($this, 'income-statement-report') ?>">
                 <i class="nav-icon fas fa-file-contract"></i>
                 <p>Lap. Laba Rugi</p>
               </a>

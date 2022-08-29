@@ -93,7 +93,7 @@ $routes->group('sales-orders', function($routes) {
 });
 
 $routes->group('reports', function($routes) {
-    $routes->get('daily-income-statement', 'ReportsController::dailyIncomeStatement');
+    $routes->get('income-statement', 'ReportsController::incomeStatement');
     $routes->get('stock-assets', 'ReportsController::stockAssets');
     $routes->get('sales-by-category', 'ReportsController::salesByCategory');
 });

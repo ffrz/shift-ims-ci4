@@ -26,7 +26,8 @@ $this->extend('_layouts/default')
                                 <i class="far fa-calendar-alt"></i>
                             </span>
                         </div>
-                        <input type="text" name="daterange" class="form-control float-right" id="daterange" value="<?= esc($filter->daterange) ?>">
+                        <input type="text" name="daterange" class="form-control float-right" id="daterange"
+                            value="<?= format_date($filter->dateStart) . ' - ' . format_date($filter->dateEnd) ?>">
                     </div>
                 </div>
             </div>
@@ -42,8 +43,8 @@ $this->extend('_layouts/default')
                     <thead>
                         <tr>
                             <th>Kode</th>
-                            <th class="text-center">Waktu</th>
                             <th class="text-center">Pemasok</th>
+                            <th class="text-center">Waktu</th>
                             <th class="text-right">Total</th>
                             <th>Catatan</th>
                             <th></th>
@@ -52,13 +53,13 @@ $this->extend('_layouts/default')
                     <tbody>
                         <?php foreach ($items as $item) : ?>
                             <tr>
-                                <td><?= format_stock_update_code($item->type, $item->code) ?></td>
-                                <td class="text-center"><?= $item->datetime ?></td>
-                                <td class="text-center"><?= $item->party_name ?></td>
+                                <td><a href="<?= base_url("/purchase-orders/view/$item->id") ?>"><?= format_stock_update_code($item->type, $item->code) ?></a></td>
+                                <td><?= $item->party_name ?></td>
+                                <td class="text-center"><?= format_datetime($item->datetime) ?></td>
                                 <td class="text-right"><?= format_number($item->total_cost) ?></td>
                                 <td><?= $item->notes ?></td>
                                 <td class="text-center">
-                                    <a href="<?= base_url("/purchase-orders/view/$item->id") ?>" class="btn btn-default btn-xs mr-2"><i class="fa fa-eye"></i></a>
+                                    <a href="<?= base_url("/purchase-orders/view/$item->id") ?>" class="btn btn-default btn-sm mr-2"><i class="fa fa-eye"></i></a>
                                 </td>
                             </tr>
                         <?php endforeach ?>
@@ -73,7 +74,7 @@ $this->extend('_layouts/default')
 <script>
     $(function() {
         $('#daterange').daterangepicker({locale: {
-            format: 'YYYY-MM-DD'
+            format: 'DD-MM-YYYY'
         }});
         $('.data-table').DataTable({
             paging: true,
