@@ -27,7 +27,11 @@ $this->menuActive = 'add-service-order';
                 <div class="form-group col-md-4">
                     <label for="date">Tanggal</label>
                     <div class="input-group date" id="date" data-target-input="nearest">
-                        <input type="date" class="form-control" data-target="#date" name="date" value="<?= esc($data->date) ?>" lang="id_ID">
+                        <input type="text" class="form-control datetimepicker-input" data-target="#date"
+                            name="date" value="<?= esc($data->date) ?>"/>
+                        <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group col-md-4">
@@ -178,8 +182,9 @@ $this->menuActive = 'add-service-order';
         $(document).on('select2:open', () => {
             document.querySelector('.select2-search__field').focus();
         });
+        
         $('.date').datetimepicker({
-            format: 'DD/MM/YYYY'
+            format: 'DD-MM-YYYY'
         });
 
         $('#customer_name').change(function() {
