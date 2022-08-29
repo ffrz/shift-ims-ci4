@@ -34,7 +34,7 @@ $this->extend('_layouts/default')
                 <label for="datetime" class="">Waktu</label>
                 <div class="input-group date" id="datetime" data-target-input="nearest">
                     <input type="text" class="form-control datetimepicker-input" data-target="#datetime"
-                        name="datetime" value="<?= esc($data->datetime) ?>"/>
+                        name="datetime" value="<?= format_datetime($data->datetime) ?>"/>
                     <div class="input-group-append" data-target="#datetime" data-toggle="datetimepicker">
                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
@@ -133,9 +133,11 @@ $this->extend('_layouts/default')
         document.querySelector('.select2-search__field').focus();
     });
     $('.date').datetimepicker({
-        format: 'YYYY-MM-DD HH:mm:ss'
+        format: 'DD-MM-YYYY HH:mm:ss'
     });
     $(function() {
+        $('.date').attr('readonly');
+        
         var itemByIds = {};
         var addButton = $('#add-button');
         var productSelect = $('#product');

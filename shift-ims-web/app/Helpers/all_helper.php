@@ -14,6 +14,18 @@ function menu_active($self, $name) {
     return !empty($self->menuActive) && $self->menuActive == $name ? 'active' : '';
 }
 
+function datetime_from_input($str)
+{
+    $input = explode(' ', $str);
+    $date = explode('-', $input[0]);
+
+    $out =  "$date[2]-$date[1]-$date[0]";
+    if (count($input) == 2) {
+        $out .=  " $input[1]";
+    }
+
+    return $out;
+}
 
 /**
  * Helper function untuk merender kelas 'active' pada nav-item sidebar
@@ -89,14 +101,20 @@ function format_service_order_code($id) {
     return 'SVC-' . str_pad($id, 5, '0', STR_PAD_LEFT);;
 }
 
-function format_date($date, $format = 'd-M-y', $locale = null) {
+function format_datetime($date, $format = 'dd-MM-yyyy HH:mm:ss', $locale = null) {
     if (!$date instanceof DateTime) {
         $date = new DateTime($date);
     }
     return IntlDateFormatter::formatObject($date, $format, $locale);
-      
+}
 
+function format_date($date, $format = 'dd-MM-yyyy', $locale = null) {
+    if (!$date instanceof DateTime) {
+        $date = new DateTime($date);
     }
+    return IntlDateFormatter::formatObject($date, $format, $locale);
+}
+
 function format_stock_update_type($type) {
     switch ($type) {
         case StockUpdate::UPDATE_TYPE_INITIAL_STOCK: return 'Stok Awal';

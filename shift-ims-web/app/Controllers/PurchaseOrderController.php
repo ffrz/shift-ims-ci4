@@ -89,6 +89,7 @@ class PurchaseOrderController extends BaseController
 
         if ($this->request->getMethod() == 'post') {
             $data->fill($this->request->getPost());
+            $data->datetime = datetime_from_input($data->datetime);
 
             $products_by_ids = [];
             foreach ($products as $product) {

@@ -28,7 +28,7 @@ $this->menuActive = 'add-service-order';
                     <label for="date">Tanggal</label>
                     <div class="input-group date" id="date" data-target-input="nearest">
                         <input type="text" class="form-control datetimepicker-input" data-target="#date"
-                            name="date" value="<?= esc($data->date) ?>"/>
+                            name="date" value="<?= format_datetime($data->date) ?>"/>
                         <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                         </div>

@@ -31,7 +31,7 @@ class ServiceOrderController extends BaseController
 
         if ($id == 0) {
             $item = new \App\Entities\ServiceOrder();
-            $item->date = date('Y-m-d');
+            $item->date = date('d-m-Y');
         }
         else {
             $item = $model->find($id);
@@ -77,8 +77,9 @@ class ServiceOrderController extends BaseController
             }
 
             if (empty($errors)) {
+                $item->date = datetime_from_input($item->date);
                 $model->save($item);
-                $id = $this->db->insertID();
+                $id = !$item->id ? $this->db->insertID() : $item->id;
                 return redirect()->to(base_url("service-orders/view/$id"))->with('info', 'Order telah disimpan.');
             }
         }

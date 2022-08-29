@@ -14,9 +14,6 @@ $this->extend('_layouts/default')
     text-align:right;
 }
 </style>
-<script>
-    var items = <?= json_encode($items); ?>;
-</script>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -41,7 +38,7 @@ $this->extend('_layouts/default')
                 <label for="datetime" class="">Waktu</label>
                 <div class="input-group date" id="datetime" data-target-input="nearest">
                     <input type="text" class="form-control datetimepicker-input" data-target="#datetime"
-                        name="datetime" value="<?= esc($data->datetime) ?>"/>
+                        name="datetime" value="<?= esc(format_datetime($data->datetime)) ?>"/>
                     <div class="input-group-append" data-target="#datetime" data-toggle="datetimepicker">
                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
@@ -110,14 +107,10 @@ $this->extend('_layouts/default')
 </div>
 <?= $this->endSection() ?>
 
-<?= $this->section('footscripts') ?>
-<script src="<?= base_url('plugins/select2/js/select2.full.min.js') ?>"></script>
-<script src="<?= base_url('plugins/moment/moment.min.js') ?>"></script>
-<script src="<?= base_url('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') ?>"></script>
-<?= $this->endSection() ?>
-
 <?= $this->section('footscript') ?>
 <script>
+    var items = <?= json_encode($items); ?>;
+
     class NumberParser {
     constructor(locale) {
         const format = new Intl.NumberFormat(locale);
@@ -139,7 +132,7 @@ $this->extend('_layouts/default')
 
     $('.select2').select2();
     $('.date').datetimepicker({
-        format: 'YYYY-MM-DD HH:mm:ss'
+        format: 'DD-MM-YYYY HH:mm:ss'
     });
     $(function() {
         var itemByIds = {};
