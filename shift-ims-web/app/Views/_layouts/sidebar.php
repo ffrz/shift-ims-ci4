@@ -182,7 +182,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?= base_url('/system-settings/') ?>" class="nav-link <?= nav_active($this, 'system-setting') ?>">
+              <a href="<?= base_url('/system/settings') ?>" class="nav-link <?= nav_active($this, 'system-settings') ?>">
                 <i class="nav-icon fas fa-gear"></i>
                 <p>Pengaturan</p>
               </a>

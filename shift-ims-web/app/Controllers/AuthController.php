@@ -50,6 +50,7 @@ class AuthController extends BaseController
             'username' => $username,
             'password' => $password,
             'remember' => $remember,
+            'storeName' => $this->getSettings()->storeName,
             'error' => $error,
         ]);
     }

@@ -1,5 +1,6 @@
 <?php
 $this->title = 'Dashboard';
+$this->titleIcon = 'fa-tachometer-alt';
 $this->navActive = 'dashboard';
 $this->extend('_layouts/default')
 ?>

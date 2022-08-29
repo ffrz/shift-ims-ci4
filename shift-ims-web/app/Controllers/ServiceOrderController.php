@@ -121,7 +121,8 @@ class ServiceOrderController extends BaseController
 
         return view('service-order/view', [
             'data' => $item,
-            'print' => $print
+            'print' => $print,
+            'settings' => $this->getSettings(),
         ]);
     }
 }

@@ -3,17 +3,17 @@ $orderCode = format_stock_update_code($data->type, $data->code);
 $this->title = 'Order Penjualan #' . $orderCode;
 $this->navActive = 'sales-order';
 $this->menuActive = 'sales-order';
-$this->extend('_layouts/default')
+$this->extend('_layouts/default');
 ?>
 <?= $this->section('content') ?>
 <div class="<?= $print ? 'print' : '' ?> invoice p-3 mb-3">
     <div class="row">
         <div class="col-12">
             <h4>
-                <i class="fas fa-laptop-code"></i> Shift Computer
+                <i class="fas fa-laptop-code"></i> <?= esc($settings->storeName) ?>
                 <small class="float-right">Invoice #<?= $orderCode ?></small>
             </h4>
-            <p class="text-muted font-italic">Jl. Ahmad Yani No. 5 Talaga, Majalengka - Telp / WA 0853-1740-4760</p>
+            <p class="text-muted font-italic"><?= esc($settings->storeAddress) ?></p>
         </div>
     </div>
     <div class="row">

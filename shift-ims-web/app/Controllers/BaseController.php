@@ -9,6 +9,7 @@ use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
+use stdClass;
 
 /**
  * Class BaseController
@@ -26,6 +27,8 @@ abstract class BaseController extends Controller
      * @var BaseConnection
      */
     protected $db;
+
+    protected $settings;
 
     /**
      * @var array
@@ -165,5 +168,29 @@ abstract class BaseController extends Controller
         }
 
         return $this->models['user'];
+    }
+
+    /**
+     * 
+     * @return \App\Models\SettingModel
+     */
+    public function getSettingModel()
+    {
+        if (!isset($this->models['setting'])) {
+            $this->models['setting'] = new \App\Models\SettingModel($this->db);
+        }
+
+        return $this->models['setting'];
+    }
+
+    public function getSettings()
+    {
+        if (null == $this->settings) {
+            $this->settings = new stdClass;
+            $this->settings->storeName = $this->getSettingModel()->get('app.store_name');
+            $this->settings->storeAddress = $this->getSettingModel()->get('app.store_address');
+        }
+        
+        return $this->settings;
     }
 }

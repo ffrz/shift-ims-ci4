@@ -116,6 +116,9 @@ $routes->group('auth', function($routes) {
     $routes->get('logout', 'AuthController::logout');
 });
 
+$routes->group('system', function($routes) {
+    $routes->match(['get', 'post'], 'settings', 'SystemController::settings');
+});
 
 /*
  * --------------------------------------------------------------------

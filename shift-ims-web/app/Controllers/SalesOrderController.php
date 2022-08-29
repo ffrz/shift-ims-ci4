@@ -66,6 +66,7 @@ class SalesOrderController extends BaseController
         return view('sales-order/view', [
             'data' => $order,
             'print' => $this->request->getGet('print'),
+            'settings' => $this->getSettings()
         ]);
     }
 
