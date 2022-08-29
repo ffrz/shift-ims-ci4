@@ -89,7 +89,7 @@ function format_service_order_code($id) {
     return 'SVC-' . str_pad($id, 5, '0', STR_PAD_LEFT);;
 }
 
-function format_date($date, $format = 'd/M/y', $locale = null) {
+function format_date($date, $format = 'd-M-y', $locale = null) {
     if (!$date instanceof DateTime) {
         $date = new DateTime($date);
     }
