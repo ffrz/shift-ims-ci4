@@ -13,3 +13,7 @@
  *
  * @see: https://codeigniter4.github.io/CodeIgniter4/
  */
+
+ define('APP_NAME', 'Shift IMS');
+ define('APP_VERSION', 0x010000);
+ define('APP_VERSION_STR', '1.0.0');

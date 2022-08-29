@@ -4,8 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Shift IMS</title>
-
+  <title>Masuk <?= APP_NAME ?></title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
@@ -15,7 +14,10 @@
 <div class="login-box">
   <div class="card card-outline card-primary">
     <div class="card-header text-center text-muted">
-      <a class="h1"><b><i>shift</i></b> IMS</a>
+      <div>
+         <span>Masuk <b><?= APP_NAME ?></b><sup><small> v<?= APP_VERSION_STR ?></sup></small></span>
+      </div>
+      <div class="h1"><b>Shift Komputer</b></div>
     </div>
     <div class="card-body">
       <?php if ($error): ?>
@@ -23,7 +25,6 @@
       <?php else: ?>
         <p class="login-box-msg">Masuk untuk memulai sesi anda.</p>
       <?php endif ?>
-
       <form action="?" method="post">
         <?= csrf_field() ?>
         <div class="input-group mb-3">
@@ -51,7 +52,6 @@
     </div>
   </div>
 </div>
-
 <script src="<?= base_url('plugins/jquery/jquery.min.js') ?>"></script>
 <script src="<?= base_url('plugins/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
 <script src="<?= base_url('dist/js/adminlte.min.js') ?>"></script>
