@@ -63,9 +63,8 @@ class SalesOrderController extends BaseController
             where parent_id=$order->id")
             ->getResultObject();
 
-        return view('sales-order/view', [
+        return view('sales-order/' . ($this->request->getGet('print') ? 'print' : 'view'), [
             'data' => $order,
-            'print' => $this->request->getGet('print'),
             'settings' => $this->getSettings()
         ]);
     }

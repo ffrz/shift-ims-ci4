@@ -50,7 +50,7 @@ $this->extend('_layouts/default')
             <div class="card-header border-0">
                 <h3 class="card-title">
                     <i class="fas fa-th mr-1"></i>
-                    Grafik Penjualan Bulan Ini
+                    Penjualan Bulan Ini
                 </h3>
             </div>
             <div class="card-body">

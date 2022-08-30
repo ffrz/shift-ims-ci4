@@ -1,12 +1,19 @@
 <?php
 $orderCode = format_stock_update_code($data->type, $data->code);
 $this->title = 'Order Penjualan #' . $orderCode;
-$this->navActive = 'sales-order';
-$this->menuActive = 'sales-order';
-$this->extend('_layouts/default');
 ?>
+<?= $this->extend('_layouts/print-invoice') ?>
 <?= $this->section('content') ?>
-<div class="invoice p-3 mb-3">
+<section class="invoice">
+    <div class="row">
+        <div class="col-12">
+            <h4>
+                <i class="fas fa-laptop-code"></i> <?= esc($settings->storeName) ?>
+                <small class="float-right">Invoice #<?= $orderCode ?></small>
+            </h4>
+            <p class="text-muted font-italic"><?= esc($settings->storeAddress) ?></p>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-6">
             <div>
@@ -93,10 +100,19 @@ $this->extend('_layouts/default');
             </table>
         </div>
     </div>
-    <div class="row no-print mt-3">
-        <div class="col-12">
-            <a href="<?= base_url("sales-orders/view/$data->id?print=1") ?>" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+    <div class="row">
+        <div class="col-md-6">
+            <p>Catatan:<br><?= $data->notes ?></p>
+        </div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3 text-center">
+            Hormat kami,
+            <br><br><br>
+            <hr>
         </div>
     </div>
-</div>
+    <script>
+        window.addEventListener("load", window.print());
+    </script>
+</section>
 <?= $this->endSection() ?>

@@ -117,11 +117,8 @@ class ServiceOrderController extends BaseController
             return redirect()->to(base_url('service-orders'))->with('warning', 'Order tidak ditemukan.');
         }
 
-        $print = $this->request->getGet('print');
-
-        return view('service-order/view', [
+        return view('service-order/' . ($this->request->getGet('print') ? 'print' : 'view'), [
             'data' => $item,
-            'print' => $print,
             'settings' => $this->getSettings(),
         ]);
     }
