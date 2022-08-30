@@ -49,7 +49,7 @@ $this->extend('_layouts/default')
     <?php endif ?>
 </div>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="card">
             <div class="card-header border-0">
                 <h3 class="card-title">
