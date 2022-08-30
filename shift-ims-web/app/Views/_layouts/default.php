@@ -17,28 +17,7 @@
   <link rel="stylesheet" href="<?= base_url('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') ?>">
   <link rel="stylesheet" href="<?= base_url('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') ?>">
   <link rel="stylesheet" href="<?= base_url('dist/css/adminlte.min.css') ?>">
-  <style>
-    .table td,
-    .table th {
-      padding-top: 0.25rem;
-      padding-bottom: 0.25rem;
-      vertical-align: middle;
-    }
-    .table.thcenter th {
-      text-align: center;
-    }
-    .form-error {
-      color: red;
-    }
-    .plus-btn {
-      border-radius: 100%;
-      width: 2rem;
-      height: 2rem;
-    }
-    .plus-btn .fa {
-      line-height: 1.7;
-    }
-  </style>
+  <link rel="stylesheet" href="<?= base_url('app.css') ?>">
 </head>
 <body class="hold-transition sidebar-mini layout-navbar-fixed layout-fixed">
   <div class="wrapper">

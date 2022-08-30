@@ -33,13 +33,13 @@ $this->extend('_layouts/default')
 
         <div class="row mt-3">
             <div class="col-md-12">
-                <table class="data-table display table table-bordered table-striped table-condensed">
+                <table class="data-table display table table-bordered table-striped table-condensed center-th">
                     <thead>
                         <tr>
-                            <th class="text-center">Kategori</th>
-                            <th class="text-center">Modal (Rp.)</th>
-                            <th class="text-center">Omzet (Rp.)</th>
-                            <th class="text-center">Laba / Rugi (Rp.)</th>
+                            <th>Kategori</th>
+                            <th>Modal (Rp.)</th>
+                            <th>Omzet (Rp.)</th>
+                            <th>Laba / Rugi (Rp.)</th>
                         </tr>
                     </thead>
                     <tbody>

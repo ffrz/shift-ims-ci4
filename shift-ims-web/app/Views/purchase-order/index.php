@@ -39,13 +39,13 @@ $this->extend('_layouts/default')
         </form>
         <div class="row mt-3">
             <div class="col-md-12">
-                <table id="customer-table" class="data-table display table table-bordered table-striped table-condensed">
+                <table id="customer-table" class="data-table display table table-bordered table-striped table-condensed center-th">
                     <thead>
                         <tr>
                             <th>Kode</th>
-                            <th class="text-center">Pemasok</th>
-                            <th class="text-center">Waktu</th>
-                            <th class="text-right">Total</th>
+                            <th>Pemasok</th>
+                            <th>Waktu</th>
+                            <th>Total</th>
                             <th>Catatan</th>
                             <th></th>
                         </tr>

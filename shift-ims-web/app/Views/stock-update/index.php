@@ -34,14 +34,14 @@ $this->extend('_layouts/default')
         </form>
         <div class="row mt-3">
             <div class="col-md-12">
-                <table id="customer-table" class="data-table display table table-bordered table-striped table-condensed">
+                <table id="customer-table" class="data-table display table table-bordered table-striped table-condensed center-th">
                     <thead>
                         <tr>
                             <th>Kode</th>
-                            <th class="text-center">Waktu</th>
-                            <th class="text-center">Jenis</th>
-                            <th class="text-right">Selisih Modal</th>
-                            <th class="text-right">Selisih Harga</th>
+                            <th>Waktu</th>
+                            <th>Jenis</th>
+                            <th>Selisih Modal</th>
+                            <th>Selisih Harga</th>
                             <th>Catatan</th>
                             <th></th>
                         </tr>

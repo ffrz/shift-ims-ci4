@@ -15,12 +15,12 @@ $this->extend('_layouts/default')
     <div class="card-body">
         <div class="row mt-3">
             <div class="col-md-12">
-                <table class="data-table display table table-bordered table-striped table-condensed">
+                <table class="data-table display table table-bordered table-striped table-condensed center-th">
                     <thead>
                         <tr>
                             <th>Nama</th>
-                            <th class="text-center">Jumlah Produk</th>
-                            <th class="text-center" style="max-width:10%">Aksi</th>
+                            <th>Jumlah Produk</th>
+                            <th style="max-width:10%">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -14,7 +14,7 @@ $this->addButtonLink = [
     <div class="card-body">
         <div class="row mt-3">
             <div class="col-md-12">
-                <table class="data-table display table table-bordered table-striped table-condensed">
+                <table class="data-table display table table-bordered table-striped table-condensed center-th">
                     <thead>
                         <tr>
                             <th>Nama</th>

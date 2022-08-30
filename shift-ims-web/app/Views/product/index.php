@@ -67,18 +67,18 @@ $this->extend('_layouts/default')
 
         <div class="row mt-3">
             <div class="col-md-12">
-                <table class="data-table display table table-bordered table-striped table-condensed">
+                <table class="data-table display table table-bordered table-striped table-condensed center-th">
                     <thead>
                         <tr>
-                            <th class="text-center">Nama</th>
-                            <th class="text-center">Pemasok</th>
-                            <th class="text-center">Jenis</th>
-                            <th class="text-center">Kategori</th>
-                            <th class="text-center">Stok</th>
-                            <th class="text-center">Satuan</th>
-                            <th class="text-center">Modal</th>
-                            <th class="text-center">Harga</th>
-                            <th class="text-center">Aksi</th>
+                            <th>Nama</th>
+                            <th>Pemasok</th>
+                            <th>Jenis</th>
+                            <th>Kategori</th>
+                            <th>Stok</th>
+                            <th>Satuan</th>
+                            <th>Modal</th>
+                            <th>Harga</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>

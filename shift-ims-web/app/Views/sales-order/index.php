@@ -38,13 +38,13 @@ $this->extend('_layouts/default')
 
         <div class="row mt-3">
             <div class="col-md-12">
-                <table class="data-table display table table-bordered table-striped table-condensed">
+                <table class="data-table display table table-bordered table-striped table-condensed center-th">
                     <thead>
                         <tr>
                             <th>Kode</th>
-                            <th class="text-center">Waktu</th>
-                            <th class="text-center">Pelanggan</th>
-                            <th class="text-right">Total</th>
+                            <th>Waktu</th>
+                            <th>Pelanggan</th>
+                            <th>Total</th>
                             <th>Catatan</th>
                             <th></th>
                         </tr>

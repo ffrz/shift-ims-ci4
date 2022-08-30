@@ -9,15 +9,15 @@ $this->extend('_layouts/default')
     <div class="card-body">
         <div class="row mt-3">
             <div class="col-md-12">
-                <table class="data-table display table table-bordered table-striped table-condensed">
+                <table class="data-table display table table-bordered table-striped table-condensed center-th">
                     <thead>
                         <tr>
-                            <th class="text-center">Produk</th>
-                            <th class="text-center" colspan="2">Stok</th>
-                            <th class="text-center">Modal</th>
-                            <th class="text-center">Subtotal Modal</th>
-                            <th class="text-center">Harga</th>
-                            <th class="text-center">Subtotal Harga</th>
+                            <th>Produk</th>
+                            <th colspan="2">Stok</th>
+                            <th>Modal</th>
+                            <th>Subtotal Modal</th>
+                            <th>Harga</th>
+                            <th>Subtotal Harga</th>
                         </tr>
                     </thead>
                     <tbody>
