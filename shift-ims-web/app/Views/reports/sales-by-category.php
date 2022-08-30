@@ -32,8 +32,7 @@ $this->extend('_layouts/default')
         </form>
 
         <div class="row mt-3">
-            <div class="col-md-12">
-            <div class="table-responsive">
+            <div class="col-md-12 table-responsive">
                 <table class="data-table display table table-bordered table-striped table-condensed center-th">
                     <thead>
                         <tr>
@@ -73,7 +72,6 @@ $this->extend('_layouts/default')
                     </tfoot>
                 </table>
             </div>
-            </div>
         </div>
     </div>
 </div>
@@ -81,9 +79,7 @@ $this->extend('_layouts/default')
 <?= $this->section('footscript') ?>
 <script>
     $(function() {
-        $('#daterange').daterangepicker({locale: {
-            format: 'DD-MM-YYYY'
-        }});
+        $('#daterange').daterangepicker({locale: { format: DATE_FORMAT }});
     });
 </script>
 <?= $this->endSection() ?>

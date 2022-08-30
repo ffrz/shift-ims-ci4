@@ -19,8 +19,7 @@ $this->extend('_layouts/default')
                                 <i class="far fa-calendar-alt"></i>
                             </span>
                         </div>
-                        <input type="text" name="daterange" class="form-control float-right" id="daterange"
-                            value="<?= format_date($filter->dateStart) . ' - ' . format_date($filter->dateEnd) ?>">
+                        <input type="text" name="daterange" class="form-control float-right" id="daterange" value="<?= format_date($filter->dateStart) . ' - ' . format_date($filter->dateEnd) ?>">
                     </div>
                 </div>
             </div>
@@ -32,8 +31,7 @@ $this->extend('_layouts/default')
         </form>
 
         <div class="row mt-3">
-            <div class="col-md-12">
-                <div class="table-responsive">
+            <div class="col-md-12 table-responsive">
                 <table class="data-table display table table-bordered table-striped table-condensed center-th">
                     <thead>
                         <tr>
@@ -54,13 +52,13 @@ $this->extend('_layouts/default')
                         ?>
                         <?php foreach ($items as $item) : ?>
                             <?php
-                                $total_cost += $item->cost;    
-                                $total_price += $item->price;
-                                $total_profit += $item->profit;
+                            $total_cost += $item->cost;
+                            $total_price += $item->price;
+                            $total_profit += $item->profit;
 
-                                $profits[] = $item->profit;
-                                $costs[] = $item->cost;
-                                $prices[] = $item->price;
+                            $profits[] = $item->profit;
+                            $costs[] = $item->cost;
+                            $prices[] = $item->price;
                             ?>
                             <tr>
                                 <td><?= format_date($item->date) ?></td>
@@ -97,7 +95,6 @@ $this->extend('_layouts/default')
                         </tr>
                     </tfoot>
                 </table>
-                </div>
             </div>
         </div>
     </div>
@@ -106,9 +103,7 @@ $this->extend('_layouts/default')
 <?= $this->section('footscript') ?>
 <script>
     $(function() {
-        $('#daterange').daterangepicker({locale: {
-            format: 'DD-MM-YYYY'
-        }});
+        $('#daterange').daterangepicker({ locale: { format: DATE_FORMAT } });
     });
 </script>
 <?= $this->endSection() ?>

@@ -60,7 +60,7 @@ $this->extend('_layouts/default');
         </div>
 
         <div class="row mt-3">
-            <div class="col-md-12">
+            <div class="col-md-12 table-responsive">
                 <table id="customer-table" class="data-table display table table-bordered table-striped table-condensed center-th">
                     <thead>
                         <tr>
@@ -69,7 +69,7 @@ $this->extend('_layouts/default');
                             <th>Nama Pelanggan</th>
                             <th>Perangkat</th>
                             <th>Status Servis</th>
-                            <th>Aksi</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -99,15 +99,10 @@ $this->extend('_layouts/default');
 <?= $this->endSection() ?>
 <?= $this->section('footscript') ?>
 <script>
+    DATATABLES_OPTIONS.order = [[0, 'desc']];
+    DATATABLES_OPTIONS.columnDefs = [{ orderable: false, targets: 5 }];
     $(function() {
-        $('.data-table').DataTable({
-            order: [[0, 'desc']],
-            paging: true,
-            length: 50,
-            "ordering": true,
-            "info": true,
-            "responsive": true,
-        });
+        $('.data-table').DataTable(DATATABLES_OPTIONS);
     });
 </script>
 <?= $this->endSection() ?>

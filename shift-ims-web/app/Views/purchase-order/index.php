@@ -38,7 +38,7 @@ $this->extend('_layouts/default')
             </div>
         </form>
         <div class="row mt-3">
-            <div class="col-md-12">
+            <div class="col-md-12 table-responsive">
                 <table id="customer-table" class="data-table display table table-bordered table-striped table-condensed center-th">
                     <thead>
                         <tr>
@@ -73,17 +73,10 @@ $this->extend('_layouts/default')
 <?= $this->section('footscript') ?>
 <script>
     $(function() {
-        $('#daterange').daterangepicker({locale: {
-            format: 'DD-MM-YYYY'
-        }});
-        $('.data-table').DataTable({
-            order: [[0, 'desc']],
-            paging: true,
-            length: 50,
-            "ordering": true,
-            "info": true,
-            "responsive": true,
-        });
+        DATATABLES_OPTIONS.order = [[0, 'desc']];
+        DATATABLES_OPTIONS.columnDefs = [{ orderable: false, targets: 3 }];
+        $('#daterange').daterangepicker({locale: { format: DATE_FORMAT }});
+        $('.data-table').DataTable(DATATABLES_OPTIONS);
     });
 </script>
 <?= $this->endSection() ?>

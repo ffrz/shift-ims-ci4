@@ -37,7 +37,7 @@ $this->extend('_layouts/default')
             </div>
         </form>
         <div class="row mt-3">
-            <div class="col-md-12">
+            <div class="col-md-12 table-responsive">
                 <table id="customer-table" class="data-table display table table-bordered table-striped table-condensed center-th">
                     <thead>
                         <tr>
@@ -60,7 +60,7 @@ $this->extend('_layouts/default')
                                 <td class="text-right"><?= format_number($item->total_price) ?></td>
                                 <td><?= $item->notes ?></td>
                                 <td class="text-center">
-                                    <a href="<?= base_url("/stock-updates/view/$item->id") ?>" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
+                                    <a href="<?= base_url("/stock-updates/view/$item->id") ?>" class="btn btn-default btn-sm"><i class="fa fa-eye"></i></a>
                                 </td>
                             </tr>
                         <?php endforeach ?>
@@ -74,17 +74,10 @@ $this->extend('_layouts/default')
 <?= $this->section('footscript') ?>
 <script>
     $(function() {
-        $('#daterange').daterangepicker({locale: {
-            format: 'DD-MM-YYYY'
-        }});
-        $('.data-table').DataTable({
-            order: [[1, 'desc']],
-            paging: true,
-            length: 50,
-            "ordering": true,
-            "info": true,
-            "responsive": true,
-        });
+        DATATABLES_OPTIONS.order = [[1, 'desc']];
+        DATATABLES_OPTIONS.columnDefs = [{ orderable: false, targets: 6 }];
+        $('#daterange').daterangepicker({locale: { format: DATE_FORMAT }});
+        $('.data-table').DataTable(DATATABLES_OPTIONS);
     });
 </script>
 <?= $this->endSection() ?>
