@@ -47,8 +47,8 @@ $this->extend('_layouts/default')
             </div>
         </div>
         <div class="card-footer">
-            <a href="<?= base_url('/suppliers/') ?>" class="btn btn-default"><i class="fas fa-arrow-left mr-2"></i> Kembali</a>
-            <button type="submit" class="btn btn-primary float-right"><i class="fas fa-save mr-2"></i> Simpan</button>
+            <a href="<?= base_url('/suppliers/') ?>" class="btn btn-default mr-2"><i class="fas fa-arrow-left mr-2"></i> Kembali</a>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save mr-2"></i> Simpan</button>
         </div>
     </form>
 </div>

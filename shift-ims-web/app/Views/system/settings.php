@@ -31,7 +31,7 @@ $this->extend('_layouts/default');
             </div>
         </div>
         <div class="card-footer">
-            <button type="submit" class="btn btn-primary float-right"><i class="fas fa-save mr-2"></i> Simpan</button>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save mr-2"></i> Simpan</button>
         </div>
     </form>
 </div>

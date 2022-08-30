@@ -49,7 +49,7 @@ $this->navActive = 'product';
                 <div class="offset-sm-2 col-sm-10">
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input " id="active" name="active" value="1" <?= $data->active ? 'checked="checked"' : '' ?>>
-                        <label class="custom-control-label" for="active">Aktif</label>
+                        <label class="custom-control-label" for="active" title="Produk aktif dapat dijual">Aktif</label>
                     </div>
                 </div>
             </div>
@@ -89,7 +89,8 @@ $this->navActive = 'product';
             <div class="form-group row">
                 <label for="costing-method" class="col-sm-2 col-form-label">Penentuan Modal</label>
                 <div class="col-sm-10">
-                    <select class="custom-select" id="costing-method" name="costing_method">
+                    <select class="custom-select" id="costing-method" name="costing_method"
+                    title="Pilih cara menentukan modal dari produk ini">
                         <option value="0" <?= $data->costing_method == 0 ? 'selected' : '' ?>>Harga Beli Manual</option>
                         <option value="1" <?= $data->costing_method == 1 ? 'selected' : '' ?>>Harga Beli Terakhir</option>
                         <option value="2" <?= $data->costing_method == 2 ? 'selected' : '' ?>>Harga Beli Rata-Rata</option>
@@ -139,8 +140,8 @@ $this->navActive = 'product';
             </div>
         </div>
         <div class="card-footer">
-            <a href="<?= base_url('/products') ?>" class="btn btn-default"><i class="fas fa-arrow-left mr-2"></i> Kembali</a>
-            <button type="submit" class="btn btn-primary float-right"><i class="fas fa-save mr-2"></i> Simpan</button>
+            <a href="<?= base_url('/products') ?>" class="btn btn-default mr-2"><i class="fas fa-arrow-left mr-2"></i> Kembali</a>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save mr-2"></i> Simpan</button>
         </div>
     </form>
 </div>

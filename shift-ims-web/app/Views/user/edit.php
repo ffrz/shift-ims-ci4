@@ -47,21 +47,21 @@ $this->extend('_layouts/default')
                 <div class="form-group col-md-2">
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input " id="active" name="active" value="1" <?= $data->active ? 'checked="checked"' : '' ?>>
-                        <label class="custom-control-label" for="active">Aktif</label>
+                        <label class="custom-control-label" for="active" title="Akun aktif dapat login">Aktif</label>
                     </div>
                 </div>
                 <div class="form-group col-md-2">
                 <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input " id="is_admin" name="is_admin" value="1" <?= $data->is_admin ? 'checked="checked"' : '' ?>>
-                        <label class="custom-control-label" for="is_admin">Administrator</label>
+                        <label class="custom-control-label" for="is_admin" title="Akun pengguna pengelola">Administrator</label>
                     </div>
                 </div>
             </div>
         </div>
         <div class="card-footer">
             <div>
-                <a href="<?= base_url('/users/') ?>" class="btn btn-default"><i class="fas fa-arrow-left mr-1"></i> Kembali</a>
-                <button type="submit" class="btn btn-primary float-right"><i class="fas fa-save mr-1"></i> Simpan</button>
+                <a href="<?= base_url('/users/') ?>" class="btn btn-default mr-2"><i class="fas fa-arrow-left mr-1"></i> Kembali</a>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-save mr-1"></i> Simpan</button>
             </div>
         </div>
     </form>
