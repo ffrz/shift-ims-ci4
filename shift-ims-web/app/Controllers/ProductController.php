@@ -2,11 +2,8 @@
 
 namespace App\Controllers;
 
-use App\Models\ProductModel;
 use App\Entities\Product;
-use App\Entities\ProductCategory;
 use App\Entities\StockUpdate;
-use App\Models\ProductCategoryModel;
 
 class ProductController extends BaseController
 {
@@ -66,6 +63,9 @@ class ProductController extends BaseController
 
         if ($id == 0) {
             $item = new Product();
+            $item->type = Product::TYPE_STOCKED;
+            $item->costing_method = Product::COSTING_METHOD_LAST;
+            $item->uom = 'bh';
             $adjustmentType = StockUpdate::UPDATE_TYPE_INITIAL_STOCK;
         }
         else {
@@ -82,7 +82,6 @@ class ProductController extends BaseController
         
         $errors = [];
         $oldStock = $item->stock;
-        
 
         if ($this->request->getMethod() === 'post') {
             $item->fill($this->request->getPost());
