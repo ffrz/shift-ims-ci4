@@ -52,6 +52,7 @@
     </div>
   </div>
 </div>
+<div class="mt-4 text-muted">&copy; Shift IT Solution 2022</div>
 <script src="<?= base_url('plugins/jquery/jquery.min.js') ?>"></script>
 <script src="<?= base_url('plugins/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
 <script src="<?= base_url('dist/js/adminlte.min.js') ?>"></script>
