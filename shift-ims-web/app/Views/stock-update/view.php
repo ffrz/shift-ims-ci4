@@ -1,18 +1,11 @@
 <?php
 
-use App\Entities\StockUpdate;
-
-$this->title = 'Rincian <code>' . format_stock_update_code($data->type, $data->code) . '</code>';
+$this->title = 'Rincian <code>#' . format_stock_update_code($data->type, $data->code) . '</code>';
 $this->navActive = 'stock-adjustment';
 $this->extend('_layouts/default')
 ?>
-
-<?= $this->section('headstyles') ?>
-<?= $this->endSection() ?>
-
 <?= $this->section('content') ?>
 <div class="card card-primary">
-    <div class="card-header line"></div>
     <div class="card-body">
         <div class="form-row">
         <div class="form-group col-md-4">
@@ -86,13 +79,4 @@ $this->extend('_layouts/default')
         </div>
     </div>
 </div>
-<?= $this->endSection() ?>
-
-<?= $this->section('footscripts') ?>
-
-<?= $this->endSection() ?>
-
-<?= $this->section('footscript') ?>
-<script>
-</script>
 <?= $this->endSection() ?>

@@ -33,6 +33,7 @@ $this->extend('_layouts/default')
 
         <div class="row mt-3">
             <div class="col-md-12">
+            <div class="table-responsive">
                 <table class="data-table display table table-bordered table-striped table-condensed center-th">
                     <thead>
                         <tr>
@@ -71,6 +72,7 @@ $this->extend('_layouts/default')
                         </tr>
                     </tfoot>
                 </table>
+            </div>
             </div>
         </div>
     </div>

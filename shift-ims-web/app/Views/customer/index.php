@@ -13,7 +13,7 @@ $this->addButtonLink = [
 <div class="card card-primary">
     <div class="card-body">
         <div class="row mt-3">
-            <div class="col-md-12">
+            <div class="col-md-12 table-responsive" >
                 <table class="data-table display table table-bordered table-striped table-condensed center-th">
                     <thead>
                         <tr>
@@ -47,14 +47,10 @@ $this->addButtonLink = [
 <?= $this->endSection() ?>
 <?= $this->section('footscript') ?>
 <script>
+    DATATABLES_OPTIONS.order = [[0, 'asc']];
+    DATATABLES_OPTIONS.columnDefs = [{ orderable: false, targets: 3 }];
     $(function() {
-        $('.data-table').DataTable({
-            paging: true,
-            "ordering": true,
-            "info": true,
-            "responsive": true,
-            columnDefs: [{ orderable: false, targets: 3 }]
-        });
+        $('.data-table').DataTable(DATATABLES_OPTIONS);
     });
 </script>
 <?= $this->endSection() ?>

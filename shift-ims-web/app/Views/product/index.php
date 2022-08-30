@@ -64,32 +64,23 @@ $this->extend('_layouts/default')
                     </div>
                 </div>
             </form>
-
         <div class="row mt-3">
-            <div class="col-md-12">
+            <div class="col-md-12 table-responsive">
                 <table class="data-table display table table-bordered table-striped table-condensed center-th">
                     <thead>
                         <tr>
                             <th>Nama</th>
-                            <th>Pemasok</th>
-                            <th>Jenis</th>
-                            <th>Kategori</th>
                             <th>Stok</th>
-                            <th>Satuan</th>
                             <th>Modal</th>
                             <th>Harga</th>
-                            <th>Aksi</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($items as $item) : ?>
                             <tr>
                                 <td><?= esc($item->name) ?></td>
-                                <td><?= esc($item->supplier_name) ?></td>
-                                <td><?= format_product_type($item->type) ?></td>
-                                <td><?= esc($item->category_name) ?></td>
-                                <td class="text-right"><?= format_number($item->stock) ?></td>
-                                <td><?= esc($item->uom) ?></td>
+                                <td class="text-center"><?= format_number($item->stock) . ' ' . esc($item->uom) ?></td>
                                 <td class="text-right"><?= format_number($item->cost) ?></td>
                                 <td class="text-right"><?= format_number($item->price) ?></td>
                                 <td class="text-center">
@@ -111,17 +102,10 @@ $this->extend('_layouts/default')
 <?= $this->endSection() ?>
 <?= $this->section('footscript') ?>
 <script>
-    $(function() {
-        $('.data-table').DataTable({
-            paging: true,
-            "pageLength": 50,
-            "ordering": true,
-            "info": true,
-            "responsive": true,
-            columnDefs: [{ orderable: false, targets: 8 }]
-        });
-    });
+    DATATABLES_OPTIONS.order = [[0, 'asc']];
+    DATATABLES_OPTIONS.columnDefs = [{ orderable: false, targets: 4 }];
     $(document).ready(function() {
+        $('.data-table').DataTable(DATATABLES_OPTIONS);
         $('.select2').select2();
     });
     $(document).on('select2:open', () => {

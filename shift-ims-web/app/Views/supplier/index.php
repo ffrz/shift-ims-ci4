@@ -10,7 +10,6 @@ $this->addButtonLink = [
 ];
 $this->extend('_layouts/default')
 ?>
-
 <?= $this->section('content') ?>
 <div class="card card-primary">
     <div class="card-body">
@@ -23,7 +22,7 @@ $this->extend('_layouts/default')
                             <th>Kontak</th>
                             <th>Alamat</th>
                             <th>URL</th>
-                            <th>Aksi</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -49,11 +48,11 @@ $this->extend('_layouts/default')
     </div>
 </div>
 <?= $this->endSection() ?>
-
 <?= $this->section('footscript') ?>
 <script>
     $(function() {
         $('.data-table').DataTable({
+            order: [[0, 'asc']],
             paging: true,
             "ordering": true,
             "info": true,

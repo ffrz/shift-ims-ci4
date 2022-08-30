@@ -132,7 +132,7 @@ $this->extend('_layouts/default')
 
     $('.select2').select2();
     $('.date').datetimepicker({
-        format: 'DD-MM-YYYY HH:mm:ss'
+        format: DATETIME_FORMAT
     });
     $(function() {
         var itemByIds = {};

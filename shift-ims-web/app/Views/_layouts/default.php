@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="<?= base_url('dist/css/adminlte.min.css') ?>">
   <link rel="stylesheet" href="<?= base_url('app.css') ?>">
 </head>
+
 <body class="hold-transition sidebar-mini layout-navbar-fixed layout-fixed">
   <div class="wrapper">
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -96,6 +97,17 @@
   <script src="<?= base_url('plugins/datatables-buttons/js/buttons.colVis.min.js') ?>"></script>
   <script src="<?= base_url('dist/js/adminlte.min.js') ?>"></script>
   <script>
+    DATE_FORMAT = 'DD-MM-YYYY';
+    DATETIME_FORMAT = 'DD-MM-YYYY HH:mm:ss';
+    DATATABLES_OPTIONS = {
+      language: { url: '<?= base_url('plugins/datatables/id.json') ?>' },
+      paging: true,
+      length: 10,
+      "ordering": true,
+      "info": true,
+      "responsive": true,
+    };
+
     toastr.options = {
       "closeButton": true,
       "debug": false,

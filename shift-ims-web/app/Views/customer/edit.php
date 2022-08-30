@@ -11,7 +11,7 @@ $this->extend('_layouts/default')
         <div class="card-body">
             <?= csrf_field() ?>
             <div class="form-row">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                     <label for="name">Nama</label>
                     <input type="text" class="form-control <?= !empty($errors['name']) ? 'is-invalid' : '' ?>" id="name" placeholder="Nama" name="name" value="<?= esc($data->name) ?>">
                     <?php if (!empty($errors['name'])) : ?>
@@ -20,14 +20,14 @@ $this->extend('_layouts/default')
                         </span>
                     <?php endif ?>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                     <label for="contacts">Kontak</label>
                     <input type="text" class="form-control" id="contacts" placeholder="Kontak" name="contacts" value="<?= esc($data->contacts) ?>">
-                </div>
+                </div><?php /*
                 <div class="form-group col-md-4">
                     <label for="url">URL</label>
                     <input type="text" class="form-control" id="url" placeholder="URL" name="url" value="<?= esc($data->url) ?>">
-                </div>
+                </div> */ ?>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-12">
@@ -37,6 +37,7 @@ $this->extend('_layouts/default')
             </div>
             <div class="form-row">
                 <div class="form-group col-sm-12">
+                <label for="active">Status</label>
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="active" name="active" value="1" <?= $data->active ? 'checked="checked"' : '' ?>>
                         <label class="custom-control-label" for="active">Aktif</label>
@@ -45,8 +46,8 @@ $this->extend('_layouts/default')
             </div>
         </div>
         <div class="card-footer">
-            <a href="<?= base_url('/suppliers/') ?>" class="btn btn-default"><i class="fas fa-arrow-left mr-2"></i> Kembali</a>
-            <button type="submit" class="btn btn-primary float-right"><i class="fas fa-save mr-2"></i> Simpan</button>
+            <a href="<?= base_url('/suppliers/') ?>" class="btn btn-default mr-2"><i class="fas fa-arrow-left mr-2"></i> Kembali</a>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save mr-2"></i> Simpan</button>
         </div>
     </form>
 </div>

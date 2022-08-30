@@ -77,6 +77,7 @@ $this->extend('_layouts/default')
             format: 'DD-MM-YYYY'
         }});
         $('.data-table').DataTable({
+            order: [[0, 'desc']],
             paging: true,
             length: 50,
             "ordering": true,

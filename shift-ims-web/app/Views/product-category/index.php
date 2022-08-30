@@ -47,6 +47,7 @@ $this->extend('_layouts/default')
 <script>
     $(function() {
         $('.data-table').DataTable({
+            order: [[0, 'asc']],
             paging: true,
             "ordering": true,
             "info": true,

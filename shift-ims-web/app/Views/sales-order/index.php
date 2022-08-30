@@ -71,17 +71,12 @@ $this->extend('_layouts/default')
 <?= $this->endSection() ?>
 <?= $this->section('footscript') ?>
 <script>
+    DATATABLES_OPTIONS.order = [[0, 'desc']];
     $(function() {
         $('#daterange').daterangepicker({locale: {
-            format: 'DD-MM-YYYY'
+            format: DATE_FORMAT
         }});
-        $('.data-table').DataTable({
-            paging: true,
-            length: 50,
-            "ordering": true,
-            "info": true,
-            "responsive": true,
-        });
+        $('.data-table').DataTable(DATATABLES_OPTIONS);
     });
 </script>
 <?= $this->endSection() ?>

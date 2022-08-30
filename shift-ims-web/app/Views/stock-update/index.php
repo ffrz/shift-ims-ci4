@@ -40,8 +40,8 @@ $this->extend('_layouts/default')
                             <th>Kode</th>
                             <th>Waktu</th>
                             <th>Jenis</th>
-                            <th>Selisih Modal</th>
-                            <th>Selisih Harga</th>
+                            <th>Modal</th>
+                            <th>Harga</th>
                             <th>Catatan</th>
                             <th></th>
                         </tr>
@@ -56,7 +56,7 @@ $this->extend('_layouts/default')
                                 <td class="text-right"><?= format_number($item->total_price) ?></td>
                                 <td><?= $item->notes ?></td>
                                 <td class="text-center">
-                                    <a href="<?= base_url("stock-updates/view/$item->id") ?>" class="btn btn-primary btn-sm mr-2"><i class="fa fa-eye"></i></a>
+                                    <a href="<?= base_url("stock-updates/view/$item->id") ?>" class="btn btn-default btn-sm"><i class="fa fa-eye"></i></a>
                                 </td>
                             </tr>
                         <?php endforeach ?>
@@ -74,12 +74,13 @@ $this->extend('_layouts/default')
             format: 'DD-MM-YYYY'
         }});
         $('.data-table').DataTable({
+            order: [[1, 'desc']],
             paging: true,
-            scrollY: 400,
             length: 50,
             "ordering": true,
             "info": true,
             "responsive": true,
+            columnDefs: [{ orderable: false, targets: 6 }]
         });
     });
 </script>
