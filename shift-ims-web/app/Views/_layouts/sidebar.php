@@ -31,13 +31,13 @@
             </li>
             <li class="nav-item">
               <a href="<?= base_url('/reports/sales-by-category') ?>" class="nav-link <?= nav_active($this, 'sales-by-category') ?>">
-              <i class="nav-icon fas fa-file-contract"></i>
+                <i class="nav-icon fas fa-file-contract"></i>
                 <p><small>Lap. Penjualan per Kategori</small></p>
               </a>
             </li>
             <li class="nav-item">
               <a href="<?= base_url('/reports/stock-assets') ?>" class="nav-link <?= nav_active($this, 'stock-report') ?>">
-              <i class="nav-icon fas fa-file-contract"></i>
+                <i class="nav-icon fas fa-file-contract"></i>
                 <p>Lap. Stok</p>
               </a>
             </li>
@@ -78,30 +78,31 @@
             </li>
           </ul>
         </li>
-
-        <li class="nav-item <?= menu_open($this, 'service-order') ?>">
-          <a href="#" class="nav-link <?= menu_active($this, 'service-order') ?>">
-            <i class="nav-icon fas fa-house-laptop"></i>
-            <p>
-              Servis
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="<?= base_url('/service-orders/edit/0') ?>" class="nav-link <?= nav_active($this, 'edit-service-order') ?>">
-                <i class="fas fa-hand-holding-medical nav-icon"></i>
-                <p>Penerimaan servis</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="<?= base_url('/service-orders/') ?>" class="nav-link <?= nav_active($this, 'service-order') ?>">
-                <i class="nav-icon fas fa-screwdriver-wrench"></i>
-                <p>Servis</p>
-              </a>
-            </li>
-          </ul>
-        </li>
+        <?php if (defined('REPAIR_SERVICE_MODULE')) : ?>
+          <li class="nav-item <?= menu_open($this, 'service-order') ?>">
+            <a href="#" class="nav-link <?= menu_active($this, 'service-order') ?>">
+              <i class="nav-icon fas fa-house-laptop"></i>
+              <p>
+                Servis
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= base_url('/service-orders/edit/0') ?>" class="nav-link <?= nav_active($this, 'edit-service-order') ?>">
+                  <i class="fas fa-hand-holding-medical nav-icon"></i>
+                  <p>Penerimaan servis</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('/service-orders/') ?>" class="nav-link <?= nav_active($this, 'service-order') ?>">
+                  <i class="nav-icon fas fa-screwdriver-wrench"></i>
+                  <p>Servis</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+        <?php endif ?>
         <li class="nav-item <?= menu_open($this, 'inventory') ?>">
           <a href="#" class="nav-link <?= menu_active($this, 'inventory') ?>">
             <i class="nav-icon fas fa-warehouse"></i>

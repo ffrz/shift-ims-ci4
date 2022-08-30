@@ -19,7 +19,7 @@ $this->extend('_layouts/default')
     </div>
     <div class="card-body">
         <div class="tab-content" id="customer-tabContent">
-            <div class="tab-pane fade show active" id="tabcontent1" role="tabpanel" aria-labelledby="tabcontent1-tab1">
+            <div class="tab-pane fade show active table-responsive" id="tabcontent1" role="tabpanel" aria-labelledby="tabcontent1-tab1">
                 <table class="table table-condensed table-striped">
                     <tbody>
                         <tr>
@@ -51,7 +51,7 @@ $this->extend('_layouts/default')
                 </table>
             </div>
             <div class="tab-pane fade" id="tabcontent2" role="tabpanel" aria-labelledby="tabcontent2-tab">
-                <div class="overlay-wrapper">
+                <div class="overlay-wrapper table-responsive">
                     <table class="table table-bordered table-condensed table-striped">
                         <thead>
                             <tr>

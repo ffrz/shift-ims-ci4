@@ -15,14 +15,16 @@ $this->extend('_layouts/default')
             <li class="nav-item">
                 <a class="nav-link" id="tabcontent2-tab" data-toggle="pill" href="#tabcontent2" role="tab" aria-controls="tabcontent2-tab" aria-selected="true">Riwayat Transaksi</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" id="tabcontent3-tab" data-toggle="pill" href="#tabcontent3" role="tab" aria-controls="tabcontent3-tab" aria-selected="true">Riwayat Servis</a>
-            </li>
+            <?php if (defined('REPAIR_SERVICE_MODULE')) : ?>
+                <li class="nav-item">
+                    <a class="nav-link" id="tabcontent3-tab" data-toggle="pill" href="#tabcontent3" role="tab" aria-controls="tabcontent3-tab" aria-selected="true">Riwayat Servis</a>
+                </li>
+            <?php endif ?>
         </ul>
     </div>
     <div class="card-body">
         <div class="tab-content" id="customer-tabContent">
-            <div class="tab-pane fade show active" id="tabcontent1" role="tabpanel" aria-labelledby="tabcontent1-tab1">
+            <div class="tab-pane fade show active table-responsive" id="tabcontent1" role="tabpanel" aria-labelledby="tabcontent1-tab1">
                 <table class="table table-condensed table-striped">
                     <tbody>
                         <tr>
@@ -49,7 +51,7 @@ $this->extend('_layouts/default')
                 </table>
             </div>
             <div class="tab-pane fade" id="tabcontent2" role="tabpanel" aria-labelledby="tabcontent2-tab">
-                <div class="overlay-wrapper">
+                <div class="overlay-wrapper table-responsive">
                     <table class="table table-bordered table-condensed table-striped">
                         <thead>
                             <tr class="text-center">
@@ -61,10 +63,12 @@ $this->extend('_layouts/default')
                             </tr>
                         </thead>
                         <tbody>
-                        <?php if (empty($salesOrders)): ?>
-                                <tr><td colspan="5" class="text-center font-italic text-muted">Belum ada rekaman penjualan.</td></tr>
+                            <?php if (empty($salesOrders)) : ?>
+                                <tr>
+                                    <td colspan="5" class="text-center font-italic text-muted">Belum ada rekaman penjualan.</td>
+                                </tr>
                             <?php endif ?>
-                            <?php foreach ($salesOrders as $item): ?>
+                            <?php foreach ($salesOrders as $item) : ?>
                                 <tr>
                                     <td class="text-center"><?= format_stock_update_code($item->type, $item->code) ?></td>
                                     <td class="text-center"><?= format_date($item->datetime) ?></td>
@@ -77,8 +81,9 @@ $this->extend('_layouts/default')
                     </table>
                 </div>
             </div>
+            <?php if (defined('REPAIR_SERVICE_MODULE')) : ?>
             <div class="tab-pane fade" id="tabcontent3" role="tabpanel" aria-labelledby="tabcontent3-tab">
-                <div class="overlay-wrapper">
+                <div class="overlay-wrapper table-responsive">
                     <table class="table table-bordered table-condensed table-striped">
                         <thead>
                             <tr class="text-center">
@@ -91,10 +96,12 @@ $this->extend('_layouts/default')
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if (empty($services)): ?>
-                                <tr><td colspan="6" class="text-center text-muted font-italic">Belum ada rekaman servis.</td></tr>
+                            <?php if (empty($services)) : ?>
+                                <tr>
+                                    <td colspan="6" class="text-center text-muted font-italic">Belum ada rekaman servis.</td>
+                                </tr>
                             <?php endif ?>
-                            <?php foreach ($services as $item): ?>
+                            <?php foreach ($services as $item) : ?>
                                 <tr>
                                     <td class="text-center"><?= format_service_order_code($item->id) ?></td>
                                     <td class="text-center"><?= format_date($item->date) ?></td>
@@ -108,6 +115,7 @@ $this->extend('_layouts/default')
                     </table>
                 </div>
             </div>
+            <?php endif ?>
         </div>
     </div>
     <div class="card-footer">

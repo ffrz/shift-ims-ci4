@@ -16,6 +16,7 @@ $this->extend('_layouts/default')
             </div>
         </div>
     </div>
+    <?php if (defined('REPAIR_SERVICE_MODULE')) : ?>
     <div class="col-12 col-sm-6 col-md-3">
         <div class="info-box">
             <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-screwdriver-wrench"></i></span>
@@ -25,6 +26,7 @@ $this->extend('_layouts/default')
             </div>
         </div>
     </div>
+    <?php endif ?>
     <div class="col-12 col-sm-6 col-md-3">
         <div class="info-box">
             <span class="info-box-icon bg-success elevation-1"><i class="fas fa-money-bill-trend-up"></i></span>
@@ -34,6 +36,7 @@ $this->extend('_layouts/default')
             </div>
         </div>
     </div>
+    <?php if (defined('REPAIR_SERVICE_MODULE')) : ?>
     <div class="col-12 col-sm-6 col-md-3">
         <div class="info-box">
             <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-screwdriver-wrench"></i></span>
@@ -43,9 +46,10 @@ $this->extend('_layouts/default')
             </div>
         </div>
     </div>
+    <?php endif ?>
 </div>
 <div class="row">
-    <div class="col-md-8 offset-md-2">
+    <div class="col-md-6">
         <div class="card">
             <div class="card-header border-0">
                 <h3 class="card-title">

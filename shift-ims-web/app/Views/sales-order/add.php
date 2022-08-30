@@ -47,7 +47,6 @@ $this->extend('_layouts/default')
         </div>
 
         <div class="form-row">
-
             <div class="form-group col-md-4">
                 <label for="product">Produk</label>
                 <select id="product" class="form-control custom-select select2">
@@ -62,8 +61,8 @@ $this->extend('_layouts/default')
             <button id="add-button" class="btn btn-md btn-warning" type="button"><i class="fa fas fa-plus"></i> Tambahkan</button>
         </div>
         <div class="row mt-3">
-            <div class="col-md-12">
-                <table id="" class="data-table display table table-bordered table-striped table-condensed">
+            <div class="col-md-12 table-responsive">
+                <table  class="data-table display table table-bordered table-striped table-condensed">
                     <thead>
                         <tr>
                             <th>No</th>
