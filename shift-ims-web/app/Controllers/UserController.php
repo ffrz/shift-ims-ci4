@@ -132,9 +132,23 @@ class UserController extends BaseController
             return redirect()->to(base_url('users'))
                 ->with('error', 'Akun <b>' . esc($user->username) . '</b> tidak dapat dihapus.');
         }
+        else if ($user->id == current_user()['id']) {
+            return redirect()->to(base_url('users'))
+            ->with('error', 'Anda tidak dapat menghapus akun sendiri.');
+        }
 
-        $user->active = 0;
-        $model->save($user);
-        return redirect()->to(base_url('users'))->with('info', 'Pengguna telah dinonaktifkan.');
+        if ($this->request->getMethod() == 'post') {
+            $user->active = 0;
+            $model->save($user);
+            if ($model->delete($user->id)) {
+                return redirect()->to(base_url('users'))->with('info', 'Pengguna ' . esc($user->username) . ' telah dihapus.');
+            }
+
+            return redirect()->to(base_url('users'))->with('info', 'Pengguna telah dinonaktifkan.');
+        }
+
+        return view('user/delete', [
+            'data' => $user
+        ]);
     }
 }
