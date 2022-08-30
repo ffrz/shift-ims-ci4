@@ -17,16 +17,34 @@ $this->navActive = 'service-order';
     </div>
     <div class="row">
         <div class="col-md-6">
+            <h4>Order</h4>
             <div class="table-responsive">
                 <table class="table">
                     <tr>
-                        <th style="width:50%">Tanggal Penerimaan</th>
+                        <th style="width:8rem">No. Order</th>
                         <td style="width:1rem">:</td>
+                        <td>#<?= $orderCode ?></td>
+                    </tr>
+                    <tr>
+                        <th>Tanggal</th>
+                        <td>:</td>
                         <td><?= format_date($data->date) ?></td>
                     </tr>
                     <tr>
-                        <th>Nama Pelanggan</th>
+                        <th>Status</th>
                         <td>:</td>
+                        <td><?= format_service_order_status($data->status) ?></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h4>Pelanggan</h4>
+            <div class="table-responsive">
+                <table class="table">
+                    <tr>
+                        <th style="width:8rem">Nama</th>
+                        <td style="width:1rem">:</td>
                         <td><?= esc($data->customer_name) ?></td>
                     </tr>
                     <tr>
@@ -39,26 +57,16 @@ $this->navActive = 'service-order';
                         <td>:</td>
                         <td><?= esc($data->customer_address) ?></td>
                     </tr>
-                    <tr>
-                        <th style="width:50%">Biaya Perkiraan</th>
-                        <td>:</td>
-                        <td><?= format_number($data->estimated_cost) ?></td>
-                    </tr>
-                    <tr>
-                        <th>Uang Muka</th>
-                        <td>:</td>
-                        <td><?= format_number($data->down_payment) ?></td>
-                    </tr>
                 </table>
             </div>
         </div>
         <div class="col-md-6">
+            <h4>Perangkat</h4>
             <div class="table-responsive">
                 <table class="table">
-
                     <tr>
-                        <th style="width:50%">Perangkat</th>
-                        <td>:</td>
+                        <th style="width:8rem">Perangkat</th>
+                        <td style="width:1rem">:</td>
                         <td><?= esc($data->device) ?></td>
                     </tr>
                     <tr>
@@ -82,6 +90,11 @@ $this->navActive = 'service-order';
                         <td><?= esc($data->actions) ?></td>
                     </tr>
                     <tr>
+                        <th>Status</th>
+                        <td>:</td>
+                        <td><?= format_service_status($data->service_status) ?></td>
+                    </tr>
+                    <tr>
                         <th>Catatan</th>
                         <td>:</td>
                         <td><?= esc($data->notes) ?></td>
@@ -89,8 +102,50 @@ $this->navActive = 'service-order';
                 </table>
             </div>
         </div>
+        <div class="col-md-6">
+            <h4>Biaya-biaya</h4>
+            <div class="table-responsive">
+                <table class="table">
+                    <tr>
+                        <th style="width:10rem">Biaya Perkiraan</th>
+                        <td style="width:1rem">:</td>
+                        <td>Rp. <?= format_number($data->estimated_cost) ?></td>
+                    </tr>
+                    <tr>
+                        <th>Uang Muka</th>
+                        <td>:</td>
+                        <td>Rp. <?= format_number($data->down_payment) ?></td>
+                    </tr>
+                    <tr>
+                        <th>Biaya Peralatan</th>
+                        <td>:</td>
+                        <td>Rp. <?= format_number($data->parts_cost) ?></td>
+                    </tr>
+                    <tr>
+                        <th>Biaya Servis</th>
+                        <td>:</td>
+                        <td>Rp. <?= format_number($data->service_cost) ?></td>
+                    </tr>
+                    <tr>
+                        <th>Biaya Lain-lain</th>
+                        <td>:</td>
+                        <td>Rp. <?= format_number($data->other_cost) ?></td>
+                    </tr>
+                    <tr>
+                        <th>Total Biaya</th>
+                        <td>:</td>
+                        <td>Rp. <?= format_number($data->total_cost) ?></td>
+                    </tr>
+                    <tr>
+                        <th>Status</th>
+                        <td>:</td>
+                        <td><?= format_service_order_payment_status($data->payment_status) ?></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
-    <div class="row no-print mt-3">
+    <div class="row mt-3">
         <div class="col-12">
             <a href="<?= base_url("service-orders/view/$data->id?print=1") ?>" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
         </div>

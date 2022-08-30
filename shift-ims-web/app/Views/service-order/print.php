@@ -18,7 +18,7 @@ $this->navActive = 'service-order';
     <div class="row">
         <div class="col-md-6">
             <div class="table-responsive">
-                <table class="table">
+                <table class="table table-condensed table-striped">
                     <tr>
                         <th>Tanggal:</th>
                         <td><?= format_date($data->date) ?></td>
@@ -48,7 +48,7 @@ $this->navActive = 'service-order';
         </div>
         <div class="col-md-6">
             <div class="table-responsive">
-                <table class="table">
+                <table class="table table-condensed table-striped">
 
                     <tr>
                         <th style="width:50%">Perangkat:</th>
