@@ -21,21 +21,9 @@ $this->extend('_layouts/default')
     <div class="card-body">
         <form method="post">
         <?= csrf_field() ?>
-        <div class="row">
-            <h4 class="col-md-12">Info Order</h4>
-        </div>
         <div class="form-row">
             <div class="form-group col-md-4">
-                <label for="party_id">Pemasok</label>
-                <select class="form-control custom-select select2" id="party_id" name="party_id">
-                    <option value="" <?= !$data->party_id ? 'selected' : '' ?>>Tidak Ditentukan</option>
-                    <?php foreach ($suppliers as $supplier) : ?>
-                        <option value="<?= $supplier->id ?>" <?= $data->party_id == $supplier->id ? 'selected' : '' ?>><?= esc($supplier->name) ?></option>
-                    <?php endforeach ?>
-                </select>
-            </div>
-            <div class="form-group col-md-4">
-                <label for="datetime" class="">Waktu</label>
+                <label for="datetime">Waktu:</label>
                 <div class="input-group date" id="datetime" data-target-input="nearest">
                     <input type="text" class="form-control datetimepicker-input" data-target="#datetime"
                         name="datetime" value="<?= esc(format_datetime($data->datetime)) ?>"/>
@@ -45,15 +33,45 @@ $this->extend('_layouts/default')
                 </div>
             </div>
             <div class="form-group col-md-4">
-                <label for="code" class="">Kode</label>
+                    <label for="status">Status Order:</label>
+                    <select class="custom-select" id="status" name="status">
+                        <option value="1" <?= $data->status == 0 ? 'selected' : '' ?>>Belum Disimpan</option>
+                        <option value="2" <?= $data->status == 1 ? 'selected' : '' ?>>Disimpan</option>
+                        <option value="3" <?= $data->status == 2 ? 'selected' : '' ?>>Selesai</option>
+                        <option value="3" <?= $data->status == 2 ? 'selected' : '' ?>>Dibatalkan</option>
+                    </select>
+                </div>
+            <div class="form-group col-md-4">
+                <label for="code">Kode:</label>
                 <input type="text" id="code" class="form-control" value="<?= format_stock_update_code($data->type, $data->code) ?>" readonly>
             </div>
         </div>
-
         <div class="form-row">
-
+            <div class="form-group col-md-3">
+                <label for="party_id">Nama Pemasok:</label>
+                <select class="form-control custom-select select2" id="party_id" name="party_id">
+                    <option value="" <?= !$data->party_id ? 'selected' : '' ?>>Tidak Ditentukan</option>
+                    <?php foreach ($suppliers as $supplier) : ?>
+                        <option value="<?= $supplier->id ?>" <?= $data->party_id == $supplier->id ? 'selected' : '' ?>
+                            data-contacts="<?= esc($supplier->contacts)?>"
+                            data-address="<?= esc($supplier->address) ?>">
+                            <?= esc($supplier->name) ?>
+                        </option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="party_contacts">Kontak:</label>
+                <input type="text" id="party_contacts" readonly class="form-control">
+            </div>
             <div class="form-group col-md-6">
-                <label for="product">Produk</label>
+                <label for="party_address">Alamat:</label>
+                <input type="text" id="party_address" readonly class="form-control">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="product">Pilih Produk:</label>
                 <select id="product" class="form-control custom-select select2">
                     <option value="0">-- Pilih Produk --</option>
                     <?php foreach ($products as $product) : ?>
@@ -96,7 +114,7 @@ $this->extend('_layouts/default')
             </div>
         </div>
         <div class="form-row">
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-12">
                 <label for="datetime" class="">Catatan</label>
                 <textarea class="form-control" name="notes"><?= esc($data->notes) ?></textarea>
             </div>
@@ -194,10 +212,10 @@ $this->extend('_layouts/default')
                 `<tr id="item-${item.id}" class="items">`
                 + `<td>${num++}</td>`
                 + `<td>${item.name}</td>`
-                + `<td><input type="number" id="item-quantity-${item.id}" name=quantities[${item.id}] value="${item.quantity}" min="1" max="99999999"></td>`
+                + `<td class="text-center"><input style="width:5rem;text-align:right;" type="number" id="item-quantity-${item.id}" name=quantities[${item.id}] value="${item.quantity}" min="1" max="99999999"></td>`
                 + `<td>${item.uom}</td>`
-                + `<td><input type="number" id="item-cost-${item.id}" name=costs[${item.id}] value="${item.cost}" max="999999999999"></td>`
-                + `<td><input type="number" id="item-price-${item.id}" name=prices[${item.id}] value="${item.price}" max="999999999999"></td>`
+                + `<td class="text-center"><input style="width:7rem;text-align:right;" type="number" id="item-cost-${item.id}" name=costs[${item.id}] value="${item.cost}" max="999999999999"></td>`
+                + `<td class="text-center"><input style="width:7rem;text-align:right;" type="number" id="item-price-${item.id}" name=prices[${item.id}] value="${item.price}" max="999999999999"></td>`
                 + `<td id="item-subtotal-${item.id}" class="text-right">${formatNumber(item.cost)}</td>`                
                 + `<td><button id="remove-item-${item.id}" class="btn btn-xs btn-danger" type="button"><i class="fa fa-trash"></i></button></td>`
                 + `</tr>`
@@ -205,6 +223,13 @@ $this->extend('_layouts/default')
             $(`#remove-item-${item.id}`).click(removeRow);
             $(`#item-quantity-${item.id}`).change(updateSubtotal);
             $(`#item-cost-${item.id}`).change(updateSubtotal);
+        }
+
+        function resetProductSelect() {
+            setTimeout(function() {
+                $('#product').val('0').trigger('change');
+                $('#product').showPopup();
+            }, 5);
         }
 
         addButton.click(function() {
@@ -215,7 +240,6 @@ $this->extend('_layouts/default')
             }
                         
             if (itemByIds.hasOwnProperty(id)) {
-                var qtyElement = $(`#item-quantity-${id}`);
                 var qty = parseInt(qtyElement.val());
                 var cost = parseFloat($(`#item-cost-${id}`).val());
                 
@@ -226,6 +250,8 @@ $this->extend('_layouts/default')
                 $(`#item-subtotal-${id}`).text(formatNumber(subtotal));
                 setFocus(qtyElement);
                 updateTotal();
+                qtyElement.select();
+                resetProductSelect();
                 return;
             }
 
@@ -241,9 +267,12 @@ $this->extend('_layouts/default')
                 price: selected.data('price'),
             })
 
-            setFocus($(`#item-quantity-${id}`));
+            var qtyElement = $(`#item-quantity-${id}`);
+            setFocus(qtyElement);
             $('#empty-items').hide();
             updateTotal();
+            qtyElement.select();
+            resetProductSelect();
         });
 
         productSelect.change();
@@ -256,6 +285,12 @@ $this->extend('_layouts/default')
             updateTotal();
             $('#empty-items').hide();
         }
+
+        $('#party_id').change(function() {
+            var selected = $(this).find('option:selected');
+            $('#party_contacts').val(selected.data('contacts'));
+            $('#party_address').val(selected.data('address'));
+        });
     });
 </script>
 <?= $this->endSection() ?>

@@ -71,8 +71,10 @@ $this->extend('_layouts/default')
                         <tr>
                             <th>Nama</th>
                             <th>Stok</th>
-                            <th>Modal</th>
                             <th>Harga</th>
+                            <?php if (0): ?>
+                            <th>Modal</th>
+                            <?php endif ?>
                             <th></th>
                         </tr>
                     </thead>
@@ -81,8 +83,10 @@ $this->extend('_layouts/default')
                             <tr>
                                 <td><?= esc($item->name) ?></td>
                                 <td class="text-center"><?= format_number($item->stock) . ' ' . esc($item->uom) ?></td>
-                                <td class="text-right"><?= format_number($item->cost) ?></td>
                                 <td class="text-right"><?= format_number($item->price) ?></td>
+                                <?php if (0): ?>
+                                <td class="text-right"><?= format_number($item->cost) ?></td>
+                                <?php endif ?>
                                 <td class="text-center">
                                     <div class="btn-group" role="group" aria-label="Actions">
                                     <a href="<?= base_url("/products/view/$item->id") ?>" class="btn btn-default btn-sm"><i class="fa fa-eye"></i></a>

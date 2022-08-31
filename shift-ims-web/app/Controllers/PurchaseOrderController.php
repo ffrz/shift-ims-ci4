@@ -78,6 +78,7 @@ class PurchaseOrderController extends BaseController
         $data->datetime = date('Y-m-d H:i:s');
         $data->code = $model->generateCode(StockUpdate::UPDATE_TYPE_PURCHASE_ORDER);
         $data->notes = '';
+        $data->status = 0;
         
         $items = [];
 
