@@ -107,7 +107,7 @@ $this->extend('_layouts/default')
 <?= $this->section('footscript') ?>
 <script>
     DATATABLES_OPTIONS.order = [[0, 'asc']];
-    DATATABLES_OPTIONS.columnDefs = [{ orderable: false, targets: 4 }];
+    DATATABLES_OPTIONS.columnDefs = [{ orderable: false, targets: 3 }];
     $(document).ready(function() {
         $('.data-table').DataTable(DATATABLES_OPTIONS);
         $('.select2').select2();
