@@ -64,18 +64,6 @@
                 <p>Penjualan</p>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="<?= base_url('/customers/edit/0') ?>" class="nav-link <?= nav_active($this, 'edit-customer') ?>">
-                <i class="fas fa-user-plus nav-icon"></i>
-                <p>Pelanggan Baru</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="<?= base_url('/customers/') ?>" class="nav-link <?= nav_active($this, 'customer') ?>">
-                <i class="nav-icon fas fa-users"></i>
-                <p>Pelanggan</p>
-              </a>
-            </li>
           </ul>
         </li>
         <?php if (env('REPAIR_SERVICE_MODULE')) : ?>
@@ -103,6 +91,29 @@
             </ul>
           </li>
         <?php endif ?>
+        <li class="nav-item <?= menu_open($this, 'customer') ?>">
+          <a href="#" class="nav-link <?= menu_active($this, 'customer') ?>">
+            <i class="nav-icon fas fa-users"></i>
+            <p>
+              Pelanggan
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="<?= base_url('/customers/edit/0') ?>" class="nav-link <?= nav_active($this, 'edit-customer') ?>">
+                <i class="fas fa-user-plus nav-icon"></i>
+                <p>Pelanggan Baru</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?= base_url('/customers/') ?>" class="nav-link <?= nav_active($this, 'customer') ?>">
+                <i class="nav-icon fas fa-users"></i>
+                <p>Pelanggan</p>
+              </a>
+            </li>
+          </ul>
+        </li>
         <li class="nav-item <?= menu_open($this, 'inventory') ?>">
           <a href="#" class="nav-link <?= menu_active($this, 'inventory') ?>">
             <i class="nav-icon fas fa-warehouse"></i>

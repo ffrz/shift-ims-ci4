@@ -2,7 +2,7 @@
 $this->title = (!$data->id ? 'Tambah' : 'Edit') . ' Pelanggan';
 $this->titleIcon = 'fa-user-plus';
 $this->navActive = 'edit-customer';
-$this->menuActive = 'sales-order';
+$this->menuActive = 'customer';
 $this->extend('_layouts/default')
 ?>
 <?= $this->section('content') ?>

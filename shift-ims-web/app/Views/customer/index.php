@@ -2,6 +2,7 @@
 $this->title = 'Daftar Pelanggan';
 $this->titleIcon = 'fa-users';
 $this->navActive = 'customer';
+$this->menuActive = 'customer';
 $this->addButtonLink = [
     'url' => '/customers/edit/0',
     'icon' => 'fa-plus',

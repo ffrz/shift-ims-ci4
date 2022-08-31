@@ -2,7 +2,7 @@
 $this->title = 'Rincian Pelanggan';
 $this->titleIcon = 'fa-user';
 $this->navActive = 'customer';
-$this->menuActive = 'sales-order';
+$this->menuActive = 'customer';
 $this->extend('_layouts/default')
 ?>
 <?= $this->section('content') ?>
