@@ -35,7 +35,7 @@ $this->extend('_layouts/default'); ?>
                 </div>
             <?php endif ?>
             <div class="row mt-3">
-                <div class="col-md-12">
+                <div class="col-md-12 table-responsive">
                     <table id="editor" class="data-table display table table-bordered table-striped table-condensed">
                         <thead>
                             <tr>

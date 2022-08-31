@@ -30,7 +30,7 @@ class PartyController extends BaseController
             $party = $model->find($id);
             if (!$party) {
                 return redirect()->to(base_url($this->redirectUrl))
-                    ->with('warning', 'Pemasok tidak ditemukan.');
+                    ->with('warning', 'Item tidak ditemukan.');
             }
         }
 

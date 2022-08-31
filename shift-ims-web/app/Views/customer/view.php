@@ -35,7 +35,7 @@ $this->extend('_layouts/default')
                         <tr>
                             <td>Kontak</td>
                             <td>:</td>
-                            <td><?= esc($data->contacts) ?></td>
+                            <td><a href="<?= esc(wa_send_url($data->contacts)) ?>" target="blank"><?= esc($data->contacts) ?></a></td>
                         </tr>
                         <tr>
                             <td>Alamat</td>
@@ -70,7 +70,11 @@ $this->extend('_layouts/default')
                             <?php endif ?>
                             <?php foreach ($salesOrders as $item) : ?>
                                 <tr>
-                                    <td class="text-center"><?= format_stock_update_code($item->type, $item->code) ?></td>
+                                    <td class="text-center">
+                                        <a href="<?= base_url("sales-orders/view/$item->id") ?>">
+                                            <?= format_stock_update_code($item->type, $item->code) ?>
+                                        </a>
+                                    </td>
                                     <td class="text-center"><?= format_date($item->datetime) ?></td>
                                     <td class="text-center"><?= format_stock_update_type($item->type) ?></td>
                                     <td class="text-right"><?= format_number($item->total_price) ?></td>

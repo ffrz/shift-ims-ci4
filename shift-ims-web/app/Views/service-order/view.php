@@ -10,7 +10,6 @@ $this->navActive = 'service-order';
         <div class="col-12">
             <h4>
                 <i class="fas fa-laptop-code"></i> <?= esc($settings->storeName) ?>
-                <small class="float-right">Service Order #<?= $orderCode ?></small>
             </h4>
             <p class="text-muted font-italic"><?= esc($settings->storeAddress) ?></p>
         </div>
@@ -45,7 +44,11 @@ $this->navActive = 'service-order';
                     <tr>
                         <th style="width:8rem">Nama</th>
                         <td style="width:1rem">:</td>
-                        <td><?= esc($data->customer_name) ?></td>
+                        <td>
+                            <a href="<?= base_url("customers/view/$data->customer_id") ?>">
+                            <?= esc($data->customer_name) ?>
+                            </a>
+                        </td>
                     </tr>
                     <tr>
                         <th>Kontak</th>
