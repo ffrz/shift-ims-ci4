@@ -28,7 +28,7 @@ $this->title = 'Order Penjualan #' . $orderCode;
                         <td>:</td>
                         <td>
                             <?php if ($data->customer) : ?>
-                                <a href="<?= wa_send_url($data->customer->contacts) ?>" target="_blank"><?= esc($data->customer->contacts) ?></a>
+                                <?= esc($data->customer->contacts) ?>
                             <?php endif ?>
                         </td>
                     </tr>

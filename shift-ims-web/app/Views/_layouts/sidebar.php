@@ -78,7 +78,7 @@
             </li>
           </ul>
         </li>
-        <?php if (defined('REPAIR_SERVICE_MODULE')) : ?>
+        <?php if (env('REPAIR_SERVICE_MODULE')) : ?>
           <li class="nav-item <?= menu_open($this, 'service-order') ?>">
             <a href="#" class="nav-link <?= menu_active($this, 'service-order') ?>">
               <i class="nav-icon fas fa-house-laptop"></i>

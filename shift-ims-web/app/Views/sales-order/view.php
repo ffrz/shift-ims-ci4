@@ -9,8 +9,8 @@ $this->extend('_layouts/default');
 <div class="invoice p-3 mb-3">
     <div class="row">
         <div class="col-md-6">
-            <div>
-                <table style="width:100%;">
+            <div class="table-responsive">
+                <table>
                     <tr>
                         <td style="width:25%;">Atas Nama</td>
                         <td style="width:5%;">:</td>
@@ -56,7 +56,7 @@ $this->extend('_layouts/default');
         </div>
     </div>
     <div class="row mt-4">
-        <div class="col-12">
+        <div class="col-12 table-responsive">
             <table class="table">
                 <thead style="text-align:center;">
                     <tr>

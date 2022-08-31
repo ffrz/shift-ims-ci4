@@ -50,7 +50,7 @@ $this->navActive = 'service-order';
                     <tr>
                         <th>Kontak</th>
                         <td>:</td>
-                        <td><?= esc($data->customer_contacts) ?></td>
+                        <td><a href="<?= esc(wa_send_url($data->customer_contacts)) ?>" target="blank"><?= esc($data->customer_contacts) ?></a></td>
                     </tr>
                     <tr>
                         <th>Alamat</th>
