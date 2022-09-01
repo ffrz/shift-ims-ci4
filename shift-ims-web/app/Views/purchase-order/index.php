@@ -4,39 +4,48 @@ $this->title = 'Order Pembelian';
 $this->titleIcon = 'fa-truck-ramp-box';
 $this->menuActive = 'purchase-order';
 $this->navActive = 'purchase-order';
-$this->addButtonLink = [
-    'url' => '/purchase-orders/add',
-    'icon' => 'fa-plus',
-    'text' => 'Tambah Order Pembelian'
-];
 $this->extend('_layouts/default')
 ?>
-
+<?= $this->section('right-menu') ?>
+<li class="nav-item dropdown">
+    <button class="btn btn-default plus-btn mr-2" data-toggle="modal" data-target="#modal-sm" title="Saring"><i class="fa fa-filter"></i></button>
+</li>
+<?= $this->endSection() ?>
 <?= $this->section('content') ?>
-<div class="card card-primary">
-    <div class="card-body">
-        <form method="GET">
-            <?= csrf_field() ?>
-            <div class="form-row">
-                <div class="form-group col-md-3">
-                    <label>Tanggal:</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">
-                                <i class="far fa-calendar-alt"></i>
-                            </span>
+<form method="GET" class="form-horizontal">
+    <div class="modal fade" id="modal-sm">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Penyaringan</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label for="daterange" class="col-sm-2 col-form-label">Tanggal</label>
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="far fa-calendar-alt"></i>
+                                    </span>
+                                </div>
+                                <input type="text" name="daterange" class="form-control float-right" id="daterange" value="<?= format_date($filter->dateStart) . ' - ' . format_date($filter->dateEnd) ?>">
+                            </div>
                         </div>
-                        <input type="text" name="daterange" class="form-control float-right" id="daterange"
-                            value="<?= format_date($filter->dateStart) . ' - ' . format_date($filter->dateEnd) ?>">
                     </div>
                 </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <button type="submit" class="btn btn-primary btn-sm mr-2"><i class="fas fa-filter mr-2"></i> Terapkan</button>
+                <div class="modal-footer justify-content-between">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-check mr-2"></i> Terapkan</button>
                 </div>
             </div>
-        </form>
+        </div>
+    </div>
+</form>
+<div class="card card-primary">
+    <div class="card-body">
         <div class="row mt-3">
             <div class="col-md-12 table-responsive">
                 <table id="customer-table" class="data-table display table table-bordered table-striped table-condensed center-th">

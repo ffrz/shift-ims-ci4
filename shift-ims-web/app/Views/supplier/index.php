@@ -10,10 +10,15 @@ $this->addButtonLink = [
 ];
 $this->extend('_layouts/default')
 ?>
+<?= $this->section('right-menu') ?>
+<li class="nav-item">
+    <a href="<?= base_url('suppliers/edit/0') ?>" class="btn plus-btn btn-primary mr-2" title="Baru"><i class="fa fa-plus"></i></a>
+</li>
+<?= $this->endSection() ?>
 <?= $this->section('content') ?>
 <div class="card card-primary">
     <div class="card-body">
-        <div class="row mt-3">
+        <div class="row">
             <div class="col-md-12 table-responsive">
                 <table class="data-table display table table-bordered table-striped table-condensed center-th" style="width:100%">
                     <thead>

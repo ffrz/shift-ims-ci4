@@ -12,9 +12,4 @@
 }
 .plus-btn {
     border-radius: 100%;
-    width: 2rem;
-    height: 2rem;
-}
-.plus-btn .fa {
-    line-height: 1.7;
 }

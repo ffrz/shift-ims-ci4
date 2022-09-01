@@ -6,54 +6,50 @@ $this->title = 'Penyesuaian Stok';
 $this->titleIcon = 'fa-sliders';
 $this->menuActive = 'inventory';
 $this->navActive = 'stock-adjustment';
-$this->addButtonLink = [
-    'url' => '/stock-adjustments/add',
-    'icon' => 'fa-plus',
-    'text' => 'Sesuaikan Stok'
-];
 $this->extend('_layouts/default')
 ?>
+<?= $this->section('right-menu') ?>
+<li class="nav-item">
+<a href="<?= base_url('stock-adjustments/add') ?>" class="btn plus-btn btn-primary mr-1" title="Baru"><i class="fa fa-plus"></i></a>
+    <button class="btn plus-btn btn-default mr-2" data-toggle="modal" data-target="#modal-sm" title="Saring"><i class="fa fa-filter"></i></button>
+</li>
+<?= $this->endSection() ?>
 <?= $this->section('content') ?>
-<div class="card card-primary">
-    <div class="card-body">
-        <form method="GET">
-            <?= csrf_field() ?>
-            <div class="form-row">
-                <div class="form-group col-md-3">
-                    <label for="daterange" >Tanggal:</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">
-                                <i class="far fa-calendar-alt"></i>
-                            </span>
+<form method="GET" class="form-horizontal">
+    <div class="modal fade" id="modal-sm">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Penyaringan</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label for="daterange" class="col-sm-2 col-form-label">Tanggal</label>
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="far fa-calendar-alt"></i>
+                                    </span>
+                                </div>
+                                <input type="text" name="daterange" class="form-control float-right" id="daterange" value="<?= format_date($filter->dateStart) . ' - ' . format_date($filter->dateEnd) ?>">
+                            </div>
                         </div>
-                        <input type="text" name="daterange" class="form-control float-right" id="daterange"
-                            value="<?= format_date($filter->dateStart) . ' - ' . format_date($filter->dateEnd) ?>">
                     </div>
                 </div>
-                <div class="form-group col-md-3">
-                    <label for="status">Status:</label>
-                    <select class="custom-select" id="status" name="status">
-                        <option value="-1" <?= $filter->status == -1 ? 'selected' : '' ?>>Semua Status</option>
-                        <option value="0" <?= $filter->status == 0 ? 'selected' : '' ?>>
-                            <?= format_stock_update_status(0) ?>
-                        </option>
-                        <option value="1" <?= $filter->status == 1 ? 'selected' : '' ?>>
-                            <?= format_stock_update_status(1) ?>
-                        </option>
-                        <option value="2" <?= $filter->status == 2 ? 'selected' : '' ?>>
-                            <?= format_stock_update_status(2) ?>
-                        </option>
-                    </select>
+                <div class="modal-footer justify-content-between">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-check mr-2"></i> Terapkan</button>
                 </div>
             </div>
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <button type="submit" class="btn btn-primary btn-sm mr-2"><i class="fas fa-filter mr-2"></i> Terapkan</button>
-                </div>
-            </div>
-        </form>
-        <div class="row mt-3">
+        </div>
+    </div>
+</form>
+<div class="card card-primary">
+    <div class="card-body">
+        <div class="row">
             <div class="col-md-12 table-responsive">
                 <table id="customer-table" class="data-table display table table-bordered table-striped table-condensed center-th" style="width:100%">
                     <thead>

@@ -6,7 +6,7 @@ $this->extend('_layouts/default')
 ?>
 <?= $this->section('right-menu') ?>
 <li class="nav-item dropdown">
-    <button class="btn" data-toggle="modal" data-target="#modal-sm"><i class="fa fa-filter"></i></button>
+    <button class="btn btn-default plus-btn mr-2" data-toggle="modal" data-target="#modal-sm" title="Saring"><i class="fa fa-filter"></i></button>
 </li>
 <?= $this->endSection() ?>
 <?= $this->section('content') ?>
@@ -15,14 +15,14 @@ $this->extend('_layouts/default')
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Filter</h4>
+                    <h4 class="modal-title">Penyaringan</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-2 col-form-label">Tanggal</label>
+                        <label for="daterange" class="col-sm-2 col-form-label">Tanggal</label>
                         <div class="col-sm-10">
                             <div class="input-group">
                                 <div class="input-group-prepend">
