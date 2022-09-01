@@ -49,7 +49,8 @@ class ProductController extends BaseController
              from stock_update_details sud
              inner join stock_updates su on su.id = sud.parent_id
              left join parties p on p.id = su.party_id
-             where sud.product_id=$data->id"
+             where sud.product_id=$data->id
+             and su.status=" . StockUpdate::STATUS_COMPLETED
         )->getResultObject();
         return view('product/view', [
             'data' => $data,

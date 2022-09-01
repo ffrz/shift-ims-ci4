@@ -90,6 +90,7 @@ class StockUpdateModel extends Model
         return $this->db->query('
             select * from stock_updates
             where party_id=:party_id:
+            and status=' . StockUpdate::STATUS_COMPLETED . '
             order by datetime desc',
             [ 'party_id' => $partyId])
             ->getResultObject();
