@@ -1,5 +1,7 @@
 <?php
 
+use Config\Format;
+
 /**
  * Helper function untuk merender kelas 'menu-open' pada sidebar
  * @param $self View
@@ -112,6 +114,9 @@ function format_service_order_code($id) {
 }
 
 function format_datetime($date, $format = 'dd-MM-yyyy HH:mm:ss', $locale = null) {
+    if (!$date) {
+        return '?';
+    }
     if (!$date instanceof DateTime) {
         $date = new DateTime($date);
     }
@@ -135,6 +140,15 @@ function format_stock_update_type($type) {
         case StockUpdate::UPDATE_TYPE_SALES_ORDER: return 'Penjualan';
         case StockUpdate::UPDATE_TYPE_SALES_ORDER_RETURN: return 'Retur Penjualan';
     }    
+}
+
+function format_stock_update_status($status)
+{
+    switch ($status) {
+        case StockUpdate::STATUS_SAVED: return 'Disimpan';
+        case StockUpdate::STATUS_COMPLETED: return 'Selesai';
+        case StockUpdate::STATUS_CANCELED: return 'Dibatalkan';
+    }
 }
 
 function format_stock_update_code($type, $code)

@@ -6,8 +6,13 @@
     <span class="brand-text font-weight-light">Shift IMS</span>
   </a>
   <div class="sidebar">
+  <div class="user-panel mt-1 pb-1 mb-1 d-flex">
+        <div class="info">
+          <a href="<?= base_url('users/profile')  ?>" class="d-block"><i class="fas fa-user mr-3"></i><?= esc(session()->get('current_user')['username']) ?></a>
+        </div>
+      </div>
     <nav class="mt-2">
-      <ul class="nav nav-pills nav-sidebar flex-column nav-legacy nav-flat nav-collapse-hide-child" data-widget="treeview" role="menu" data-accordion="false">
+      <ul class="nav nav-pills nav-sidebar flex-column nav-flat nav-flat nav-collapse-hide-child" data-widget="treeview" role="menu" data-accordion="false">    
         <li class="nav-item">
           <a href="<?= base_url() ?>" class="nav-link <?= nav_active($this, 'dashboard') ?>">
             <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -200,6 +205,15 @@
               </a>
             </li>
           </ul>
+        </li>
+        <li class="nav-header"></li>
+        <li class="nav-item">
+          <a href="<?= base_url('auth/logout') ?>" class="nav-link <?= menu_active($this, 'system') ?>">
+              <i class="nav-icon fas fa-right-from-bracket"></i>
+              <p>
+                Keluar
+              </p>
+            </a>
         </li>
       </ul>
     </nav>

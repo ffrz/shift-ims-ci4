@@ -15,7 +15,7 @@ $this->extend('_layouts/default')
     <div class="card-body">
         <div class="row mt-3">
             <div class="col-md-12">
-                <table class="data-table display table table-bordered table-striped table-condensed center-th">
+                <table class="data-table display table table-bordered table-striped table-condensed center-th" style="width:100%">
                     <thead>
                         <tr>
                             <th>Username</th>
@@ -50,13 +50,9 @@ $this->extend('_layouts/default')
 <?= $this->section('footscript') ?>
 <script>
     $(function() {
-        $('.data-table').DataTable({
-            paging: true,
-            "ordering": true,
-            "info": true,
-            "responsive": true,
-            columnDefs: [{ orderable: false, targets: 2 }]
-        });
+        DATATABLES_OPTIONS.order = [[0, 'asc']];
+        DATATABLES_OPTIONS.columnDefs = [{ orderable: false, targets: 2 }];
+        $('.data-table').DataTable(DATATABLES_OPTIONS);
     });
 </script>
 <?= $this->endSection() ?>

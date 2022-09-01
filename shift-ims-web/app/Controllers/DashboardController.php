@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Entities\ServiceOrder;
 use App\Entities\StockUpdate;
 
 class DashboardController extends BaseController
@@ -32,6 +33,7 @@ class DashboardController extends BaseController
     {
         return (float)$this->db->query("
             select sum(total_price) total from stock_updates where type=$type
+            and status=" . StockUpdate::STATUS_COMPLETED . "
             and date(datetime)='$date'
         ")->getRow()->total;
     }
@@ -51,9 +53,11 @@ class DashboardController extends BaseController
 
     private function _getMonthlySalesIncome($type, $startDate, $endDate)
     {
+        $status = StockUpdate::STATUS_COMPLETED;
         return (float)$this->db->query("
             select sum(total_price) total from stock_updates where type=$type
             and (date(datetime) between '$startDate' and '$endDate')
+            and status=$status
         ")->getRow()->total;
     }
 
@@ -69,16 +73,17 @@ class DashboardController extends BaseController
     {
         $sales_vs_cost_data = [];
         $sales_vs_cost_data['days'] = [];
-
+        $status = StockUpdate::STATUS_COMPLETED;
         $result = $this->db->query("
             select date(datetime) as date, total_cost, total_price
             from stock_updates
             where type=$type and date(datetime) between '$startDate' and '$endDate'
+            and status=$status
         ")->getResultObject();
 
         $sales_by_dates = [];
         foreach ($result as $item) {
-            $day = date('d', strtotime($item->date));
+            $day = (int)date('j', strtotime($item->date));
             if (!isset($sales_by_dates[$day])) {
                 $sales_by_dates[$day] = [
                     'cost' => 0,

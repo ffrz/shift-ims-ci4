@@ -29,6 +29,7 @@ class ReportsController extends BaseController
             from stock_updates su
             where type=' . StockUpdate::UPDATE_TYPE_SALES_ORDER . '
             and (date(datetime) between :date1: and :date2:)
+            and status=' . StockUpdate::STATUS_COMPLETED . '
             order by date(datetime) asc
         ', [
             'date1' => $filter->dateStart,
@@ -82,6 +83,7 @@ class ReportsController extends BaseController
             left join product_categories pc on pc.id = p.category_id
             where su.type=' . StockUpdate::UPDATE_TYPE_SALES_ORDER . '
             and (date(su.datetime) between :date1: and :date2:)
+            and su.status=' . StockUpdate::STATUS_COMPLETED . '
             order by pc.name asc
         ', [
             'date1' => $filter->dateStart,

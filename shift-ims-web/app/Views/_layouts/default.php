@@ -27,41 +27,22 @@
         <li class="nav-item">
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
+        <li class="nav-link">
+          <h5 style="cursor:default;">
+            <?php if (!empty($this->title)) : ?>
+
+              <span class="mr-2"><?= $this->title ?></span>
+            <?php endif ?>
+          </h5>
+        </li>
       </ul>
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
-          <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
-            <?= esc(session()->get('current_user')['username']) ?>
-          </button>
-          <div class="dropdown-menu dropdown-menu-right">
-            <a href="<?= base_url('users/profile') ?>" class="dropdown-item"><i class="fa fa-user mr-2"></i>Profile</a>
-            <a href="<?= base_url('auth/logout') ?>" class="dropdown-item"><i class="fa fa-right-from-bracket mr-2"></i> Logout</a>
-          </div>
-        </li>
+        <?= $this->renderSection('right-menu') ?>
       </ul>
     </nav>
     <?= $this->include('_layouts/sidebar.php') ?>
     <div class="content-wrapper">
       <section class="content-header">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-12">
-              <h1 class="m-0">
-                <?php if (!empty($this->title)) : ?>
-                  <?php if (!empty($this->titleIcon)) : ?>
-                    <small class="text-muted"><i class="fa <?= $this->titleIcon ?> mr-2"></i></small>
-                  <?php endif ?>
-                  <span class="mr-2"><?= $this->title ?></span>
-                  <?php if (!empty($this->addButtonLink)) : ?>
-                    <a title="<?= $this->addButtonLink['text'] ?>" href="<?= base_url($this->addButtonLink['url']) ?>" class="btn btn-sm plus-btn btn-primary"><i class="fa <?= $this->addButtonLink['icon'] ?>"></i></a>
-                  <?php endif ?>
-                <?php endif ?>
-              </h1>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="content">
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12">
@@ -100,7 +81,14 @@
     DATE_FORMAT = 'DD-MM-YYYY';
     DATETIME_FORMAT = 'DD-MM-YYYY HH:mm:ss';
     DATATABLES_OPTIONS = {
-      language: { url: '<?= base_url('plugins/datatables/id.json') ?>' },
+      responsive: {
+        details: {
+          type: 'none'
+        }
+      },
+      language: {
+        url: '<?= base_url('plugins/datatables/id.json') ?>'
+      },
       paging: true,
       length: 10,
       "ordering": true,

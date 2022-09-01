@@ -15,7 +15,7 @@ $this->extend('_layouts/default')
     <div class="card-body">
         <div class="row mt-3">
             <div class="col-md-12 table-responsive">
-                <table class="data-table display table table-bordered table-striped table-condensed center-th">
+                <table class="data-table display table table-bordered table-striped table-condensed center-th" style="width:100%">
                     <thead>
                         <tr>
                             <th>Nama</th>

@@ -1,5 +1,7 @@
 <?php
 
+use App\Entities\StockUpdate;
+
 $this->title = 'Penyesuaian Stok';
 $this->titleIcon = 'fa-sliders';
 $this->menuActive = 'inventory';
@@ -18,7 +20,7 @@ $this->extend('_layouts/default')
             <?= csrf_field() ?>
             <div class="form-row">
                 <div class="form-group col-md-3">
-                    <label>Tanggal:</label>
+                    <label for="daterange" >Tanggal:</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">
@@ -29,6 +31,21 @@ $this->extend('_layouts/default')
                             value="<?= format_date($filter->dateStart) . ' - ' . format_date($filter->dateEnd) ?>">
                     </div>
                 </div>
+                <div class="form-group col-md-3">
+                    <label for="status">Status:</label>
+                    <select class="custom-select" id="status" name="status">
+                        <option value="-1" <?= $filter->status == -1 ? 'selected' : '' ?>>Semua Status</option>
+                        <option value="0" <?= $filter->status == 0 ? 'selected' : '' ?>>
+                            <?= format_stock_update_status(0) ?>
+                        </option>
+                        <option value="1" <?= $filter->status == 1 ? 'selected' : '' ?>>
+                            <?= format_stock_update_status(1) ?>
+                        </option>
+                        <option value="2" <?= $filter->status == 2 ? 'selected' : '' ?>>
+                            <?= format_stock_update_status(2) ?>
+                        </option>
+                    </select>
+                </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-12">
@@ -38,7 +55,7 @@ $this->extend('_layouts/default')
         </form>
         <div class="row mt-3">
             <div class="col-md-12 table-responsive">
-                <table id="customer-table" class="data-table display table table-bordered table-striped table-condensed center-th">
+                <table id="customer-table" class="data-table display table table-bordered table-striped table-condensed center-th" style="width:100%">
                     <thead>
                         <tr>
                             <th>Kode</th>
@@ -60,7 +77,11 @@ $this->extend('_layouts/default')
                                 <td class="text-right"><?= format_number($item->total_price) ?></td>
                                 <td><?= $item->notes ?></td>
                                 <td class="text-center">
-                                    <a href="<?= base_url("/stock-updates/view/$item->id") ?>" class="btn btn-default btn-sm"><i class="fa fa-eye"></i></a>
+                                    <?php if ($item->status == StockUpdate::STATUS_SAVED): ?>
+                                        <a href="<?= base_url("/stock-adjustments/edit/$item->id") ?>" class="btn btn-default btn-sm"><i class="fa fa-edit"></i></a>
+                                    <?php else: ?>
+                                        <a href="<?= base_url("/stock-adjustments/view/$item->id") ?>" class="btn btn-default btn-sm"><i class="fa fa-eye"></i></a>
+                                    <?php endif ?>
                                 </td>
                             </tr>
                         <?php endforeach ?>

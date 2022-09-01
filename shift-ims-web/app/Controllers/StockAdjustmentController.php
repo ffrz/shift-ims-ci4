@@ -35,6 +35,11 @@ class StockAdjustmentController extends BaseController
               . ' or type=' . StockUpdate::UPDATE_TYPE_ADJUSTMENT
               . ')';
 
+        $filter->status = (int)$this->request->getGet('status');
+        if ($filter->status >= 0) {
+            $where[] = 'status=' . $filter->status;
+        }
+
         $sql = 'select * from stock_updates';
         $where = implode(' and ', $where);
         
@@ -120,13 +125,27 @@ class StockAdjustmentController extends BaseController
                 return redirect()->to(base_url('stock-adjustments'))
                     ->with('info', 'Berhasil disimpan.');
             }
-
-            
         }
 
         return view('stock-adjustment/add', [
             'data' => $data,
             'error' => $error,
+            'items' => $items,
+        ]);
+    }
+
+    public function view($id)
+    {
+        $data = $this->getStockUpdateModel()->find($id);
+        if (!$data) {
+            return redirect()->to(base_url('stock-adjustments'))
+                ->with('warning', 'Tidak ditemukan.');            
+        }
+
+        $items = $this->getStockUpdateDetailModel()->getAllByUpdateId($id);
+
+        return view('stock-adjustment/view', [
+            'data' => $data,
             'items' => $items,
         ]);
     }

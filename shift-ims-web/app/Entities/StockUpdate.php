@@ -13,4 +13,8 @@ class StockUpdate extends \CodeIgniter\Entity\Entity
 
     const UPDATE_TYPE_SALES_ORDER = 21;
     const UPDATE_TYPE_SALES_ORDER_RETURN = 22;
+
+    const STATUS_SAVED = 0;
+    const STATUS_COMPLETED = 1;
+    const STATUS_CANCELED = 2;
 }

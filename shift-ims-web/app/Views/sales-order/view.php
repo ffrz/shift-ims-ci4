@@ -49,7 +49,7 @@ $this->extend('_layouts/default');
                     <tr>
                         <td>Status</td>
                         <td>:</td>
-                        <td>Selesai</td>
+                        <td><?= format_stock_update_status($data->status) ?></td>
                     </tr>
                 </table>
             </div>
@@ -93,9 +93,10 @@ $this->extend('_layouts/default');
             </table>
         </div>
     </div>
-    <div class="row no-print mt-3">
-        <div class="col-12">
-            <a href="<?= base_url("sales-orders/view/$data->id?print=1") ?>" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <a href="<?= base_url("sales-orders/view/$data->id?print=1") ?>" rel="noopener" target="_blank" class="btn btn-default mr-2"><i class="fas fa-print"></i> Print</a>
+            <a onclick="return confirm('Hapus?')" href="<?= base_url("sales-orders/delete/$data->id") ?>" class="btn btn-danger"><i class="fas fa-trash"></i> Hapus</a>
         </div>
     </div>
 </div>

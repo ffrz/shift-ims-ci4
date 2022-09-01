@@ -78,6 +78,7 @@ $routes->group('service-orders', function($routes) {
 $routes->group('stock-adjustments', function($routes) {
     $routes->get('', 'StockAdjustmentController::index');
     $routes->match(['get', 'post'], 'add', 'StockAdjustmentController::add');
+    $routes->get('view/(:num)', 'StockAdjustmentController::view/$1');
 });
 
 $routes->group('purchase-orders', function($routes) {
@@ -89,7 +90,9 @@ $routes->group('purchase-orders', function($routes) {
 $routes->group('sales-orders', function($routes) {
     $routes->get('', 'SalesOrderController::index');
     $routes->match(['get', 'post'], 'add', 'SalesOrderController::add');
+    $routes->match(['get', 'post'], 'edit/(:num)', 'SalesOrderController::edit/$1');
     $routes->get('view/(:num)', 'SalesOrderController::view/$1');
+    $routes->get('delete/(:num)', 'SalesOrderController::delete/$1');
 });
 
 $routes->group('reports', function($routes) {

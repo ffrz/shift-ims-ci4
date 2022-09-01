@@ -1,35 +1,51 @@
 <?php
-
-$this->title = 'Laporan Laba Rugi';
+$this->title = 'Laporan';
 $this->menuActive = 'report';
 $this->navActive = 'income-statement-report';
-$this->extend('_layouts/default')
-
+$this->extend('_layouts/default');
 ?>
+<?= $this->section('right-menu') ?>
+<li class="nav-item dropdown">
+    <button class="btn" data-toggle="modal" data-target="#modal-sm"><i class="fa fa-filter"></i></button>
+</li>
+<?= $this->endSection() ?>
 <?= $this->section('content') ?>
-<div class="card card-primary">
-    <div class="card-body">
-        <form method="GET">
-            <div class="form-row">
-                <div class="form-group col-md-3">
-                    <label>Tanggal:</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">
-                                <i class="far fa-calendar-alt"></i>
-                            </span>
+<form method="GET" class="form-horizontal">
+    <div class="modal fade" id="modal-sm">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Filter</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">Tanggal</label>
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="far fa-calendar-alt"></i>
+                                    </span>
+                                </div>
+                                <input type="text" name="daterange" class="form-control float-right" id="daterange" value="<?= format_date($filter->dateStart) . ' - ' . format_date($filter->dateEnd) ?>">
+                            </div>
                         </div>
-                        <input type="text" name="daterange" class="form-control float-right" id="daterange" value="<?= format_date($filter->dateStart) . ' - ' . format_date($filter->dateEnd) ?>">
                     </div>
                 </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <button type="submit" class="btn btn-primary btn-sm mr-2"><i class="fas fa-filter mr-2"></i> Terapkan</button>
+                <div class="modal-footer justify-content-between">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-check mr-2"></i> Terapkan</button>
                 </div>
             </div>
-        </form>
-
+        </div>
+    </div>
+</form>
+<div class="card card-primary">
+    <div class="card-body">
+        <h4>Laporan Laba Rugi</h4>
+        <p>Periode: <?= format_date($filter->dateStart) . ' - ' . format_date($filter->dateEnd) ?></p>
         <div class="row mt-3">
             <div class="col-md-12 table-responsive">
                 <table class="data-table display table table-bordered table-striped table-condensed center-th">
@@ -103,7 +119,11 @@ $this->extend('_layouts/default')
 <?= $this->section('footscript') ?>
 <script>
     $(function() {
-        $('#daterange').daterangepicker({ locale: { format: DATE_FORMAT } });
+        $('#daterange').daterangepicker({
+            locale: {
+                format: DATE_FORMAT
+            }
+        });
     });
 </script>
 <?= $this->endSection() ?>

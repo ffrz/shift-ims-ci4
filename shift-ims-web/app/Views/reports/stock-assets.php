@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Laporan Stok';
+$this->title = 'Laporan';
 $this->menuActive = 'report';
 $this->navActive = 'stock-report';
 $this->extend('_layouts/default')
@@ -7,6 +7,7 @@ $this->extend('_layouts/default')
 <?= $this->section('content') ?>
 <div class="card card-primary">
     <div class="card-body">
+        <h4>Laporan Stok Aktual</h4>
         <div class="row mt-3">
             <div class="col-md-12 table-responsive">
                 <table class="data-table display table table-bordered table-striped table-condensed center-th">

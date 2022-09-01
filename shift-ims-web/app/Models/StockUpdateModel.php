@@ -15,7 +15,8 @@ class StockUpdateModel extends Model
     protected $useSoftDeletes = false;
     protected $allowedFields = [
         'code', 'type', 'datetime', 'total_cost', 'total_price',
-        'party_id', 'notes', 'cash_change', 'ref_id', 'ref_code'
+        'party_id', 'notes', 'cash_change', 'ref_id', 'ref_code',
+        'status', 'created_at', 'created_by', 'lastmod_at', 'lastmod_by'
     ];
 
     public function getAll()

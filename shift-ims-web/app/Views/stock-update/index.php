@@ -34,7 +34,7 @@ $this->extend('_layouts/default')
         </form>
         <div class="row mt-3">
             <div class="col-md-12 table-responsive">
-                <table id="customer-table" class="data-table display table table-bordered table-striped table-condensed center-th">
+                <table id="customer-table" class="data-table display table table-bordered table-striped table-condensed center-th" style="width:100%">
                     <thead>
                         <tr>
                             <th>Kode</th>

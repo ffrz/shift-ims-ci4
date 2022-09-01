@@ -67,7 +67,8 @@ $this->extend('_layouts/default'); ?>
         </div>
         <div class="card-footer">
             <a href="<?= base_url('/stock-adjustments/') ?>" class="btn btn-default mr-2"><i class="fas fa-arrow-left mr-1"></i> Kembali</a>
-            <button type="submit" class="btn btn-primary"><i class="fas fa-save mr-1"></i> Simpan</button>
+            <button type="submit" class="btn btn-primary" name="action" value="save"><i class="fas fa-save mr-1"></i> Simpan</button>
+            <button type="submit" class="btn btn-primary" name="action" value="complete"><i class="fas fa-save mr-1"></i> Selesai</button>
         </div>
     </form>
 </div>

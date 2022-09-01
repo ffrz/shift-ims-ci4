@@ -72,6 +72,8 @@ $this->extend('_layouts/default')
                 <?= csrf_field() ?>
                     <input type="hidden" name="id" value="<?= $data->id ?>">
                     <input type="hidden" name="goto" value="<?= base_url('/stock-updates/') ?>">
+                    <button type="submit" name="action" value="delete_revert" class="btn btn-danger mr-2"><i class="fa fas fa-trash mr-2"></i>Hapus (Revert Stok)</button>
+                    <button type="submit" name="action" value="delete_ignore" class="btn btn-danger"><i class="fa fas fa-trash mr-2"></i>Hapus (Biarkan Stok)</button>
                 </form>
             </div>
         </div>
