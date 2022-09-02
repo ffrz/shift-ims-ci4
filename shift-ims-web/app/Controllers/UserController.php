@@ -44,6 +44,7 @@ class UserController extends BaseController
             $item->password = $this->request->getPost('password');
             $item->is_admin = (int)$this->request->getPost('is_admin');
             $item->active = (int)$this->request->getPost('active');
+            $item->group_id = (int)$this->request->getPost('group_id');
 
             if ($item->username == '') {
                 $errors['username'] = 'Username harus diisi.';
@@ -77,13 +78,13 @@ class UserController extends BaseController
         
         return view('user/edit', [
             'data' => $item,
+            'userGroups' => $this->getUserGroupModel()->getAll(),
             'errors' => $errors,
         ]);
     }
 
     public function profile()
     {
-        // TODO: implementasikan auth
         $id = session()->get('current_user')['id'];
         $errors = [];
 

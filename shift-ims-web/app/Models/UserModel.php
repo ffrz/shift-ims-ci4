@@ -12,7 +12,7 @@ class UserModel extends Model
     protected $useAutoIncrement = true;
     protected $returnType       = \App\Entities\User::class;
     protected $useSoftDeletes   = false;
-    protected $allowedFields    = ['username', 'password', 'fullname', 'active', 'is_admin'];
+    protected $allowedFields    = ['username', 'password', 'fullname', 'active', 'is_admin', 'group_id'];
 
     /**
      * Periksa duplikat rekaman berdasarkan username dan id
@@ -35,8 +35,12 @@ class UserModel extends Model
 
     public function getAll()
     {
-        return $this->db->query('select * from users order by username asc')
-            ->getResultObject();
+        return $this->db->query('
+            select u.*, g.name group_name
+                from users u
+                left join user_groups g on g.id = u.group_id
+                order by u.username asc'
+            )->getResultObject();
     }
 
     /**

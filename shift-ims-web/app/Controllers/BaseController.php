@@ -172,6 +172,19 @@ abstract class BaseController extends Controller
 
     /**
      * 
+     * @return \App\Models\UserGroupModel
+     */
+    public function getUserGroupModel()
+    {
+        if (!isset($this->models['user-group'])) {
+            $this->models['user-group'] = new \App\Models\UserGroupModel($this->db);
+        }
+
+        return $this->models['user-group'];
+    }
+
+    /**
+     * 
      * @return \App\Models\SettingModel
      */
     public function getSettingModel()

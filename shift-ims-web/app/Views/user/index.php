@@ -3,13 +3,14 @@ $this->title = 'Pengguna';
 $this->titleIcon = 'fa-users';
 $this->menuActive = 'system';
 $this->navActive = 'users';
-$this->addButtonLink = [
-    'url' => '/users/edit/0',
-    'icon' => 'fa-plus',
-    'text' => 'Tambah Pengguna'
-];
 $this->extend('_layouts/default')
 ?>
+?>
+<?= $this->section('right-menu') ?>
+<li class="nav-item">
+    <a href="<?= base_url('users/edit/0') ?>" class="btn plus-btn btn-primary mr-2" title="Baru"><i class="fa fa-plus"></i></a>
+</li>
+<?= $this->endSection() ?>
 <?= $this->section('content') ?>
 <div class="card card-primary">
     <div class="card-body">
@@ -28,10 +29,15 @@ $this->extend('_layouts/default')
                     <tbody>
                         <?php foreach ($items as $item) : ?>
                             <tr>
-                                <td><?= esc($item->username) ?></td>
+                                <td>
+                                    <?= esc($item->username) ?>
+                                    <?php if ($item->is_admin): ?>
+                                        <span class="badge badge-warning">Administrator</span>
+                                    <?php endif ?>
+                                </td>
                                 <td><?= esc($item->fullname) ?></td>
                                 <td><?= $item->active ? 'Aktif' : 'Nonaktif' ?></td>
-                                <td><?= $item->is_admin ? 'Administrator' : 'Pengguna Biasa' ?></td>
+                                <td><?= esc($item->group_name) ?></td>
                                 <td class="text-center">
                                     <div class="btn-group">
                                         <a href="<?= base_url("/users/edit/$item->id") ?>" class="btn btn-default btn-sm"><i class="fa fa-edit"></i></a>

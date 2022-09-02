@@ -114,6 +114,12 @@ $routes->group('users', function($routes) {
     $routes->match(['get', 'post'], 'delete/(:num)', 'UserController::delete/$1');
 });
 
+$routes->group('user-groups', function($routes) {
+    $routes->get('', 'UserGroupController::index');
+    $routes->match(['get', 'post'], 'edit/(:num)', 'UserGroupController::edit/$1');
+    $routes->get('delete/(:num)', 'UserGroupController::delete/$1');
+});
+
 $routes->group('auth', function($routes) {
     $routes->match(['get', 'post'], 'login', 'AuthController::login');
     $routes->get('logout', 'AuthController::logout');
