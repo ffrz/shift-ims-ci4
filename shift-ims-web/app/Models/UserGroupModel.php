@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Entities\User;
 use CodeIgniter\Model;
 
 class UserGroupModel extends Model

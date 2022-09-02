@@ -43,7 +43,11 @@ class ProductCategoryController extends BaseController
             }
 
             if (empty($errors)) {
-                $model->save($item);
+                try {
+                    $model->save($item);
+                }
+                catch (\CodeIgniter\Database\Exceptions\DataException $ex) {
+                }
                 return redirect()->to(base_url('product-categories'))->with('info', 'Berhasil disimpan.');
             }
         }

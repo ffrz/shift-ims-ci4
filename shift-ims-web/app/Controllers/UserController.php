@@ -85,7 +85,7 @@ class UserController extends BaseController
 
     public function profile()
     {
-        $id = session()->get('current_user')['id'];
+        $id = current_user()->id;
         $errors = [];
 
         $model = $this->getUserModel(); 
@@ -133,7 +133,7 @@ class UserController extends BaseController
             return redirect()->to(base_url('users'))
                 ->with('error', 'Akun <b>' . esc($user->username) . '</b> tidak dapat dihapus.');
         }
-        else if ($user->id == current_user()['id']) {
+        else if ($user->id == current_user()->id) {
             return redirect()->to(base_url('users'))
             ->with('error', 'Anda tidak dapat menghapus akun sendiri.');
         }

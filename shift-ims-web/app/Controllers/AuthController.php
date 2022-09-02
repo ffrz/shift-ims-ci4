@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use stdClass;
+
 class AuthController extends BaseController
 {
     public function login()
@@ -34,14 +36,23 @@ class AuthController extends BaseController
                 $error = 'Kata sandi anda salah.';
             }
             else {
-                $session->set([
-                    'is_logged_in' => TRUE,
-                    'current_user' => [
-                        'id' => $user->id,
-                        'username' => $user->username,
-                        'is_admin' => $user->is_admin
-                    ]
-                ]);
+                
+                $currentUser = new stdClass;
+                $currentUser->id = $user->id;
+                $currentUser->username = $username;
+                $currentUser->is_admin = $user->is_admin;
+                $currentUser->group_id = $user->group_id;
+                $currentUser->acl = [];
+                
+                $acl = [];
+                if ($user->group_id) {
+                    $acl = $this->db->query("
+                        select * from user_group_acl where group_id=$user->group_id")->getResultObject();
+                    foreach ($acl as $d) {
+                        $currentUser->acl[$d->resource] = $d->allowed;
+                    }
+                }
+                $session->set('current_user', $currentUser);
                 return redirect()->to(base_url('/'));
             }
         }

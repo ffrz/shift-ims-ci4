@@ -1,4 +1,7 @@
 <?php
+
+use App\Entities\Acl;
+
 $this->title = 'Kategori Produk';
 $this->titleIcon = 'fa-boxes';
 $this->menuActive = 'inventory';
@@ -30,8 +33,12 @@ $this->extend('_layouts/default')
                                 <td class="text-center"><a href="<?= base_url("/products?category_id=$item->id") ?>"><?= format_number($item->count) ?> produk</a></td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                    <a href="<?= base_url("/product-categories/edit/$item->id") ?>" class="btn btn-default btn-sm"><i class="fa fa-edit"></i></a>
+                                    <?php if (current_user_can(Acl::EDIT_PRODUCT_CATEGORY)): ?>
+                                        <a href="<?= base_url("/product-categories/edit/$item->id") ?>" class="btn btn-default btn-sm"><i class="fa fa-edit"></i></a>
+                                    <?php endif ?>
+                                    <?php if (current_user_can(Acl::DELETE_PRODUCT_CATEGORY)): ?>
                                     <a href="<?= base_url("/product-categories/delete/$item->id") ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                    <?php endif ?>
                                     </div>
                                 </td>
                             </tr>

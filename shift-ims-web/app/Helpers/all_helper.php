@@ -1,7 +1,25 @@
 <?php
 
-use Config\Format;
+use \App\Entities\StockUpdate;
 
+function current_user_can($access)
+{
+    $user = current_user();
+
+    if (!$user) {
+        return false;
+    }
+
+    if ($user->is_admin) {
+        return true;
+    }
+
+    if (isset($user->acl[$access]) && $user->acl[$access] == 1) {
+        return true;
+    }
+
+    return false;
+}
 /**
  * Helper function untuk merender kelas 'menu-open' pada sidebar
  * @param $self View
@@ -97,11 +115,9 @@ function format_service_order_payment_status($status)
     }
 }
 
-use \App\Entities\StockUpdate;
-
 function is_admin()
 {
-    return session()->get('current_user')['is_admin'];
+    return session()->get('current_user')->is_admin;
 }
 
 function current_user()

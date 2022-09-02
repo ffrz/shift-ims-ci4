@@ -160,7 +160,7 @@ class SalesOrderController extends BaseController
                 $this->db->transBegin();
 
                 $data->lastmod_at = date('Y-m-d H:i:s');
-                $data->lastmod_by = current_user()['username'];
+                $data->lastmod_by = current_user()->username;
                 $model->save($data);
 
                 $this->db->query('delete from stock_update_details where parent_id=' . $data->id);
@@ -221,7 +221,7 @@ class SalesOrderController extends BaseController
         $data->supplier_id = 0;
         $data->datetime = date('Y-m-d H:i:s');
         $data->created_at = date('Y-m-d H:i:s');
-        $data->created_by = current_user()['username'];
+        $data->created_by = current_user()->username;
         $data->code = $model->generateCode(StockUpdate::UPDATE_TYPE_SALES_ORDER);
         $data->notes = '';
 
