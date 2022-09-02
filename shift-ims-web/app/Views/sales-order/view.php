@@ -1,4 +1,7 @@
 <?php
+
+use App\Entities\StockUpdate;
+
 $orderCode = format_stock_update_code($data->type, $data->code);
 $this->title = 'Order Penjualan #' . $orderCode;
 $this->navActive = 'sales-order';
@@ -69,6 +72,11 @@ $this->extend('_layouts/default');
                     </tr>
                 </thead>
                 <tbody>
+                    <?php if (empty($items)): ?>
+                        <tr>
+                            <td colspan="6" class="text-center text-muted font-italic">Belum ada item yang ditambahkan.</td>
+                        </tr>
+                    <?php endif ?>
                     <?php $total = 0 ?>
                     <?php foreach ($data->items as $item) : ?>
                         <?php $subtotal = abs($item->quantity) * $item->price ?>
@@ -95,7 +103,10 @@ $this->extend('_layouts/default');
     </div>
     <div class="row mt-3">
         <div class="col-md-12">
-            <a href="<?= base_url("sales-orders/view/$data->id?print=1") ?>" rel="noopener" target="_blank" class="btn btn-default mr-2"><i class="fas fa-print"></i> Print</a>
+            <p>Dibuat oleh <?= $data->created_by ?> pada <?= format_datetime($data->created_at) ?> | Diubah terakhir kali oleh <?= $data->lastmod_by ?> <?= format_datetime($data->lastmod_at) ?></p>
+            <?php if ($data->status == StockUpdate::STATUS_COMPLETED): ?>
+                <a href="<?= base_url("sales-orders/view/$data->id?print=1") ?>" rel="noopener" target="_blank" class="btn btn-default mr-2"><i class="fas fa-print"></i> Print</a>
+            <?php endif ?>
             <a onclick="return confirm('Hapus?')" href="<?= base_url("sales-orders/delete/$data->id") ?>" class="btn btn-danger"><i class="fas fa-trash"></i> Hapus</a>
         </div>
     </div>
