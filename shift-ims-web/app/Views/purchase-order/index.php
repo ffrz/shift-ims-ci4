@@ -7,7 +7,8 @@ $this->navActive = 'purchase-order';
 $this->extend('_layouts/default')
 ?>
 <?= $this->section('right-menu') ?>
-<li class="nav-item dropdown">
+<li class="nav-item">
+    <a href="<?= base_url('purchase-orders/add') ?>" class="btn plus-btn btn-primary mr-1" title="Baru"><i class="fa fa-plus"></i></a>
     <button class="btn btn-default plus-btn mr-2" data-toggle="modal" data-target="#modal-sm" title="Saring"><i class="fa fa-filter"></i></button>
 </li>
 <?= $this->endSection() ?>

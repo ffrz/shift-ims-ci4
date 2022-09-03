@@ -44,77 +44,26 @@
           </ul>
         </li>
         <?php endif ?>
-        <li class="nav-item <?= menu_open($this, 'sales-order') ?>">
-          <a href="#" class="nav-link <?= menu_active($this, 'sales-order') ?>">
-            <i class="nav-icon fas fa-store"></i>
-            <p>
-              Penjualan
-              <i class="right fas fa-angle-left"></i>
-            </p>
+        <li class="nav-item">
+          <a href="<?= base_url('/sales-orders/') ?>" class="nav-link <?= nav_active($this, 'sales-order') ?>">
+            <i class="nav-icon fas fa-cart-shopping"></i>
+            <p>Penjualan</p>
           </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="<?= base_url('/sales-orders/add') ?>" class="nav-link <?= nav_active($this, 'add-sales-order') ?>">
-                <i class="fas fa-cart-plus nav-icon"></i>
-                <p>Penjualan Baru</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="<?= base_url('/sales-orders/') ?>" class="nav-link <?= nav_active($this, 'sales-order') ?>">
-                <i class="nav-icon fas fa-cart-shopping"></i>
-                <p>Penjualan</p>
-              </a>
-            </li>
-          </ul>
         </li>
         <?php if (env('REPAIR_SERVICE_MODULE')) : ?>
-          <li class="nav-item <?= menu_open($this, 'service-order') ?>">
-            <a href="#" class="nav-link <?= menu_active($this, 'service-order') ?>">
-              <i class="nav-icon fas fa-house-laptop"></i>
-              <p>
-                Servis
-                <i class="right fas fa-angle-left"></i>
-              </p>
+          <li class="nav-item">
+            <a href="<?= base_url('/service-orders/') ?>" class="nav-link <?= nav_active($this, 'service-order') ?>">
+              <i class="nav-icon fas fa-screwdriver-wrench"></i>
+              <p>Servis</p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="<?= base_url('/service-orders/edit/0') ?>" class="nav-link <?= nav_active($this, 'edit-service-order') ?>">
-                  <i class="fas fa-hand-holding-medical nav-icon"></i>
-                  <p>Penerimaan servis</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="<?= base_url('/service-orders/') ?>" class="nav-link <?= nav_active($this, 'service-order') ?>">
-                  <i class="nav-icon fas fa-screwdriver-wrench"></i>
-                  <p>Servis</p>
-                </a>
-              </li>
-            </ul>
           </li>
         <?php endif ?>
-        <li class="nav-item <?= menu_open($this, 'customer') ?>">
-          <a href="#" class="nav-link <?= menu_active($this, 'customer') ?>">
-            <i class="nav-icon fas fa-users"></i>
-            <p>
-              Pelanggan
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="<?= base_url('/customers/edit/0') ?>" class="nav-link <?= nav_active($this, 'edit-customer') ?>">
-                <i class="fas fa-user-plus nav-icon"></i>
-                <p>Pelanggan Baru</p>
-              </a>
-            </li>
-            <li class="nav-item">
+        <li class="nav-item">
               <a href="<?= base_url('/customers/') ?>" class="nav-link <?= nav_active($this, 'customer') ?>">
                 <i class="nav-icon fas fa-users"></i>
                 <p>Pelanggan</p>
               </a>
             </li>
-          </ul>
-        </li>
         <?php if (current_user_can(Acl::MANAGE_INVENTORY)): ?>
         <li class="nav-item <?= menu_open($this, 'inventory') ?>">
           <a href="#" class="nav-link <?= menu_active($this, 'inventory') ?>">

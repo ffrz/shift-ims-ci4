@@ -68,17 +68,17 @@ $this->extend('_layouts/default')
                 </div>
             </div>
             <div class="form-row">
-                <div class="col-md-12">
-                    <div class="form-inline">
-                        <select id="product" class="custom-select select2 form-control col-md-4">
-                            <option value="0">--- PILIH PRODUK ---</option>
+                <div class="form-group col-md-6">
+                    <select id="product" class="custom-select select2 form-control">
+                            <option value="0">--- Pilih Produk ---</option>
                             <?php foreach ($products as $product) : ?>
                                 <option data-price=<?= $product->price ?> data-stock="<?= $product->stock ?>" data-uom="<?= $product->uom ?>" data-cost="<?= $product->cost ?>" value="<?= $product->id ?>"><?= esc($product->name) ?></option>
                             <?php endforeach ?>
-                        </select>
-                        <button id="add-button" class="ml-2 btn btn-md btn-warning" type="button"><i class="fa fas fa-plus"></i> Tambahkan</button>
+                    </select>
                     </div>
-                </div>
+                    <div class="form-group col-md-6">
+                    <button id="add-button" class="btn btn-md btn-warning" type="button"><i class="fa fas fa-cart-plus mr-2"></i>Tambahkan ke keranjang</button>
+                    </div>
             </div>
             <div class="row mt-3">
                 <div class="col-md-12 table-responsive">
@@ -118,16 +118,21 @@ $this->extend('_layouts/default')
         </div>
         <div class="card-footer">
             <div>
-                <p>Dibuat oleh <?= $data->created_by ?> <?= format_datetime($data->created_at) ?> | Diubah oleh <?= $data->lastmod_by ?> <?= format_datetime($data->lastmod_at) ?></p>
+                <p>
+                    <?= $data->created_by ? 'Dibuat oleh ' . esc($data->created_by) . ' pada ' . format_datetime($data->created_at) : '' ?>
+                    <?= $data->lastmod_by ? " | Diubah oleh " . esc($data->lastmod_by) . ' pada '  . format_datetime($data->lastmod_at) : '' ?>
+                </p>
             </div>
             <div class="row">
-                <div class="btn-group mr-4">
-                    <a href="<?= base_url('/sales-orders/') ?>" class="btn btn-default"><i class="fas fa-arrow-left mr-2"></i> Kembali</a>
-                    <button type="submit" name="action" value="save" class="btn btn-default"><i class="fas fa-save mr-2"></i> Simpan</button>
-                </div>
-                <div class="btn-group">
-                    <button onclick="return confirm('Selesaikan pesanan?')" type="submit" name="action" value="complete" class="btn btn-primary"><i class="fas fa-check mr-2"></i> Selesai</button>
-                    <button onclick="return confirm('Batalkan pesanan?')" type="submit" name="action" value="cancel" class="btn btn-danger"><i class="fas fa-cancel mr-2"></i> Batalkan</button>
+                <div class="col-md-12">
+                    <div class="btn-group mr-4 mt-2">
+                        <a href="<?= base_url('/sales-orders/') ?>" class="btn btn-default"><i class="fas fa-arrow-left mr-2"></i> Kembali</a>
+                        <button type="submit" name="action" value="save" class="btn btn-default"><i class="fas fa-save mr-2"></i> Simpan</button>
+                    </div>
+                    <div class="btn-group mt-2">
+                        <button onclick="return confirm('Selesaikan pesanan?')" type="submit" name="action" value="complete" class="btn btn-primary"><i class="fas fa-check mr-2"></i> Selesaikan</button>
+                        <button onclick="return confirm('Batalkan pesanan?')" type="submit" name="action" value="cancel" class="btn btn-danger"><i class="fas fa-cancel mr-2"></i> Batalkan</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -180,6 +185,10 @@ $this->extend('_layouts/default')
             maximumFractionDigits: 0,
         });
         const parser = new NumberParser('id-ID');
+
+        productSelect.change(function() {
+            console.log($(this).value);
+        });
 
         function formatNumber(number) {
             return formatter.format(number);
@@ -240,7 +249,7 @@ $this->extend('_layouts/default')
                 `<td class="text-center"><input type="number" class="text-right" id="item-quantity-${item.id}" name=quantities[${item.id}] value="${item.quantity}" min="1" max="99999999" style="width:5rem"></td>` +
                 `<td>${item.uom}</td>` +
                 `<td class="text-center"><input type="number" class="text-right" id="item-price-${item.id}" name=prices[${item.id}] value="${item.price}" max="999999999999" style="width:7rem"></td>` +
-                `<td id="item-subtotal-${item.id}" class="text-right">${formatNumber(item.price)}</td>` +
+                `<td id="item-subtotal-${item.id}" class="text-right">${formatNumber(item.quantity * item.price)}</td>` +
                 `<td class="text-center"><button id="remove-item-${item.id}" class="btn btn-sm btn-danger" type="button" title="Hapus item dari daftar."><i class="fa fa-trash"></i></button></td>` +
                 `</tr>`
             );
@@ -286,7 +295,7 @@ $this->extend('_layouts/default')
                 quantity: 1,
                 uom: selected.data('uom'),
                 price: selected.data('price'),
-            })
+            });
 
             setFocus($(`#item-quantity-${id}`));
             $('#empty-items').hide();

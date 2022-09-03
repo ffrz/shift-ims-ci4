@@ -15,7 +15,7 @@ $this->extend('_layouts/default')
             <li class="nav-item">
                 <a class="nav-link" id="tabcontent2-tab" data-toggle="pill" href="#tabcontent2" role="tab" aria-controls="tabcontent2-tab" aria-selected="true">Riwayat Transaksi</a>
             </li>
-            <?php if (defined('REPAIR_SERVICE_MODULE')) : ?>
+            <?php if (env('REPAIR_SERVICE_MODULE')) : ?>
                 <li class="nav-item">
                     <a class="nav-link" id="tabcontent3-tab" data-toggle="pill" href="#tabcontent3" role="tab" aria-controls="tabcontent3-tab" aria-selected="true">Riwayat Servis</a>
                 </li>
