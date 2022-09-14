@@ -83,34 +83,37 @@ $this->extend('_layouts/default')
                     <?php endif ?>
                 </div>
             </div>
-            <style>custom-control label.acl{font-weight:normal;}</style>
-            <div class="form-row">
+            <style>
+                custom-control label.acl {
+                    font-weight: normal;
+                }
+            </style>
+            <div class="form-row col-md-12">
                 <h4>Hak Akses</h4>
             </div>
-            
-            <?php foreach ($acl_resources as $category => $resource): ?>
-            <div class="form-row">
-                <b><?= $category ?></b>
+            <div class="container">
+                <div class="row">
+            <?php foreach ($acl_resources as $category => $resource) : ?>
+                <div class="col">
+                <div class="form-row mt-2">
+                    <b><?= $category ?></b>
             </div>
-            <?php foreach ($resource as $name => $label): ?>
-            <div class="form-row">
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox"
-                        class="custom-control-input" id="<?= $name ?>"
-                        name="acl[<?= $name ?>]" value="1" <?= $data->acl[$name] ? 'checked="checked"' : '' ?>>
-                    <label class="custom-control-label" style="font-weight:normal" for="<?= $name ?>"><?= $label ?></label>
+                <?php foreach ($resource as $name => $label) : ?>
+                    <div class="form-row">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="<?= $name ?>" name="acl[<?= $name ?>]" value="1" <?= $data->acl[$name] ? 'checked="checked"' : '' ?>>
+                            <label class="custom-control-label" style="font-weight:normal; white-space: nowrap;" for="<?= $name ?>"><?= $label ?></label>
+                        </div>
+                    </div>
+                <?php endforeach ?>
                 </div>
+            <?php endforeach ?>
             </div>
-            <?php endforeach ?>
-            <?php endforeach ?>
+            </div>
         </div>
         <div class="card-footer">
-            <div>
-                <a href="<?= base_url('/users/') ?>" class="btn btn-default mr-2"><i class="fas fa-arrow-left mr-1"></i> Kembali</a>
-                <button type="submit" class="btn btn-primary"><i class="fas fa-save mr-1"></i> Simpan</button>
-            </div>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save mr-1"></i> Simpan</button>
         </div>
     </form>
-</div>
 </div>
 <?= $this->endSection() ?>

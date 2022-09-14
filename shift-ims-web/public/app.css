@@ -4,12 +4,33 @@
     padding-bottom: 0.25rem;
     vertical-align: middle;
 }
+
 .table.center-th th {
     text-align: center;
 }
+
 .form-error {
     color: red;
 }
+
 .plus-btn {
     border-radius: 100%;
+}
+
+.invoice-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.invoice-table tr {
+    border: 1px solid black;
+}
+
+.invoice-table td,
+.invoice-table th {
+    padding: 2px 5px;
+}
+
+.invoice-table th {
+    font-weight: normal;
 }

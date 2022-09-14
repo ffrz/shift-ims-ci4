@@ -27,10 +27,14 @@
         <li class="nav-item">
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
+        <?php if (!empty($this->backButtonLink)) : ?>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= $this->backButtonLink ?>" class="btn"><i class="fas fa-arrow-left"></i></a>
+          </li>
+        <?php endif ?>
         <li class="nav-link">
           <h5 style="cursor:default;">
             <?php if (!empty($this->title)) : ?>
-
               <span class="mr-2"><?= $this->title ?></span>
             <?php endif ?>
           </h5>

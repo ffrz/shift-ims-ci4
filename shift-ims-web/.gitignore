@@ -1,12 +1,14 @@
 # CODEIGNITER
 public/null/*
 
+
 #-------------------------
 # Operating Specific Junk Files
 #-------------------------
 
 # AdminLTE
 public/plugins/*
+
 
 # OS X
 .DS_Store

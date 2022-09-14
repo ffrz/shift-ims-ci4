@@ -84,7 +84,7 @@ $this->extend('_layouts/default')
             <button id="add-button" class="btn btn-md btn-warning" type="button"><i class="fa fas fa-plus"></i> Tambahkan</button>
         </div>
         <div class="row mt-3">
-            <div class="col-md-12">
+            <div class="col-md-12 table-responsive">
                 <table id="" class="data-table display table table-bordered table-striped table-condensed">
                     <thead>
                         <tr>
@@ -114,9 +114,23 @@ $this->extend('_layouts/default')
             </div>
         </div>
         <div class="form-row">
+            <div class="form-group col-md-2">
+                <label for="expedition_cost">Biaya Ekspedisi:</label>
+                <input onfocus="this.select();" id="expedition_cost" type="number" name="expedition_cost" class="form-control text-right" value="0">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="other_cost">Biaya Lainnya:</label>
+                <input onfocus="this.select();" id="other_cost" type="number" name="other_cost" class="form-control text-right" value="0">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="grand_total">Grand Total:</label>
+                <input id="grand_total" type="text" readonly name="grand_total" class="form-control text-right" value="0">
+            </div>
+        </div>
+        <div class="form-row">
             <div class="form-group col-md-12">
-                <label for="datetime" class="">Catatan</label>
-                <textarea class="form-control" name="notes"><?= esc($data->notes) ?></textarea>
+                <label for="notes" class="">Catatan</label>
+                <textarea id="notes" name="notes" class="form-control"><?= esc($data->notes) ?></textarea>
             </div>
         </div>
         <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>

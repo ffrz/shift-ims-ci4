@@ -4,14 +4,20 @@ $this->title = 'Order Penjualan #' . $orderCode;
 ?>
 <?= $this->extend('_layouts/print-invoice') ?>
 <?= $this->section('content') ?>
+<style>
+    .table td,
+    .table th {
+        padding: 2px 5px;
+    }
+</style>
 <section class="invoice">
     <div class="row">
         <div class="col-12">
-            <h4>
+            <h4 style="margin:0">
                 <i class="fas fa-laptop-code"></i> <?= esc($settings->storeName) ?>
                 <small class="float-right">Invoice #<?= $orderCode ?></small>
             </h4>
-            <p class="text-muted font-italic"><?= esc($settings->storeAddress) ?></p>
+            <p class="font-italic" style="margin:0"><?= esc($settings->storeAddress) ?></p>
         </div>
     </div>
     <div class="row">
@@ -69,8 +75,7 @@ $this->title = 'Order Penjualan #' . $orderCode;
                     <tr>
                         <th>No</th>
                         <th>Produk</th>
-                        <th>Kwantitas</th>
-                        <th>Satuan</th>
+                        <th colspan="2">Kwantitas</th>
                         <th>Harga</th>
                         <th>Jumlah Harga</th>
                     </tr>
@@ -102,7 +107,7 @@ $this->title = 'Order Penjualan #' . $orderCode;
     </div>
     <div class="row">
         <div class="col-md-6">
-            <p>Catatan:<br><?= $data->notes ?></p>
+            <p>Catatan: <?= $data->notes | '-' ?></p>
         </div>
         <div class="col-md-3"></div>
         <div class="col-md-3 text-center">
@@ -111,6 +116,7 @@ $this->title = 'Order Penjualan #' . $orderCode;
             <hr>
         </div>
     </div>
+    <p><small>Dicetak: <?= current_user()->username ?> | <?= date('Y-m-d H:i:s') ?> - <?= APP_NAME . 'v' . APP_VERSION_STR ?></small></p>
     <script>
         window.addEventListener("load", window.print());
     </script>
