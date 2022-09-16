@@ -148,7 +148,7 @@ $this->extend('_layouts/default');
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if (empty($data->items)) : ?>
+                        <?php if (count($data->items) == 0) : ?>
                             <tr>
                                 <td colspan="4" class="text-center text-muted font-italic">Belum ada item yang ditambahkan.</td>
                             </tr>

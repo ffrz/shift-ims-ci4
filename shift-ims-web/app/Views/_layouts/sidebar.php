@@ -136,6 +136,12 @@
           </ul>
         </li>
         <?php endif ?>
+        <li class="nav-item">
+          <a href="<?= base_url('/costs') ?>" class="nav-link <?= nav_active($this, 'cost') ?>">
+            <i class="nav-icon fas fa-receipt"></i>
+            <p>Biaya Operasional</p>
+          </a>
+        </li>
         <?php if (current_user_can(Acl::CHANGE_SYSTEM_SETTINGS)): ?>
         <li class="nav-item <?= menu_open($this, 'system') ?>">
           <a href="#" class="nav-link <?= menu_active($this, 'system') ?>">

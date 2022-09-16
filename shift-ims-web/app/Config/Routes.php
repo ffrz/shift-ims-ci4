@@ -125,6 +125,22 @@ $routes->group('auth', function($routes) {
     $routes->get('logout', 'AuthController::logout');
 });
 
+$routes->group('costs', function($routes) {
+    $routes->get('', 'CostController::index');
+    $routes->match(['get', 'post'], 'add', 'CostController::edit/0');
+    $routes->match(['get', 'post'], 'edit/(:num)', 'CostController::edit/$1');
+    $routes->match(['get', 'post'], 'delete/(:num)', 'CostController::delete/$1');
+    $routes->get('view/(:num)', 'CostController::view/$1');
+});
+
+$routes->group('cost-categories', function($routes) {
+    $routes->get('', 'CostCategoryController::index');
+    $routes->match(['get', 'post'], 'add', 'CostCategoryController::edit/0');
+    $routes->match(['get', 'post'], 'edit/(:num)', 'CostCategoryController::edit/$1');
+    $routes->match(['get', 'post'], 'delete/(:num)', 'CostCategoryController::delete/$1');
+    $routes->get('view/(:num)', 'CostCategoryController::view/$1');
+});
+
 $routes->group('system', function($routes) {
     $routes->match(['get', 'post'], 'settings', 'SystemController::settings');
 });

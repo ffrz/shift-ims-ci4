@@ -183,6 +183,24 @@ abstract class BaseController extends Controller
         return $this->models['user-group'];
     }
 
+    public function getCostModel()
+    {
+        if (!isset($this->models['cost'])) {
+            $this->models['cost'] = new \App\Models\CostModel($this->db);
+        }
+
+        return $this->models['cost'];
+    }
+
+    public function getCostCategoryModel()
+    {
+        if (!isset($this->models['cost-category'])) {
+            $this->models['cost-category'] = new \App\Models\CostCategoryModel($this->db);
+        }
+
+        return $this->models['cost-category'];
+    }
+    
     /**
      * 
      * @return \App\Models\SettingModel
