@@ -139,8 +139,37 @@
         <li class="nav-item">
           <a href="<?= base_url('/costs') ?>" class="nav-link <?= nav_active($this, 'cost') ?>">
             <i class="nav-icon fas fa-receipt"></i>
-            <p>Biaya Operasional</p>
+            <p>Biaya Opr.</p>
           </a>
+        </li>
+        <li class="nav-item <?= menu_open($this, 'finance') ?>">
+          <a href="#" class="nav-link <?= menu_active($this, 'finance') ?>">
+            <i class="nav-icon fas fa-wallet"></i>
+            <p>
+              Kas
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="<?= base_url('/cash-transactions') ?>" class="nav-link <?= nav_active($this, 'cash-transaction') ?>">
+                <i class="nav-icon fas fa-money-bill-transfer"></i>
+                <p>Transaksi Kas</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?= base_url('/cash-transaction-categories') ?>" class="nav-link <?= nav_active($this, 'cash-transaction-category') ?>">
+                <i class="nav-icon fas fa-folder-tree"></i>
+                <p>Kategori Transaksi</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?= base_url('/cash-accounts') ?>" class="nav-link <?= nav_active($this, 'cash-account') ?>">
+                <i class="nav-icon fas fa-money-check"></i>
+                <p>Akun / Rekening</p>
+              </a>
+            </li>
+          </ul>
         </li>
         <?php if (current_user_can(Acl::CHANGE_SYSTEM_SETTINGS)): ?>
         <li class="nav-item <?= menu_open($this, 'system') ?>">

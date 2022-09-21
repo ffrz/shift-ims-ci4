@@ -12,7 +12,7 @@ class CostModel extends Model
     protected $returnType       = \App\Entities\Cost::class;
     protected $useSoftDeletes   = false;
     protected $allowedFields    = [
-        'description', 'category_id', 'amount', 'company_id', 'date',
+        'description', 'category_id', 'amount', 'date',
         'created_at', 'created_by', 'updated_at', 'updated_by'
     ];
 

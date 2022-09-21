@@ -5,12 +5,79 @@
     vertical-align: middle;
 }
 
+table.table-pad-xs td,
+table.table-pad-xs th {
+    padding: 2px 5px;
+}
+
 .table.center-th th {
     text-align: center;
+    color: #555;
+    text-shadow: 1px 1px #fff;
+}
+
+.table-print {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table-print td,
+.table-print th {
+    border: 1px solid black;
+    padding: 2px 5px;
+}
+
+.no-border tr,
+.no-border td {
+    border: none;
+}
+
+.pad-xs tbody th,
+.pad-xs tbody td {
+    padding: 1px;
 }
 
 .form-error {
     color: red;
+}
+
+.nav-separator {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.nav-separator hr {
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+.valign-top td {
+    vertical-align: top;
+}
+
+.card-body {
+    padding: 1rem;
+}
+
+.card {
+    border-top: 3px solid #007bff;
+}
+
+.card,
+.card-header,
+.card-footer,
+.btn,
+select.custom-select,
+.select2-container--default .select2-selection--single,
+.select2-search--dropdown .select2-search__field,
+.custom-select,
+.form-control,
+.form-control-sm,
+.page-item:first-child .page-link,
+.page-item:last-child .page-link,
+.input-group-text,
+.custom-checkbox .custom-control-label::before {
+    border-radius: 0;
 }
 
 .plus-btn {
@@ -33,4 +100,27 @@
 
 .invoice-table th {
     font-weight: normal;
+}
+
+
+*,
+.invoice {
+    -webkit-filter: none !important;
+    filter: none !important;
+}
+
+label:not(.form-check-label):not(.custom-file-label) {
+    font-weight:normal;
+}
+
+label.required {
+    font-weight:bold !important;
+}
+
+.dataTables_length {
+    display: none;
+}
+
+.toast-top-right {
+    top: 65px;
 }

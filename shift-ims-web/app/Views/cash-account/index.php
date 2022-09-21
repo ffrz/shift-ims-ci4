@@ -1,12 +1,13 @@
 <?php
-$this->title = 'Kategori Biaya Opr.';
-$this->navActive = 'cost';
+$this->title = 'Akun / Rekening';
+$this->menuActive = 'finance';
+$this->navActive = 'cash-account';
 $this->extend('_layouts/default')
 ?>
 ?>
 <?= $this->section('right-menu') ?>
 <li class="nav-item">
-    <a href="<?= base_url('cost-categories/add') ?>" class="btn plus-btn btn-primary mr-2" title="Baru"><i class="fa fa-plus"></i></a>
+    <a href="<?= base_url('cash-accounts/add') ?>" class="btn plus-btn btn-primary mr-2" title="Baru"><i class="fa fa-plus"></i></a>
 </li>
 <?= $this->endSection() ?>
 <?= $this->section('content') ?>
@@ -17,7 +18,8 @@ $this->extend('_layouts/default')
                 <table class="data-table display table table-bordered table-striped table-condensed center-th" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Nama Kategori</th>
+                            <th>Nama Akun / Rek</th>
+                            <th>Saldo (Rp.)</th>
                             <th class="text-center" style="max-width:10%">Aksi</th>
                         </tr>
                     </thead>
@@ -25,10 +27,11 @@ $this->extend('_layouts/default')
                         <?php foreach ($items as $item) : ?>
                             <tr>
                                 <td><?= esc($item->name) ?></td>
+                                <td class="text-right"><?= format_number($item->balance) ?></td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <a href="<?= base_url("/cost-categories/edit/$item->id") ?>" class="btn btn-default btn-sm"><i class="fa fa-edit"></i></a>
-                                        <a onclick="return confirm('Hapus kategori?')" href="<?= base_url("/cost-categories/delete/$item->id") ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                        <a href="<?= base_url("/cash-accounts/edit/$item->id") ?>" class="btn btn-default btn-sm"><i class="fa fa-edit"></i></a>
+                                        <a onclick="return confirm('Hapus akun?')" href="<?= base_url("/cash-accounts/delete/$item->id") ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                                     </div>
                                 </td>
                             </tr>
@@ -48,7 +51,7 @@ $this->extend('_layouts/default')
         ];
         DATATABLES_OPTIONS.columnDefs = [{
             orderable: false,
-            targets: 1
+            targets: 2
         }];
         $('.data-table').DataTable(DATATABLES_OPTIONS);
     });

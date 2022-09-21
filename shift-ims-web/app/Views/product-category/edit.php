@@ -1,6 +1,5 @@
 <?php
 $this->title = (!$data->id ? 'Tambah' : 'Edit') . ' Kategori Produk';
-$this->titleIcon = 'fa-box';
 $this->menuActive = 'inventory';
 $this->navActive = 'product-category';
 $this->extend('_layouts/default')

@@ -74,6 +74,11 @@ class SalesOrderController extends BaseController
             where parent_id=$order->id")
             ->getResultObject();
 
+            // $order->payments = $this->db->query("
+            //     select * from sales_order_payments
+            //     where order_id=$order->id order by id asc"
+            // )->getResultObject();
+
         return view('sales-order/' . ($this->request->getGet('print') ? 'print' : 'view'), [
             'data' => $order,
             'settings' => $this->getSettings()

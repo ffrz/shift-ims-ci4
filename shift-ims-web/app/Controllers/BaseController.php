@@ -200,6 +200,33 @@ abstract class BaseController extends Controller
 
         return $this->models['cost-category'];
     }
+
+    public function getCashTransactionCategoryModel()
+    {
+        if (!isset($this->models['cash-transaction-category'])) {
+            $this->models['cash-transaction-category'] = new \App\Models\CashTransactionCategoryModel($this->db);
+        }
+
+        return $this->models['cash-transaction-category'];
+    }
+
+    public function getCashAccountModel()
+    {
+        if (!isset($this->models['cash-account'])) {
+            $this->models['cash-account'] = new \App\Models\CashAccountModel($this->db);
+        }
+
+        return $this->models['cash-account'];
+    }
+
+    public function getCashTransactionModel()
+    {
+        if (!isset($this->models['cash-transaction'])) {
+            $this->models['cash-transaction'] = new \App\Models\CashTransactionModel($this->db);
+        }
+
+        return $this->models['cash-transaction'];
+    }
     
     /**
      * 

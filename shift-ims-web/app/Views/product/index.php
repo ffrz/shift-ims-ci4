@@ -1,13 +1,7 @@
 <?php
 $this->title = 'Produk';
-$this->titleIcon = 'fa-cubes';
 $this->menuActive = 'inventory';
 $this->navActive = 'product';
-$this->addButtonLink = [
-    'url' => '/products/edit/0',
-    'icon' => 'fa-plus',
-    'text' => 'Tambah Produk'
-];
 $this->extend('_layouts/default')
 ?>
 <?= $this->section('right-menu') ?>

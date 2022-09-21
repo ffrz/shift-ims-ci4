@@ -1,12 +1,13 @@
 <?php
-$this->title = 'Biaya Operasional';
-$this->navActive = 'cost';
+$this->title = 'Transaksi Kas';
+$this->menuActive = 'finance';
+$this->navActive = 'cash-transaction';
 $this->extend('_layouts/default')
 ?>
 ?>
 <?= $this->section('right-menu') ?>
 <li class="nav-item">
-    <a href="<?= base_url('costs/add') ?>" class="btn plus-btn btn-primary mr-2" title="Baru"><i class="fa fa-plus"></i></a>
+    <a href="<?= base_url('cash-transactions/add') ?>" class="btn plus-btn btn-primary mr-2" title="Baru"><i class="fa fa-plus"></i></a>
 </li>
 <?= $this->endSection() ?>
 <?= $this->section('content') ?>
@@ -39,11 +40,6 @@ $this->extend('_layouts/default')
                 </div>
             </form>
         </div>
-        <div class="row">
-            <div class="col-md-12 mt-2">
-            <a href="<?= base_url('cost-categories/') ?>" class="btn btn-default mr-2" title="Kelola Kategori"><i class="fa fa-folder mr-2"></i> Kelola Kategori</a>
-            </div>
-        </div>
     </div>
 </div>
 <div class="card card-primary">
@@ -54,23 +50,25 @@ $this->extend('_layouts/default')
                     <thead>
                         <tr>
                             <th>Tanggal</th>
+                            <th>Akun</th>
                             <th>Kategori</th>
-                            <th>Biaya (Rp.)</th>
+                            <th>Jumlah (Rp.)</th>
                             <th style="width:40%;">Deskripsi</th>
-                            <th class="text-center">Aksi</th>
+                            <th class="text-center" style="max-width:10%">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($items as $item) : ?>
                             <tr>
-                                <td class="text-center"><?= format_date($item->date) ?></td>
+                                <td class="text-center"><?= format_date($item->datetime, 'dd-MM-yyyy HH:mm:ss') ?></td>
+                                <td class="text-center"><?= esc($item->account_name) ?></td>
                                 <td class="text-center"><?= esc($item->category_name) ?></td>
                                 <td class="text-right"><?= format_number($item->amount) ?></td>
                                 <td><?= esc($item->description) ?></td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <a href="<?= base_url("/costs/edit/$item->id") ?>" class="btn btn-default btn-sm"><i class="fa fa-edit"></i></a>
-                                        <a onclick="return confirm('Hapus Biaya?')" href="<?= base_url("/costs/delete/$item->id") ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                        <a href="<?= base_url("/cash-transactions/edit/$item->id") ?>" class="btn btn-default btn-sm"><i class="fa fa-edit"></i></a>
+                                        <a onclick="return confirm('Hapus Biaya?')" href="<?= base_url("/cash-transactions/delete/$item->id") ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                                     </div>
                                 </td>
                             </tr>
@@ -85,7 +83,7 @@ $this->extend('_layouts/default')
 <?= $this->section('footscript') ?>
 <script>
     $(function() {
-        DATATABLES_OPTIONS.order = [[0, 'asc']];
+        DATATABLES_OPTIONS.order = [[0, 'desc']];
         DATATABLES_OPTIONS.columnDefs = [{ orderable: false, targets: 4 }];
         $('.data-table').DataTable(DATATABLES_OPTIONS);
     });

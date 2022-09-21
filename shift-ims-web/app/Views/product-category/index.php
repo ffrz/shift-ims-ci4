@@ -3,14 +3,8 @@
 use App\Entities\Acl;
 
 $this->title = 'Kategori Produk';
-$this->titleIcon = 'fa-boxes';
 $this->menuActive = 'inventory';
 $this->navActive = 'product-category';
-$this->addButtonLink = [
-    'url' => '/product-categories/add',
-    'icon' => 'fa-plus',
-    'text' => 'Tambah Kategori Produk'
-];
 $this->extend('_layouts/default')
 ?>
 <?= $this->section('content') ?>

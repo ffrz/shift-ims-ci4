@@ -141,6 +141,30 @@ $routes->group('cost-categories', function($routes) {
     $routes->get('view/(:num)', 'CostCategoryController::view/$1');
 });
 
+$routes->group('cash-accounts', function($routes) {
+    $routes->get('', 'CashAccountController::index');
+    $routes->match(['get', 'post'], 'add', 'CashAccountController::edit/0');
+    $routes->match(['get', 'post'], 'edit/(:num)', 'CashAccountController::edit/$1');
+    $routes->match(['get', 'post'], 'delete/(:num)', 'CashAccountController::delete/$1');
+    $routes->get('view/(:num)', 'CashAccountController::view/$1');
+});
+
+$routes->group('cash-transaction-categories', function($routes) {
+    $routes->get('', 'CashTransactionCategoryController::index');
+    $routes->match(['get', 'post'], 'add', 'CashTransactionCategoryController::edit/0');
+    $routes->match(['get', 'post'], 'edit/(:num)', 'CashTransactionCategoryController::edit/$1');
+    $routes->match(['get', 'post'], 'delete/(:num)', 'CashTransactionCategoryController::delete/$1');
+    $routes->get('view/(:num)', 'CashTransactionCategoryController::view/$1');
+});
+
+$routes->group('cash-transactions', function($routes) {
+    $routes->get('', 'CashTransactionController::index');
+    $routes->match(['get', 'post'], 'add', 'CashTransactionController::edit/0');
+    $routes->match(['get', 'post'], 'edit/(:num)', 'CashTransactionController::edit/$1');
+    $routes->match(['get', 'post'], 'delete/(:num)', 'CashTransactionController::delete/$1');
+    $routes->get('view/(:num)', 'CashTransactionController::view/$1');
+});
+
 $routes->group('system', function($routes) {
     $routes->match(['get', 'post'], 'settings', 'SystemController::settings');
 });
