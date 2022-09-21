@@ -99,6 +99,7 @@ $routes->group('reports', function($routes) {
     $routes->get('income-statement', 'ReportsController::incomeStatement');
     $routes->get('stock-assets', 'ReportsController::stockAssets');
     $routes->get('sales-by-category', 'ReportsController::salesByCategory');
+    $routes->get('cost', 'ReportsController::cost');
 });
 
 $routes->group('stock-updates', function($routes) {

@@ -130,4 +130,62 @@ class ReportsController extends BaseController
             'items' => $items
         ]);
     }
+
+    public function cost()
+    {
+        // if (!current_user_can(Acl::VIEW_REPORTS)) {
+        //     return redirect()->to(base_url('/'))->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+        // }
+        
+        $print = $this->request->getGet('print');
+        $filter = $this->initFilter();
+
+        $where = [];
+        $where[] = 'year(c.date)=' . $filter->year;
+        if ($filter->month != 0) {
+            $where[] = 'month(c.date)=' . $filter->month;
+        }
+
+        $where = implode(' and ', $where);
+        if (!empty($where)) {
+            $where = ' where ' . $where;
+        }
+
+        $sql = "select c.*, cc.name category_name
+            from costs c
+            left join cost_categories cc on cc.id = c.category_id
+            $where
+            order by c.date asc";
+        $items = $this->db->query($sql)->getResultObject();
+
+        return view('reports/cost' . ($print ? '-print' : ''), [
+            'items' => $items,
+            'filter' => $filter,
+        ]);
+    }
+
+    private function initFilter()
+    {
+        $filter = new stdClass;
+        $filter->status = $this->request->getGet('status');
+        $filter->year = (int)$this->request->getGet('year');
+        $filter->month = $this->request->getGet('month');
+        
+        if ($filter->year == 0) {
+            $filter->year = date('Y');
+        }
+
+        if ($filter->month == null) {
+            $filter->month = date('m');
+        }
+        else {
+            $filter->month = (int)$filter->month;
+        }
+
+        if ($filter->month < 0 || $filter->month > 12) {
+            $filter->month = date('m');
+        }
+
+        return $filter;
+    }
 }

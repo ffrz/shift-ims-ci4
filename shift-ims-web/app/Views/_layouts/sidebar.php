@@ -41,6 +41,12 @@
                 <p>Lap. Stok</p>
               </a>
             </li>
+            <li class="nav-item">
+                <a href="<?= base_url('/reports/cost') ?>" class="nav-link <?= nav_active($this, 'report/cost') ?>">
+                  <i class="nav-icon fas fa-file-contract"></i>
+                  <p><small>Lap. Biaya Operasional</small></p>
+                </a>
+              </li>
           </ul>
         </li>
         <?php endif ?>
@@ -136,12 +142,29 @@
           </ul>
         </li>
         <?php endif ?>
-        <li class="nav-item">
-          <a href="<?= base_url('/costs') ?>" class="nav-link <?= nav_active($this, 'cost') ?>">
-            <i class="nav-icon fas fa-receipt"></i>
-            <p>Biaya Opr.</p>
-          </a>
-        </li>
+          <li class="nav-item <?= menu_open($this, 'cost') ?>">
+            <a href="#" class="nav-link <?= menu_active($this, 'cost') ?>">
+              <i class="nav-icon fas fa-receipt"></i>
+              <p>
+                Biaya Operasional
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="<?= base_url('/costs') ?>" class="nav-link <?= nav_active($this, 'cost') ?>">
+                    <i class="nav-icon fas fa-receipt"></i>
+                    <p>Biaya Operasional</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="<?= base_url('/cost-categories') ?>" class="nav-link <?= nav_active($this, 'cost-category') ?>">
+                    <i class="nav-icon fas fa-folder-tree"></i>
+                    <p>Kategori Biaya</p>
+                  </a>
+                </li>
+            </ul>
+          </li>
         <li class="nav-item <?= menu_open($this, 'finance') ?>">
           <a href="#" class="nav-link <?= menu_active($this, 'finance') ?>">
             <i class="nav-icon fas fa-wallet"></i>
