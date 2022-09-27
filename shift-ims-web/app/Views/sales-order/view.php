@@ -8,6 +8,11 @@ $this->navActive = 'sales-order';
 $this->menuActive = 'sales-order';
 $this->extend('_layouts/default');
 ?>
+<?= $this->section('right-menu') ?>
+<li class="nav-item">
+    <a href="<?= base_url('sales-orders/add') ?>" class="btn plus-btn btn-primary mr-1" title="Baru"><i class="fa fa-plus"></i></a>
+</li>
+<?= $this->endSection() ?>
 <?= $this->section('content') ?>
 <div class="card card-primary card-tabs">
     <div class="card-header p-0 pt-1">
@@ -132,9 +137,9 @@ $this->extend('_layouts/default');
                 </div>
                 <div class="mt-3">
                     <?php if ($data->status == StockUpdate::STATUS_COMPLETED) : ?>
-                        <a href="<?= base_url("sales-orders/view/$data->id?print=1") ?>" rel="noopener" target="_blank" class="btn btn-default mr-2"><i class="fas fa-print"></i> Print</a>
+                        <a href="<?= base_url("sales-orders/view/$data->id?print=1") ?>" rel="noopener" target="_blank" class="btn btn-default mr-2"><i class="fas fa-print mr-1"></i> Print</a>
                     <?php endif ?>
-                    <a onclick="return confirm('Hapus?')" href="<?= base_url("sales-orders/delete/$data->id") ?>" class="btn btn-danger"><i class="fas fa-trash"></i> Hapus</a>
+                    <a onclick="return confirm('Hapus?')" href="<?= base_url("sales-orders/delete/$data->id") ?>" class="btn btn-danger mr-2"><i class="fas fa-trash mr-1"></i> Hapus</a>
                 </div>
             </div><!-- tab-pane -->
             <div class="tab-pane fade table-responsive" id="tabcontent2" role="tabpanel" aria-labelledby="tabcontent2-tab2">
