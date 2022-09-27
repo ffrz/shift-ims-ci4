@@ -45,16 +45,16 @@ $this->extend('_layouts/default');
                         <td><?= (int)$data->total_paid == (int)$data->total_price ? 'Lunas' : 'Belum Lunas' ?></td>
                     </tr>
                     <tr>
-                        <td>Nama Pelanggan</td>
+                        <td>Nama Pemasok</td>
                         <td>:</td>
-                        <td><?= esc($data->customer ? $data->customer->name : '-') ?></td>
+                        <td><?= esc($data->supplier ? $data->supplier->name : '-') ?></td>
                     </tr>
                     <tr>
                         <td>Kontak</td>
                         <td>:</td>
                         <td>
-                            <?php if (!empty($data->customer)) : ?>
-                                <a href="<?= wa_send_url($data->customer->contacts) ?>" target="_blank"><?= esc($data->customer->contacts) ?></a>
+                            <?php if (!empty($data->supplier)) : ?>
+                                <a href="<?= wa_send_url($data->supplier->contacts) ?>" target="_blank"><?= esc($data->supplier->contacts) ?></a>
                             <?php else : ?>
                                 <i>Tidak ada</i>
                             <?php endif ?>
@@ -63,7 +63,7 @@ $this->extend('_layouts/default');
                     <tr>
                         <td>Alamat</td>
                         <td>:</td>
-                        <td><?= esc($data->customer ? $data->customer->address : '-') ?></td>
+                        <td><?= esc($data->supplier ? $data->supplier->address : '-') ?></td>
                     </tr>
                     <tr>
                         <td>Catatan</td>
