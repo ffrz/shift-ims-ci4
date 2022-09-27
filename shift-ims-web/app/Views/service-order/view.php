@@ -4,6 +4,11 @@ $this->title = 'Service Order #' . $orderCode;
 $this->navActive = 'service-order';
 ?>
 <?php $this->extend('_layouts/default') ?>
+<?= $this->section('right-menu') ?>
+    <li class="nav-item">
+        <a href="<?= base_url('service-orders/edit/0') ?>" class="btn plus-btn btn-primary mr-1" title="Baru"><i class="fa fa-plus"></i></a>
+    </li>
+<?= $this->endSection() ?>
 <?= $this->section('content') ?>
 <div class="invoice p-3 mb-3">
     <div class="row">

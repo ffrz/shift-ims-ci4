@@ -45,16 +45,16 @@ $this->extend('_layouts/default');
                         <td><?= (int)$data->total_paid == (int)$data->total_price ? 'Lunas' : 'Belum Lunas' ?></td>
                     </tr>
                     <tr>
-                        <td>Nama Pelanggan</td>
+                        <td>Nama Pemasok</td>
                         <td>:</td>
-                        <td><?= esc($data->customer ? $data->customer->name : '-') ?></td>
+                        <td><?= esc($data->supplier ? $data->supplier->name : '-') ?></td>
                     </tr>
                     <tr>
                         <td>Kontak</td>
                         <td>:</td>
                         <td>
-                            <?php if (!empty($data->customer)) : ?>
-                                <a href="<?= wa_send_url($data->customer->contacts) ?>" target="_blank"><?= esc($data->customer->contacts) ?></a>
+                            <?php if (!empty($data->supplier)) : ?>
+                                <a href="<?= wa_send_url($data->supplier->contacts) ?>" target="_blank"><?= esc($data->supplier->contacts) ?></a>
                             <?php else : ?>
                                 <i>Tidak ada</i>
                             <?php endif ?>
@@ -63,7 +63,7 @@ $this->extend('_layouts/default');
                     <tr>
                         <td>Alamat</td>
                         <td>:</td>
-                        <td><?= esc($data->customer ? $data->customer->address : '-') ?></td>
+                        <td><?= esc($data->supplier ? $data->supplier->address : '-') ?></td>
                     </tr>
                     <tr>
                         <td>Catatan</td>
@@ -130,12 +130,14 @@ $this->extend('_layouts/default');
                         <?php endif ?>
                     </div>
                 </div>
+                <?php /*
                 <div class="mt-3">
                     <?php if ($data->status == StockUpdate::STATUS_COMPLETED) : ?>
-                        <a href="<?= base_url("sales-orders/view/$data->id?print=1") ?>" rel="noopener" target="_blank" class="btn btn-default mr-2"><i class="fas fa-print"></i> Print</a>
+                        <a href="<?= base_url("purchase-orders/view/$data->id?print=1") ?>" rel="noopener" target="_blank" class="btn btn-default mr-2"><i class="fas fa-print"></i> Print</a>
                     <?php endif ?>
-                    <a onclick="return confirm('Hapus?')" href="<?= base_url("sales-orders/delete/$data->id") ?>" class="btn btn-danger"><i class="fas fa-trash"></i> Hapus</a>
+                    <a onclick="return confirm('Hapus?')" href="<?= base_url("purchase-orders/delete/$data->id") ?>" class="btn btn-danger"><i class="fas fa-trash"></i> Hapus</a>
                 </div>
+                */ ?>
             </div><!-- tab-pane -->
             <div class="tab-pane fade table-responsive" id="tabcontent2" role="tabpanel" aria-labelledby="tabcontent2-tab2">
             <table class="table table-striped">
