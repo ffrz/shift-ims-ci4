@@ -1,13 +1,7 @@
 <?php
 $this->title = 'Servis';
-$this->titleIcon = 'fa-screwdriver-wrench';
 $this->menuActive = 'service-order';
 $this->navActive = 'service-order';
-$this->addButtonLink = [
-    'url' => '/service-orders/edit/0',
-    'icon' => 'fa-plus',
-    'text' => 'Tambah Servis'
-];
 $this->navActive = 'service-order';
 $this->extend('_layouts/default');
 ?>
