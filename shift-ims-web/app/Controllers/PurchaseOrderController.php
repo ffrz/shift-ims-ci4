@@ -48,7 +48,6 @@ class PurchaseOrderController extends BaseController
         ]);
     }
 
-
     public function view($id)
     {
         $model = $this->getStockUpdateModel();
