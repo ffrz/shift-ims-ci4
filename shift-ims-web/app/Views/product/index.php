@@ -88,6 +88,7 @@ $this->extend('_layouts/default')
                         <tr>
                             <th>Nama</th>
                             <th>Stok</th>
+                            <th>Modal</th>
                             <th>Harga</th>
                             <?php if (0) : ?>
                                 <th>Modal</th>
@@ -100,6 +101,7 @@ $this->extend('_layouts/default')
                             <tr>
                                 <td><?= esc($item->name) ?></td>
                                 <td class="text-center"><?= format_number($item->stock) . ' ' . esc($item->uom) ?></td>
+                                <td class="text-right"><?= format_number($item->cost) ?></td>
                                 <td class="text-right"><?= format_number($item->price) ?></td>
                                 <?php if (0) : ?>
                                     <td class="text-right"><?= format_number($item->cost) ?></td>
@@ -128,7 +130,7 @@ $this->extend('_layouts/default')
     ];
     DATATABLES_OPTIONS.columnDefs = [{
         orderable: false,
-        targets: 3
+        targets: 4
     }];
     $(document).ready(function() {
         $('.data-table').DataTable(DATATABLES_OPTIONS);
