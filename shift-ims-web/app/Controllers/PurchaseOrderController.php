@@ -108,7 +108,24 @@ class PurchaseOrderController extends BaseController
         ->getResultObject();
 
         if ($this->request->getMethod() == 'post') {
-            $action = $this->request->getPost('action');
+            $action = $this->request->getPost('action');           
+            $data->fill($this->request->getPost());
+            $data->expedition_cost = floatval($data->expedition_cost);
+            $data->other_cost = floatval($data->other_cost);
+            $data->datetime = datetime_from_input($data->datetime);
+            $quantities = (array)$this->request->getPost('quantities');
+            $costs = (array)$this->request->getPost('costs');
+            $prices = (array)$this->request->getPost('prices');
+
+            if (!$data->party_id) {
+                $data->party_id = null;
+            }
+            
+            $products_by_ids = [];
+            foreach ($products as $product) {
+                $products_by_ids[$product->id] = $product;
+            }
+
             if ($action == 'complete') {
                 $data->status = StockUpdate::STATUS_COMPLETED;
             }
@@ -118,22 +135,12 @@ class PurchaseOrderController extends BaseController
             else if ($action == 'save') {
                 $data->status = StockUpdate::STATUS_SAVED;
             }
-            
-            $data->fill($this->request->getPost());
-            $data->expedition_cost = floatval($data->expedition_cost);
-            $data->other_cost = floatval($data->other_cost);
-            $data->datetime = datetime_from_input($data->datetime);
-
-            $products_by_ids = [];
-            foreach ($products as $product) {
-                $products_by_ids[$product->id] = $product;
+            else if ($action == 'complete_and_paid') {
+                $data->status = StockUpdate::STATUS_COMPLETED;
+                $data->payment_status = StockUpdate::PAYMENTSTATUS_FULLYPAID;
             }
 
-            $quantities = (array)$this->request->getPost('quantities');
-            $costs = (array)$this->request->getPost('costs');
-            $prices = (array)$this->request->getPost('prices');
-
-            if (empty($quantities) && $action == 'complete') {
+            if (empty($quantities) && ($action == 'complete' || $action == 'complete_and_paid')) {
                 $errors['items']='Silahkan tambahkan item terlebih dahulu';
             }
 
@@ -167,6 +174,10 @@ class PurchaseOrderController extends BaseController
 
                 $data->lastmod_at = date('Y-m-d H:i:s');
                 $data->lastmod_by = current_user()->username;
+                $data->total_bill = abs($data->total_cost) + $data->expedition_cost + $data->other_cost;
+                if ($action == 'complete_and_paid') {
+                    $data->total_paid = $data->total_bill;
+                }
                 $model->save($data);
 
                 $this->db->query('delete from stock_update_details where parent_id=' . $data->id);

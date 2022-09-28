@@ -17,4 +17,8 @@ class StockUpdate extends \CodeIgniter\Entity\Entity
     const STATUS_SAVED = 0;
     const STATUS_COMPLETED = 1;
     const STATUS_CANCELED = 2;
+
+    const PAYMENTSTATUS_UNPAID = 0;
+    const PAYMENTSTATUS_PARTIALLYPAID = 1;
+    const PAYMENTSTATUS_FULLYPAID = 2;
 }

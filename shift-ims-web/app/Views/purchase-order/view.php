@@ -23,7 +23,7 @@ $this->extend('_layouts/default');
     <div class="card-body">
         <div class="tab-content" id="po-tabContent">
             <div class="tab-pane fade show active table-responsive" id="tabcontent1" role="tabpanel" aria-labelledby="tabcontent1-tab1">
-                <table class="table table-condensed table-striped">
+                <table class="table table-condensed table-striped table-pad-xs">
                     <tr>
                         <td style="width:10rem;">No Invoice:</td>
                         <td style="width:0.5rem;">:</td>
@@ -42,7 +42,7 @@ $this->extend('_layouts/default');
                     <tr>
                         <td>Status Pembayaran</td>
                         <td>:</td>
-                        <td><?= (int)$data->total_paid == (int)$data->total_price ? 'Lunas' : 'Belum Lunas' ?></td>
+                        <td><?= format_stock_update_payment_status($data->payment_status) ?></td>
                     </tr>
                     <tr>
                         <td>Nama Pemasok</td>
@@ -71,7 +71,7 @@ $this->extend('_layouts/default');
                         <td><?= esc($data->notes) ?></td>
                     </tr>
                     <tr>
-                        <td>Order Lewat</td>
+                        <td>Order Melalui</td>
                         <td>:</td>
                         <td><?= esc($data->order_via) ?></td>
                     </tr>
@@ -81,15 +81,15 @@ $this->extend('_layouts/default');
                         <td><?= esc($data->external_ref_code) ?></td>
                     </tr>
                 </table>
-                <table class="table table-striped">
+                <table class="table table-striped table-bordered table-pad-xs">
                     <thead style="text-align:center;">
                         <tr>
                             <th>No</th>
                             <th>Produk</th>
                             <th>Kwantitas</th>
                             <th>Satuan</th>
-                            <th>Harga</th>
-                            <th>Jumlah Harga</th>
+                            <th>Harga Beli (Rp.)</th>
+                            <th>Subtotal (Rp.)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -100,13 +100,13 @@ $this->extend('_layouts/default');
                         <?php endif ?>
                         <?php $total = 0 ?>
                         <?php foreach ($data->items as $item) : ?>
-                            <?php $subtotal = abs($item->quantity) * $item->price ?>
+                            <?php $subtotal = abs($item->quantity) * $item->cost ?>
                             <tr>
                                 <td class="text-right"><?= $item->id ?></td>
                                 <td><?= esc($item->name) ?></td>
                                 <td class="text-right"><?= format_number(abs($item->quantity)) ?></td>
                                 <td><?= esc($item->uom) ?></td>
-                                <td class="text-right"><?= format_number($item->price) ?></td>
+                                <td class="text-right"><?= format_number($item->cost) ?></td>
                                 <td class="text-right"><?= format_number($subtotal) ?></td>
                             </tr>
                             <?php $total += $subtotal ?>
@@ -115,33 +115,37 @@ $this->extend('_layouts/default');
                     <tfoot>
                         <tr>
                             <th colspan="4"></th>
-                            <th class="text-right">Total Tagihan</th>
-                            <th class="text-right"><?= format_number($data->total_price) ?></th>
+                            <th class="text-right">Total (Rp.)</th>
+                            <th class="text-right"><?= format_number($data->total_cost) ?></th>
                         </tr>
+                        <?php if ($data->expedition_cost > 0): ?>
                         <tr>
                             <th colspan="4"></th>
-                            <th class="text-right">Biaya Ekspedisi</th>
+                            <th class="text-right">Biaya Ekspedisi (Rp.)</th>
                             <th class="text-right"><?= format_number($data->expedition_cost) ?></th>
                         </tr>
+                        <?php endif ?>
+                        <?php if ($data->other_cost > 0): ?>
                         <tr>
                             <th colspan="4"></th>
-                            <th class="text-right">Biaya Lainnya</th>
+                            <th class="text-right">Biaya Lainnya (Rp.)</th>
                             <th class="text-right"><?= format_number($data->other_cost) ?></th>
                         </tr>
+                        <?php endif ?>
                         <tr>
                             <th colspan="4"></th>
-                            <th class="text-right">Grand Total</th>
-                            <th class="text-right"><?= format_number((float)($data->total_price + $data->expedition_cost + $data->other_cost)) ?></th>
+                            <th class="text-right">Total Tagihan (Rp.)</th>
+                            <th class="text-right"><?= format_number((float)$data->total_bill) ?></th>
                         </tr>
                         <tr>
                             <th colspan="4"></th>
-                            <th class="text-right">Jumlah Bayar</th>
+                            <th class="text-right">Jumlah Bayar (Rp.)</th>
                             <th class="text-right"><?= format_number((float)$data->total_paid) ?></th>
                         </tr>
                         <tr>
                             <th colspan="4"></th>
-                            <th class="text-right">Sisa Tagihan</th>
-                            <th class="text-right"><?= format_number($data->total_price - $data->total_paid) ?></th>
+                            <th class="text-right">Sisa Tagihan (Rp.)</th>
+                            <th class="text-right"><?= format_number($data->total_cost - $data->total_paid) ?></th>
                         </tr>
                     </tfoot>
                 </table>
@@ -160,6 +164,9 @@ $this->extend('_layouts/default');
                 <div class="mt-3">
                     <?php if ($data->status == StockUpdate::STATUS_COMPLETED) : ?>
                         <a href="<?= base_url("purchase-orders/view/$data->id?print=1") ?>" rel="noopener" target="_blank" class="btn btn-default mr-2"><i class="fas fa-print mr-1"></i> Print</a>
+                    <?php endif ?>
+                    <?php if ($data->payment_status != StockUpdate::PAYMENTSTATUS_FULLYPAID): ?>
+                    <a onclick="return confirm('Bayar?')" href="<?= base_url("purchase-orders/payment/$data->id") ?>" class="btn btn-primary mr-2"><i class="fas fa-money-bill mr-1"></i> Pembayaran</a>
                     <?php endif ?>
                     <a onclick="return confirm('Hapus?')" href="<?= base_url("purchase-orders/delete/$data->id") ?>" class="btn btn-danger mr-2"><i class="fas fa-trash mr-1"></i> Hapus</a>
                 </div>

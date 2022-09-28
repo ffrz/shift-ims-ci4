@@ -167,6 +167,15 @@ function format_stock_update_status($status)
     }
 }
 
+function format_stock_update_payment_status($status)
+{
+    switch ($status) {
+        case StockUpdate::PAYMENTSTATUS_UNPAID: return 'Belum Lunas';
+        case StockUpdate::PAYMENTSTATUS_PARTIALLYPAID: return 'Dibayar Sebagian';
+        case StockUpdate::PAYMENTSTATUS_FULLYPAID: return 'Lunas';
+    }
+}
+
 function format_stock_update_code($type, $code)
 {
     $code = str_pad($code, 5, '0', STR_PAD_LEFT);

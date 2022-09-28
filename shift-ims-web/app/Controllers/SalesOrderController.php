@@ -118,6 +118,10 @@ class SalesOrderController extends BaseController
             else if ($action == 'cancel') {
                 $data->status = StockUpdate::STATUS_CANCELED;
             }
+            else if ($action == 'complete_and_paid') {
+                $data->status = StockUpdate::STATUS_COMPLETED;
+                $data->payment_status = StockUpdate::PAYMENTSTATUS_FULLYPAID;
+            }
 
             $data->fill($this->request->getPost());
             if (!$data->party_id) {
@@ -134,7 +138,7 @@ class SalesOrderController extends BaseController
             $quantities = (array)$this->request->getPost('quantities');
             $prices = $this->request->getPost('prices');
 
-            if (empty($quantities) && $action == 'complete') {
+            if (empty($quantities) && ($action == 'complete' || $action == 'complete_and_paid')) {
                 $errors['items']='Silahkan tambahkan item terlebih dahulu';
             }
 
@@ -166,6 +170,10 @@ class SalesOrderController extends BaseController
 
                 $data->lastmod_at = date('Y-m-d H:i:s');
                 $data->lastmod_by = current_user()->username;
+                $data->total_bill = abs($data->total_cost) + $data->expedition_cost + $data->other_cost;
+                if ($action == 'complete_and_paid') {
+                    $data->total_paid = $data->total_bill;
+                }
                 $model->save($data);
 
                 $this->db->query('delete from stock_update_details where parent_id=' . $data->id);

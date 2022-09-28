@@ -16,7 +16,7 @@ class StockUpdateModel extends Model
     protected $allowedFields = [
         'code', 'type', 'datetime', 'total_cost', 'total_price', 'party_id', 'notes', 'status',
         'created_at', 'created_by', 'lastmod_at', 'lastmod_by', 'expedition_cost', 'other_cost',
-        'order_via', 'external_ref_code'
+        'order_via', 'external_ref_code', 'payment_status', 'total_bill', 'total_paid'
     ];
 
     public function getAll()

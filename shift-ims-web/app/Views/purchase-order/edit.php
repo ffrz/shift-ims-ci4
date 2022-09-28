@@ -152,12 +152,11 @@ $this->extend('_layouts/default')
         <div class="card-footer">
             <div class="row mb-2">
                 <div class="col-12">
-                    <div class="btn-group mr-2 mt-2">
+                    <div class="btn-group">
                         <button type="submit" name="action" value="save" class="btn btn-default"><i class="fas fa-save mr-2"></i> Simpan</button>
-                    </div>
-                    <div class="btn-group mt-2">
-                        <button onclick="return confirm('Selesaikan pesanan?')" type="submit" name="action" value="complete" class="btn btn-primary"><i class="fas fa-check mr-2"></i> Selesaikan</button>
-                        <button onclick="return confirm('Batalkan pesanan?')" type="submit" name="action" value="cancel" class="btn btn-danger"><i class="fas fa-cancel mr-2"></i> Batalkan</button>
+                        <button onclick="return confirm('Selesaikan pesanan?')" type="submit" name="action" value="complete_and_paid" class="btn btn-warning"><i class="fas fa-money-bill mr-2"></i> Lunas</button>
+                        <button onclick="return confirm('Selesaikan pesanan?')" type="submit" name="action" value="complete" class="btn btn-primary"><i class="fas fa-check mr-2"></i> Selesai</button>
+                        <button onclick="return confirm('Batalkan pesanan?')" type="submit" name="action" value="cancel" class="btn btn-danger"><i class="fas fa-cancel mr-2"></i> Batal</button>
                     </div>
                 </div>
             </div>

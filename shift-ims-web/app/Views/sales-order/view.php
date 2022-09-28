@@ -30,7 +30,7 @@ $this->extend('_layouts/default');
             <div class="tab-pane fade show active table-responsive" id="tabcontent1" role="tabpanel" aria-labelledby="tabcontent1-tab1">
                 <table class="table table-condensed table-striped">
                     <tr>
-                        <td style="width:25%;">No Invoice:</td>
+                        <td style="width:10rem;">No Invoice:</td>
                         <td style="width:0.5rem;">:</td>
                         <td>#<?= $orderCode ?></td>
                     </tr>
@@ -47,7 +47,7 @@ $this->extend('_layouts/default');
                     <tr>
                         <td>Status Pembayaran</td>
                         <td>:</td>
-                        <td><?= (int)$data->total_paid == (int)$data->total_price ? 'Lunas' : 'Belum Lunas' ?></td>
+                        <td><?= format_stock_update_payment_status($data->payment_status) ?></td>
                     </tr>
                     <tr>
                         <td>Nama Pelanggan</td>
@@ -83,8 +83,8 @@ $this->extend('_layouts/default');
                             <th>Produk</th>
                             <th>Kwantitas</th>
                             <th>Satuan</th>
-                            <th>Harga</th>
-                            <th>Jumlah Harga</th>
+                            <th>Harga (Rp.)</th>
+                            <th>Subtotal (Rp.)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -110,17 +110,36 @@ $this->extend('_layouts/default');
                     <tfoot>
                         <tr>
                             <th colspan="4"></th>
-                            <th class="text-right">Total Tagihan</th>
+                            <th class="text-right">Total (Rp.)</th>
                             <th class="text-right"><?= format_number($data->total_price) ?></th>
+                        </tr>
+                        <?php if ($data->expedition_cost): ?>
+                        <tr>
+                            <th colspan="4"></th>
+                            <th class="text-right">Biaya Ekspedisi (Rp.)</th>
+                            <th class="text-right"><?= format_number($data->expedition_cost) ?></th>
+                        </tr>
+                        <?php endif ?>
+                        <?php if ($data->other_cost): ?>
+                        <tr>
+                            <th colspan="4"></th>
+                            <th class="text-right">Biaya Lainnya (Rp.)</th>
+                            <th class="text-right"><?= format_number($data->other_cost) ?></th>
+                        </tr>
+                        <?php endif ?>
+                        <tr>
+                            <th colspan="4"></th>
+                            <th class="text-right">Total Tagihan (Rp.)</th>
+                            <th class="text-right"><?= format_number((float)$data->total_bill) ?></th>
                         </tr>
                         <tr>
                             <th colspan="4"></th>
-                            <th class="text-right">Jumlah Bayar</th>
+                            <th class="text-right">Total Bayar (Rp.)</th>
                             <th class="text-right"><?= format_number((float)$data->total_paid) ?></th>
                         </tr>
                         <tr>
                             <th colspan="4"></th>
-                            <th class="text-right">Sisa Tagihan</th>
+                            <th class="text-right">Sisa (Rp.)</th>
                             <th class="text-right"><?= format_number($data->total_price - $data->total_paid) ?></th>
                         </tr>
                     </tfoot>
