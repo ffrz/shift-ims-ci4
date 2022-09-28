@@ -61,8 +61,8 @@ $this->extend('_layouts/default')
                     <tbody>
                         <?php foreach ($items as $item) : ?>
                             <?php
-                            $badge_class = '';
                             $url = 'view';
+                            $badge_class = '';
                             if ($item->status == StockUpdate::STATUS_CANCELED) {
                                 $badge_class = 'badge-danger';
                             }
@@ -73,11 +73,22 @@ $this->extend('_layouts/default')
                                 $badge_class = 'badge-warning';
                                 $url = 'edit';
                             }
+
+                            $payment_badge_class = '';
+                            if ($item->payment_status == StockUpdate::PAYMENTSTATUS_UNPAID) {
+                                $payment_badge_class = 'badge-danger';
+                            }
+                            else if ($item->payment_status == StockUpdate::PAYMENTSTATUS_FULLYPAID) {
+                                $payment_badge_class = 'badge-success';
+                            }
                             ?>
                             <tr>
                                 <td>
                                     <a href="<?= base_url("/purchase-orders/$url/$item->id") ?>"><?= format_stock_update_code($item->type, $item->code) ?></a>
                                     <span class="badge <?= $badge_class ?>"><?= format_stock_update_status($item->status) ?></span>
+                                    <?php if ($item->status == StockUpdate::STATUS_COMPLETED): ?>
+                                        <span class="badge <?= $payment_badge_class ?>"><?= format_stock_update_payment_status($item->payment_status) ?></span>
+                                    <?php endif ?>
                                 </td>
                                 <td><?= $item->party_name ?></td>
                                 <td class="text-center"><?= format_datetime($item->datetime) ?></td>

@@ -95,7 +95,6 @@ $this->extend('_layouts/default')
                             }
 
                             $payment_badge_class = '';
-                            $url = 'view';
                             if ($item->payment_status == StockUpdate::PAYMENTSTATUS_UNPAID) {
                                 $payment_badge_class = 'badge-danger';
                             }
@@ -109,7 +108,9 @@ $this->extend('_layouts/default')
                                         <?= format_stock_update_code($item->type, $item->code) ?>
                                     </a>
                                     <span class="badge <?= $badge_class ?>"><?= format_stock_update_status($item->status) ?></span>
-                                    <span class="badge <?= $payment_badge_class ?>"><?= format_stock_update_payment_status($item->payment_status) ?></span>
+                                    <?php if ($item->status == StockUpdate::STATUS_COMPLETED): ?>
+                                        <span class="badge <?= $payment_badge_class ?>"><?= format_stock_update_payment_status($item->payment_status) ?></span>
+                                    <?php endif ?>
                                 </td>
                                 <td class="text-center"><?= $item->datetime ?> </td>
                                 <td><?= $item->party_name ?></td>
