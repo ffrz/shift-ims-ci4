@@ -20,6 +20,8 @@ class SalesOrderController extends BaseController
         }
         if (!isset($filter->daterange)) {
             $filter->daterange = date('Y-m-01') . '-' . date('Y-m-t');
+            $filter->dateStart = date('Y-m-01');
+            $filter->dateEnd = date('Y-m-t');
         }
         if (!isset($filter->payment_status)) {
             $filter->payment_status = 'all';
@@ -27,6 +29,11 @@ class SalesOrderController extends BaseController
 
         if (($daterange = $this->request->getGet('daterange')) != null) {
             $filter->daterange = (string)$daterange;
+            if (strlen($filter->daterange) == 23) {
+                $daterange = explode(' - ', $filter->daterange);
+                $filter->dateStart = datetime_from_input($daterange[0]);
+                $filter->dateEnd = datetime_from_input($daterange[1]);
+            }
         }
 
         if (($status = $this->request->getGet('status')) != null) {
@@ -35,12 +42,6 @@ class SalesOrderController extends BaseController
 
         if (($payment_status = $this->request->getGet('payment_status')) != null) {
             $filter->payment_status = $payment_status;
-        }
-        
-        if (strlen($filter->daterange) == 23) {
-            $daterange = explode(' - ', $filter->daterange);
-            $filter->dateStart = datetime_from_input($daterange[0]);
-            $filter->dateEnd = datetime_from_input($daterange[1]);
         }
 
         $session->set('sales_order_filter', $filter);
