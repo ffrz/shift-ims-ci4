@@ -258,4 +258,21 @@ class PurchaseOrderController extends BaseController
 
         return redirect()->to(base_url('/purchase-orders'))->with('warning', 'Rekaman telah dihapus');
     }
+
+    public function fullyPaid($id)
+    {
+        $model = $this->getStockUpdateModel();
+        $data = $model->find($id);
+        if ($data->status != StockUpdate::STATUS_COMPLETED) {
+            return redirect()->to(base_url('purchase-orders/view/' . $id));
+        }
+
+        $data->lastmod_at = date('Y-m-d H:i:s');
+        $data->lastmod_by = current_user()->username;
+        $data->total_paid = $data->total_bill;
+        $data->payment_status = StockUpdate::PAYMENTSTATUS_FULLYPAID;
+        $model->save($data);
+
+        return redirect()->to(base_url('purchase-orders/view/' . $id));
+    }
 }

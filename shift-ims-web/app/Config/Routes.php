@@ -87,6 +87,7 @@ $routes->group('purchase-orders', function($routes) {
     $routes->match(['get', 'post'], 'edit/(:num)', 'PurchaseOrderController::edit/$1');
     $routes->get('view/(:num)', 'PurchaseOrderController::view/$1');
     $routes->get('delete/(:num)', 'PurchaseOrderController::delete/$1');
+    $routes->post('fully-paid/(:num)', 'PurchaseOrderController::fullyPaid/$1');
 });
 
 $routes->group('sales-orders', function($routes) {
@@ -95,6 +96,7 @@ $routes->group('sales-orders', function($routes) {
     $routes->match(['get', 'post'], 'edit/(:num)', 'SalesOrderController::edit/$1');
     $routes->get('view/(:num)', 'SalesOrderController::view/$1');
     $routes->get('delete/(:num)', 'SalesOrderController::delete/$1');
+    $routes->post('fully-paid/(:num)', 'SalesOrderController::fullyPaid/$1');
 });
 
 $routes->group('reports', function($routes) {

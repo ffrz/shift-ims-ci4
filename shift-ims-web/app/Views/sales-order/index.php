@@ -14,7 +14,7 @@ $this->extend('_layouts/default')
 <?= $this->section('content') ?>
 <form method="GET" class="form-horizontal">
     <div class="modal fade" id="modal-sm">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Penyaringan</h4>
@@ -24,8 +24,8 @@ $this->extend('_layouts/default')
                 </div>
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label for="daterange" class="col-sm-3 col-form-label">Tanggal</label>
-                        <div class="col-sm-9">
+                        <label for="daterange" class="col-sm-4 col-form-label">Tanggal</label>
+                        <div class="col-sm-8">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -37,13 +37,23 @@ $this->extend('_layouts/default')
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="status" class="col-sm-3 col-form-label">Status Order</label>
-                        <div class="col-sm-9">
+                        <label for="status" class="col-sm-4 col-form-label">Status Order</label>
+                        <div class="col-sm-8">
                             <select class="custom-select" id="status" name="status">
                                 <option value="all" <?= $filter->status == 'all' ? 'selected' : '' ?>>Semua Status</option>
                                 <option value="0" <?= $filter->status == 0 ? 'selected' : '' ?>>Disimpan</option>
                                 <option value="1" <?= $filter->status == 1 ? 'selected' : '' ?>>Selesai</option>
                                 <option value="2" <?= $filter->status == 2 ? 'selected' : '' ?>>Dibatalkan</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="payment_status" class="col-sm-4 col-form-label">Status Pembayaran</label>
+                        <div class="col-sm-8">
+                            <select class="custom-select" id="payment_status" name="payment_status">
+                                <option value="all" <?= $filter->payment_status == 'all' ? 'selected' : '' ?>>Semua Status</option>
+                                <option value="0" <?= $filter->payment_status == 0 ? 'selected' : '' ?>>Belum Lunas</option>
+                                <option value="2" <?= $filter->payment_status == 2 ? 'selected' : '' ?>>Lunas</option>
                             </select>
                         </div>
                     </div>
@@ -83,6 +93,15 @@ $this->extend('_layouts/default')
                                 $badge_class = 'badge-warning';
                                 $url = 'edit';
                             }
+
+                            $payment_badge_class = '';
+                            $url = 'view';
+                            if ($item->payment_status == StockUpdate::PAYMENTSTATUS_UNPAID) {
+                                $payment_badge_class = 'badge-danger';
+                            }
+                            else if ($item->payment_status == StockUpdate::PAYMENTSTATUS_FULLYPAID) {
+                                $payment_badge_class = 'badge-success';
+                            }
                             ?>
                             <tr>
                                 <td>
@@ -90,6 +109,7 @@ $this->extend('_layouts/default')
                                         <?= format_stock_update_code($item->type, $item->code) ?>
                                     </a>
                                     <span class="badge <?= $badge_class ?>"><?= format_stock_update_status($item->status) ?></span>
+                                    <span class="badge <?= $payment_badge_class ?>"><?= format_stock_update_payment_status($item->payment_status) ?></span>
                                 </td>
                                 <td class="text-center"><?= $item->datetime ?> </td>
                                 <td><?= $item->party_name ?></td>

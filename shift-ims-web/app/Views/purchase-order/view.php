@@ -162,13 +162,16 @@ $this->extend('_layouts/default');
                     </div>
                 </div>
                 <div class="mt-3">
-                    <?php if ($data->status == StockUpdate::STATUS_COMPLETED) : ?>
-                        <a href="<?= base_url("purchase-orders/view/$data->id?print=1") ?>" rel="noopener" target="_blank" class="btn btn-default mr-2"><i class="fas fa-print mr-1"></i> Print</a>
-                    <?php endif ?>
-                    <?php if ($data->payment_status != StockUpdate::PAYMENTSTATUS_FULLYPAID): ?>
-                    <a onclick="return confirm('Bayar?')" href="<?= base_url("purchase-orders/payment/$data->id") ?>" class="btn btn-primary mr-2"><i class="fas fa-money-bill mr-1"></i> Pembayaran</a>
-                    <?php endif ?>
-                    <a onclick="return confirm('Hapus?')" href="<?= base_url("purchase-orders/delete/$data->id") ?>" class="btn btn-danger mr-2"><i class="fas fa-trash mr-1"></i> Hapus</a>
+                    <form method="post" action="<?= base_url("purchase-orders/fully-paid/$data->id") ?>">
+                        <?= csrf_field() ?>
+                        <div class="btn-group">
+                            <a href="<?= base_url("purchase-orders/view/$data->id?print=1") ?>" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print mr-1"></i> Print</a>
+                            <?php if ($data->payment_status != StockUpdate::PAYMENTSTATUS_FULLYPAID): ?>
+                                <button onclick="return confirm('Bayar lunas?')" class="btn btn-warning"><i class="fa fa-money-bill mr-2"></i>Lunas</button>
+                            <?php endif ?>
+                            <a onclick="return confirm('Hapus?')" href="<?= base_url("purchase-orders/delete/$data->id") ?>" class="btn btn-danger mr-2"><i class="fas fa-trash mr-1"></i> Hapus</a>
+                        </div>
+                    </form>
                 </div>
             </div><!-- tab-pane -->
             <div class="tab-pane fade table-responsive" id="tabcontent2" role="tabpanel" aria-labelledby="tabcontent2-tab2">

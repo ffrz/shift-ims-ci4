@@ -10,17 +10,31 @@ class SalesOrderController extends BaseController
 {
     public function index()
     {
-        $filter = new \StdClass();
-        $filter->daterange = (string)$this->request->getGet('daterange');
-        $filter->status = $this->request->getGet('status');
-
-        if (null == $filter->daterange) {
-            $filter->dateStart = date('Y-m-01');
-            $filter->dateEnd = date('Y-m-t');
+        $session = session();
+        $filter = $session->get('sales_order_filter');
+        if (!$filter) {
+            $filter = new stdClass;
+        }
+        if (!isset($filter->status)) {
+            $filter->status = 'all';
+        }
+        if (!isset($filter->daterange)) {
+            $filter->daterange = date('Y-m-01') . '-' . date('Y-m-t');
+        }
+        if (!isset($filter->payment_status)) {
+            $filter->payment_status = 'all';
         }
 
-        if (null == $filter->status) {
-            $filter->status = StockUpdate::STATUS_SAVED;
+        if (($daterange = $this->request->getGet('daterange')) != null) {
+            $filter->daterange = (string)$daterange;
+        }
+
+        if (($status = $this->request->getGet('status')) != null) {
+            $filter->status = $status;
+        }
+
+        if (($payment_status = $this->request->getGet('payment_status')) != null) {
+            $filter->payment_status = $payment_status;
         }
         
         if (strlen($filter->daterange) == 23) {
@@ -28,6 +42,8 @@ class SalesOrderController extends BaseController
             $filter->dateStart = datetime_from_input($daterange[0]);
             $filter->dateEnd = datetime_from_input($daterange[1]);
         }
+
+        $session->set('sales_order_filter', $filter);
 
         $where[] = "(date(datetime) between :d1: and :d2:)";
         $params = [
@@ -37,6 +53,10 @@ class SalesOrderController extends BaseController
 
         if ($filter->status !== 'all') {
             $where[] = 'su.status=' . (int)$filter->status;
+        }
+
+        if ($filter->payment_status !== 'all') {
+            $where[] = 'su.payment_status=' . (int)$filter->payment_status;
         }
 
         $where[] = 'su.type=' . StockUpdate::UPDATE_TYPE_SALES_ORDER;
@@ -170,7 +190,7 @@ class SalesOrderController extends BaseController
 
                 $data->lastmod_at = date('Y-m-d H:i:s');
                 $data->lastmod_by = current_user()->username;
-                $data->total_bill = abs($data->total_cost) + $data->expedition_cost + $data->other_cost;
+                $data->total_bill = abs($data->total_price) + $data->expedition_cost + $data->other_cost;
                 if ($action == 'complete_and_paid') {
                     $data->total_paid = $data->total_bill;
                 }
@@ -254,5 +274,22 @@ class SalesOrderController extends BaseController
         $this->db->transCommit();
 
         return redirect()->to(base_url('/sales-orders'))->with('warning', 'Rekaman telah dihapus');
+    }
+
+    public function fullyPaid($id)
+    {
+        $model = $this->getStockUpdateModel();
+        $data = $model->find($id);
+        if ($data->status != StockUpdate::STATUS_COMPLETED) {
+            return redirect()->to(base_url('sales-orders/view/' . $id));
+        }
+
+        $data->lastmod_at = date('Y-m-d H:i:s');
+        $data->lastmod_by = current_user()->username;
+        $data->total_paid = $data->total_bill;
+        $data->payment_status = StockUpdate::PAYMENTSTATUS_FULLYPAID;
+        $model->save($data);
+
+        return redirect()->to(base_url('sales-orders/view/' . $id));
     }
 }
