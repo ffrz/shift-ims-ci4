@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Entities\Product;
 use App\Entities\StockUpdate;
+use App\Models\OrderPaymentModel;
 use stdClass;
 
 class PurchaseOrderController extends BaseController
@@ -62,6 +63,11 @@ class PurchaseOrderController extends BaseController
             inner join products p on p.id = d.product_id
             where parent_id=$order->id")
             ->getResultObject();
+
+        $order->payments = $this->db->query("
+            select * from order_payments
+            where update_id={$order->id} order by id asc"
+        )->getResultObject();
 
         return view('purchase-order/view', [
             'data' => $order
@@ -177,6 +183,8 @@ class PurchaseOrderController extends BaseController
                 $data->total_bill = abs($data->total_cost) + $data->expedition_cost + $data->other_cost;
                 if ($action == 'complete_and_paid') {
                     $data->total_paid = $data->total_bill;
+                    $paymentModel = new OrderPaymentModel();
+                    $paymentModel->addPayment($data->id, date('Y-m-d'), $data->total_bill);
                 }
                 $model->save($data);
 
@@ -267,11 +275,16 @@ class PurchaseOrderController extends BaseController
             return redirect()->to(base_url('purchase-orders/view/' . $id));
         }
 
+        $this->db->transBegin();
         $data->lastmod_at = date('Y-m-d H:i:s');
         $data->lastmod_by = current_user()->username;
         $data->total_paid = $data->total_bill;
         $data->payment_status = StockUpdate::PAYMENTSTATUS_FULLYPAID;
         $model->save($data);
+
+        $paymentModel = new OrderPaymentModel();
+        $paymentModel->addPayment($data->id, date('Y-m-d'), $data->total_bill);
+        $this->db->transCommit();
 
         return redirect()->to(base_url('purchase-orders/view/' . $id));
     }

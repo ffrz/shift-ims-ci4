@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Entities\Product;
 use App\Entities\StockUpdate;
+use App\Models\OrderPaymentModel;
 use stdClass;
 
 class SalesOrderController extends BaseController
@@ -95,10 +96,10 @@ class SalesOrderController extends BaseController
             where parent_id=$order->id")
             ->getResultObject();
 
-            // $order->payments = $this->db->query("
-            //     select * from sales_order_payments
-            //     where order_id=$order->id order by id asc"
-            // )->getResultObject();
+            $order->payments = $this->db->query("
+                select * from order_payments
+                where update_id={$order->id} order by id asc"
+            )->getResultObject();
 
         return view('sales-order/' . ($this->request->getGet('print') ? 'print' : 'view'), [
             'data' => $order,
@@ -194,6 +195,8 @@ class SalesOrderController extends BaseController
                 $data->total_bill = abs($data->total_price) + $data->expedition_cost + $data->other_cost;
                 if ($action == 'complete_and_paid') {
                     $data->total_paid = $data->total_bill;
+                    $paymentModel = new OrderPaymentModel();
+                    $paymentModel->addPayment($data->id, date('Y-m-d'), $data->total_bill);
                 }
                 $model->save($data);
 
@@ -285,11 +288,16 @@ class SalesOrderController extends BaseController
             return redirect()->to(base_url('sales-orders/view/' . $id));
         }
 
+        $this->db->transBegin();
         $data->lastmod_at = date('Y-m-d H:i:s');
         $data->lastmod_by = current_user()->username;
         $data->total_paid = $data->total_bill;
         $data->payment_status = StockUpdate::PAYMENTSTATUS_FULLYPAID;
         $model->save($data);
+
+        $paymentModel = new OrderPaymentModel();
+        $paymentModel->addPayment($data->id, date('Y-m-d'), $data->total_bill);
+        $this->db->transCommit();
 
         return redirect()->to(base_url('sales-orders/view/' . $id));
     }

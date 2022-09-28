@@ -85,7 +85,7 @@ $this->extend('_layouts/default')
                     </table>
                 </div>
             </div>
-            <?php if (defined('REPAIR_SERVICE_MODULE')) : ?>
+            <?php if (env('REPAIR_SERVICE_MODULE')) : ?>
             <div class="tab-pane fade" id="tabcontent3" role="tabpanel" aria-labelledby="tabcontent3-tab">
                 <div class="overlay-wrapper table-responsive">
                     <table class="table table-bordered table-condensed table-striped">
@@ -107,7 +107,11 @@ $this->extend('_layouts/default')
                             <?php endif ?>
                             <?php foreach ($services as $item) : ?>
                                 <tr>
-                                    <td class="text-center"><?= format_service_order_code($item->id) ?></td>
+                                    <td class="text-center">
+                                        <a href="<?= base_url('service-orders/view/' . $item->id) ?>">
+                                            <?= format_service_order_code($item->id) ?>
+                                        </a>
+                                    </td>
                                     <td class="text-center"><?= format_date($item->date) ?></td>
                                     <td class="text-center"><?= format_service_order_status($item->status) ?></td>
                                     <td><?= esc($item->device) ?></td>

@@ -18,7 +18,7 @@ $this->extend('_layouts/default');
     <div class="card-header p-0 pt-1">
         <ul class="nav nav-tabs" id="customer-tab" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" id="tabcontent1-tab1" data-toggle="pill" href="#tabcontent1" role="tab" aria-controls="tabcontent1-tab1" aria-selected="false">Info Pelanggan</a>
+                <a class="nav-link active" id="tabcontent1-tab1" data-toggle="pill" href="#tabcontent1" role="tab" aria-controls="tabcontent1-tab1" aria-selected="false">Info Order</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="tabcontent2-tab" data-toggle="pill" href="#tabcontent2" role="tab" aria-controls="tabcontent2-tab" aria-selected="true">Riwayat Pembayaran</a>
@@ -170,7 +170,7 @@ $this->extend('_layouts/default');
                 </div>
             </div><!-- tab-pane -->
             <div class="tab-pane fade table-responsive" id="tabcontent2" role="tabpanel" aria-labelledby="tabcontent2-tab2">
-            <table class="table table-striped">
+                <table class="table table-striped">
                     <thead style="text-align:center;">
                         <tr>
                             <th>Kode TRX</th>
@@ -180,34 +180,44 @@ $this->extend('_layouts/default');
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if (count($data->items) == 0) : ?>
+                        <?php if (count($data->payments) == 0) : ?>
                             <tr>
-                                <td colspan="4" class="text-center text-muted font-italic">Belum ada item yang ditambahkan.</td>
+                                <td colspan="4" class="text-center text-muted font-italic">Belum ada rekaman.</td>
                             </tr>
                         <?php endif ?>
-                        <?php $total = 0 ?>
-                        <?php foreach ($data->items as $item) : ?>
-                            <?php $subtotal = abs($item->quantity) * $item->price ?>
+                        <?php foreach ($data->payments as $item) : ?>
+                            <?php $subtotal = $item->amount ?>
                             <tr>
                                 <td class="text-right"><?= $item->id ?></td>
-                                <td><?= esc($item->name) ?></td>
-                                <td class="text-right"><?= format_number(abs($item->quantity)) ?></td>
-                                <td><?= esc($item->uom) ?></td>
+                                <td><?= format_date($item->date) ?></td>
+                                <td class="text-right"><?= format_number(abs($item->amount)) ?></td>
+                                <td></td>
                             </tr>
-                            <?php $total += $subtotal ?>
                         <?php endforeach ?>
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th colspan="2"></th>
+                            <th></th>
+                            <th class="text-right">Total Penerimaan</th>
+                            <th class="text-right"><?= format_number($data->total_paid) ?></th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <th></th>
                             <th class="text-right">Total Tagihan</th>
-                            <th class="text-right"><?= format_number($data->total_price) ?></th>
+                            <th class="text-right"><?= format_number($data->total_bill) ?></th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th class="text-right">Sisa Tagihan</th>
+                            <th class="text-right"><?= format_number($data->total_bill - $data->total_paid) ?></th>
+                            <th></th>
                         </tr>
                     </tfoot>
                 </table>
             </div>
         </div>
-
     </div>
 </div>
 <?= $this->endSection() ?>
