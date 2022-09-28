@@ -84,7 +84,9 @@ $routes->group('stock-adjustments', function($routes) {
 $routes->group('purchase-orders', function($routes) {
     $routes->get('', 'PurchaseOrderController::index');
     $routes->match(['get', 'post'], 'add', 'PurchaseOrderController::add');
+    $routes->match(['get', 'post'], 'edit/(:num)', 'PurchaseOrderController::edit/$1');
     $routes->get('view/(:num)', 'PurchaseOrderController::view/$1');
+    $routes->get('delete/(:num)', 'PurchaseOrderController::delete/$1');
 });
 
 $routes->group('sales-orders', function($routes) {

@@ -1,5 +1,5 @@
 <?php
-
+use App\Entities\StockUpdate;
 $this->title = 'Order Pembelian';
 $this->titleIcon = 'fa-truck-ramp-box';
 $this->menuActive = 'purchase-order';
@@ -56,21 +56,32 @@ $this->extend('_layouts/default')
                             <th>Pemasok</th>
                             <th>Waktu</th>
                             <th>Total</th>
-                            <th>Catatan</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($items as $item) : ?>
+                            <?php
+                            $badge_class = '';
+                            $url = 'view';
+                            if ($item->status == StockUpdate::STATUS_CANCELED) {
+                                $badge_class = 'badge-danger';
+                            }
+                            else if ($item->status == StockUpdate::STATUS_COMPLETED) {
+                                $badge_class = 'badge-success';
+                            }
+                            else if ($item->status == StockUpdate::STATUS_SAVED) {
+                                $badge_class = 'badge-warning';
+                                $url = 'edit';
+                            }
+                            ?>
                             <tr>
-                                <td><a href="<?= base_url("/purchase-orders/view/$item->id") ?>"><?= format_stock_update_code($item->type, $item->code) ?></a></td>
+                                <td>
+                                    <a href="<?= base_url("/purchase-orders/$url/$item->id") ?>"><?= format_stock_update_code($item->type, $item->code) ?></a>
+                                    <span class="badge <?= $badge_class ?>"><?= format_stock_update_status($item->status) ?></span>
+                                </td>
                                 <td><?= $item->party_name ?></td>
                                 <td class="text-center"><?= format_datetime($item->datetime) ?></td>
                                 <td class="text-right"><?= format_number($item->total_cost) ?></td>
-                                <td><?= $item->notes ?></td>
-                                <td class="text-center">
-                                    <a href="<?= base_url("/purchase-orders/view/$item->id") ?>" class="btn btn-default btn-sm mr-2"><i class="fa fa-eye"></i></a> 
-                                </td>
                             </tr>
                         <?php endforeach ?>
                     </tbody>
@@ -84,7 +95,7 @@ $this->extend('_layouts/default')
 <script>
     $(function() {
         DATATABLES_OPTIONS.order = [[0, 'desc']];
-        DATATABLES_OPTIONS.columnDefs = [{ orderable: false, targets: 3 }];
+        //DATATABLES_OPTIONS.columnDefs = [{ orderable: false, targets: 4 }];
         $('#daterange').daterangepicker({locale: { format: DATE_FORMAT }});
         $('.data-table').DataTable(DATATABLES_OPTIONS);
     });

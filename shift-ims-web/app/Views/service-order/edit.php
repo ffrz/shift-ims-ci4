@@ -124,11 +124,11 @@ $this->menuActive = 'add-service-order';
             <div class="form-row">
                 <div class="form-group col-md-2">
                     <label for="estimated_cost" class="">Biaya Perkiraan</label>
-                    <input type="text" class="form-control" id="estimated_cost" name="estimated_cost" value="<?= esc($data->estimated_cost) ?>">
+                    <input type="number" class="form-control text-right" id="estimated_cost" name="estimated_cost" value="<?= esc($data->estimated_cost) ?>">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="down_payment" class="">Uang Muka</label>
-                    <input type="text" class="form-control" id="down_payment" name="down_payment" value="<?= esc($data->down_payment) ?>">
+                    <input type="number" class="form-control text-right" id="down_payment" name="down_payment" value="<?= esc($data->down_payment) ?>">
                 </div>
             </div>
             <div class="row">
@@ -137,19 +137,19 @@ $this->menuActive = 'add-service-order';
             <div class="form-row">
                 <div class="form-group col-md-2">
                     <label for="parts_cost" class="">Biaya Peralatan</label>
-                    <input type="number" lang="id" class="form-control" id="parts_cost" name="parts_cost" value="<?= esc($data->parts_cost) ?>">
+                    <input type="number" lang="id" class="form-control text-right" id="parts_cost" name="parts_cost" value="<?= esc($data->parts_cost) ?>">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="service_cost" class="">Biaya Servis</label>
-                    <input type="number" lang="id" class="form-control" id="service_cost" name="service_cost" value="<?= esc($data->service_cost) ?>">
+                    <input type="number" lang="id" class="form-control text-right" id="service_cost" name="service_cost" value="<?= esc($data->service_cost) ?>">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="other_cost" class="">Biaya Lain-lain</label>
-                    <input type="number" lang="id" class="form-control" id="other_cost" name="other_cost" value="<?= esc($data->other_cost) ?>">
+                    <input type="number" lang="id" class="form-control text-right" id="other_cost" name="other_cost" value="<?= esc($data->other_cost) ?>">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="total_cost" class="">Jumlah Biaya</label>
-                    <input type="number" lang="id" class="form-control" id="total_cost" name="total_cost" value="<?= esc($data->total_cost) ?>" readonly>
+                    <input type="text" lang="id" class="form-control text-right" id="total_cost" name="total_cost" value="<?= format_number((float)$data->total_cost) ?>" readonly>
                 </div>
                 <div class="form-group col-md-2">
                     <label for="payment_status" class="">Status Pembayaran</label>
@@ -178,6 +178,11 @@ $this->menuActive = 'add-service-order';
 <?= $this->section('footscript') ?>
 <script>
     $(document).ready(function() {
+        var formatter = new Intl.NumberFormat('id-ID', {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+        });
+
         $('.select2').select2();
         $(document).on('select2:open', () => {
             document.querySelector('.select2-search__field').focus();
@@ -199,7 +204,7 @@ $this->menuActive = 'add-service-order';
             var b = parseInt($('#service_cost').val());
             var c = parseInt($('#other_cost').val());
             var total = a + b + c;
-            $('#total_cost').val(total);
+            $('#total_cost').val(formatter.format(total));
         }
 
         $('#parts_cost').change(update_total_cost);

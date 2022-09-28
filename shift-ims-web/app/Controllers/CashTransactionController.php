@@ -72,8 +72,12 @@ class CashTransactionController extends BaseController
             $item->fill($this->request->getPost());
             $item->datetime = datetime_from_input($item->datetime);
             $item->amount = (float)$item->amount;
+            $item->account_id = (int)$item->account_id;
             if (!$item->category_id) {
                 $item->category_id = null;
+            }
+            if (!$item->account_id) {
+                $errors['account_id'] = 'Silahkan tentukan akun kas.';
             }
 
             if (empty($errors)) {

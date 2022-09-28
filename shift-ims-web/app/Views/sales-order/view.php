@@ -127,12 +127,14 @@ $this->extend('_layouts/default');
                 </table>
                 <div class="mt-3">
                     <div class="col-md-12">
+                        <small>
                         <?php if ($data->created_by) : ?>
-                            <p>Dibuat oleh <?= $data->created_by ?> pada <?= format_datetime($data->created_at) ?></p>
+                            <div class="text-muted">Dibuat oleh <?= $data->created_by ?> pada <?= format_datetime($data->created_at) ?></div>
                         <?php endif ?>
                         <?php if ($data->lastmod_by) : ?>
-                            | Diubah terakhir kali oleh <?= $data->lastmod_by ?> <?= format_datetime($data->lastmod_at) ?>
+                            <div class="text-muted">Diperbarui terakhir kali oleh <?= $data->lastmod_by ?> <?= format_datetime($data->lastmod_at) ?></div>
                         <?php endif ?>
+                        </small>
                     </div>
                 </div>
                 <div class="mt-3">

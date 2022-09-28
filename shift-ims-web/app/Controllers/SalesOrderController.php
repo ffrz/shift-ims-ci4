@@ -197,14 +197,14 @@ class SalesOrderController extends BaseController
 
                 $this->db->transCommit();
 
-                if (!$data->status == StockUpdate::STATUS_SAVED) {
+                if ($data->status != StockUpdate::STATUS_SAVED) {
                     return redirect()->to(base_url("sales-orders/view/$data->id"))
                         ->with('info', "Order telah selesai");
                 }
-            }
 
-            return redirect()->to(base_url("sales-orders/edit/$data->id"))
-                ->with('info', "Order telah disimpan");
+                return redirect()->to(base_url("sales-orders/edit/$data->id"))
+                    ->with('info', "Order telah disimpan");
+            }
         }
 
         $customers = $this->getPartyModel()->getAllCustomers();
@@ -213,7 +213,9 @@ class SalesOrderController extends BaseController
             'data' => $data,
             'customers' => $customers,
             'products' => $products,
-            'items' => $items
+            'items' => $items,
+            'orderOptions' => $this->db->query('select order_via from stock_updates group by order_via order by order_via asc')
+            ->getResultObject()
         ]);
     }
 
@@ -223,13 +225,10 @@ class SalesOrderController extends BaseController
         $data = new StockUpdate();
         $data->status = StockUpdate::STATUS_SAVED;
         $data->type = StockUpdate::UPDATE_TYPE_SALES_ORDER;
-        $data->supplier_id = 0;
         $data->datetime = date('Y-m-d H:i:s');
         $data->created_at = date('Y-m-d H:i:s');
         $data->created_by = current_user()->username;
         $data->code = $model->generateCode(StockUpdate::UPDATE_TYPE_SALES_ORDER);
-        $data->notes = '';
-
         $model->save($data);
         return redirect()->to(base_url('sales-orders/edit/' . $this->db->insertID()));
     }

@@ -30,7 +30,7 @@ $this->extend('_layouts/default')
                 <div class="form-group row">
                     <label for="account_id" class="col-sm-3 col-form-label">Akun / Rekening</label>
                     <div class="col-sm-9">
-                        <select class="custom-select select2" id="account_id" name="account_id">
+                        <select class="custom-select select2 <?= !empty($errors['account_id']) ? 'is-invalid' : '' ?>" id="account_id" name="account_id">
                             <option value="" <?= !$data->account_id ? 'selected' : '' ?>>-- Akun / Rek --</option>
                             <?php foreach ($accounts as $account) : ?>
                                 <option value="<?= $account->id ?>" <?= $data->account_id == $account->id ? 'selected' : '' ?>>
@@ -38,6 +38,11 @@ $this->extend('_layouts/default')
                                 </option>
                             <?php endforeach ?>
                         </select>
+                        <?php if (!empty($errors['account_id'])) : ?>
+                            <span class="error form-error">
+                                <?= $errors['account_id'] ?>
+                            </span>
+                        <?php endif ?>
                     </div>
                 </div>
                 <div class="form-group row">

@@ -25,7 +25,7 @@ $this->extend('_layouts/default');
             <div class="tab-pane fade show active table-responsive" id="tabcontent1" role="tabpanel" aria-labelledby="tabcontent1-tab1">
                 <table class="table table-condensed table-striped">
                     <tr>
-                        <td style="width:25%;">No Invoice:</td>
+                        <td style="width:10rem;">No Invoice:</td>
                         <td style="width:0.5rem;">:</td>
                         <td>#<?= $orderCode ?></td>
                     </tr>
@@ -70,6 +70,16 @@ $this->extend('_layouts/default');
                         <td>:</td>
                         <td><?= esc($data->notes) ?></td>
                     </tr>
+                    <tr>
+                        <td>Order Lewat</td>
+                        <td>:</td>
+                        <td><?= esc($data->order_via) ?></td>
+                    </tr>
+                    <tr>
+                        <td>No Nota</td>
+                        <td>:</td>
+                        <td><?= esc($data->external_ref_code) ?></td>
+                    </tr>
                 </table>
                 <table class="table table-striped">
                     <thead style="text-align:center;">
@@ -110,6 +120,21 @@ $this->extend('_layouts/default');
                         </tr>
                         <tr>
                             <th colspan="4"></th>
+                            <th class="text-right">Biaya Ekspedisi</th>
+                            <th class="text-right"><?= format_number($data->expedition_cost) ?></th>
+                        </tr>
+                        <tr>
+                            <th colspan="4"></th>
+                            <th class="text-right">Biaya Lainnya</th>
+                            <th class="text-right"><?= format_number($data->other_cost) ?></th>
+                        </tr>
+                        <tr>
+                            <th colspan="4"></th>
+                            <th class="text-right">Grand Total</th>
+                            <th class="text-right"><?= format_number((float)($data->total_price + $data->expedition_cost + $data->other_cost)) ?></th>
+                        </tr>
+                        <tr>
+                            <th colspan="4"></th>
                             <th class="text-right">Jumlah Bayar</th>
                             <th class="text-right"><?= format_number((float)$data->total_paid) ?></th>
                         </tr>
@@ -122,22 +147,22 @@ $this->extend('_layouts/default');
                 </table>
                 <div class="mt-3">
                     <div class="col-md-12">
+                        <small>
                         <?php if ($data->created_by) : ?>
-                            <p>Dibuat oleh <?= $data->created_by ?> pada <?= format_datetime($data->created_at) ?></p>
+                            <div class="text-muted">Dibuat oleh <?= $data->created_by ?> pada <?= format_datetime($data->created_at) ?></div>
                         <?php endif ?>
                         <?php if ($data->lastmod_by) : ?>
-                            | Diubah terakhir kali oleh <?= $data->lastmod_by ?> <?= format_datetime($data->lastmod_at) ?>
+                            <div class="text-muted">Diperbarui terakhir kali oleh <?= $data->lastmod_by ?> <?= format_datetime($data->lastmod_at) ?></div>
                         <?php endif ?>
+                        </small>
                     </div>
                 </div>
-                <?php /*
                 <div class="mt-3">
                     <?php if ($data->status == StockUpdate::STATUS_COMPLETED) : ?>
-                        <a href="<?= base_url("purchase-orders/view/$data->id?print=1") ?>" rel="noopener" target="_blank" class="btn btn-default mr-2"><i class="fas fa-print"></i> Print</a>
+                        <a href="<?= base_url("purchase-orders/view/$data->id?print=1") ?>" rel="noopener" target="_blank" class="btn btn-default mr-2"><i class="fas fa-print mr-1"></i> Print</a>
                     <?php endif ?>
-                    <a onclick="return confirm('Hapus?')" href="<?= base_url("purchase-orders/delete/$data->id") ?>" class="btn btn-danger"><i class="fas fa-trash"></i> Hapus</a>
+                    <a onclick="return confirm('Hapus?')" href="<?= base_url("purchase-orders/delete/$data->id") ?>" class="btn btn-danger mr-2"><i class="fas fa-trash mr-1"></i> Hapus</a>
                 </div>
-                */ ?>
             </div><!-- tab-pane -->
             <div class="tab-pane fade table-responsive" id="tabcontent2" role="tabpanel" aria-labelledby="tabcontent2-tab2">
             <table class="table table-striped">

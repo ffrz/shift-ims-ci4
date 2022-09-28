@@ -155,6 +155,9 @@ $this->navActive = 'service-order';
     </div>
     <div class="row mt-3">
         <div class="col-12">
+            <?php if ($data->status == 1): ?>
+            <a href="<?= base_url("service-orders/edit/$data->id?print=1") ?>" class="btn btn-default mr-2"><i class="fas fa-edit"></i> Edit</a>
+            <?php endif ?>
             <a href="<?= base_url("service-orders/view/$data->id?print=1") ?>" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
         </div>
     </div>
