@@ -92,6 +92,7 @@ function format_service_order_status($status) {
     switch ($status) {
         case 1: return 'Aktif';
         case 2: return 'Selesai';
+        case 3: return 'Dibatalkan';
     }
     return 'unknown status';
 }
@@ -102,7 +103,7 @@ function format_service_status($status) {
         case 1: return 'Sedang Diperiksa';
         case 2: return 'Sedang Diperbaiki';
         case 3: return 'Selesai: Sukses';
-        case 4: return 'Selesai: Gagal';
+        case 4: return 'Selesai: Gagal';  
     }
 }
 
@@ -112,6 +113,7 @@ function format_service_order_payment_status($status)
         case 0: return 'Belum Dibayar';
         case 1: return 'Dibayar Sebagian';
         case 2: return 'Lunas';
+        case 3: return 'Tidak Dibayar';
     }
 }
 
