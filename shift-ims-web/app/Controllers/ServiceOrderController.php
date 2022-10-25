@@ -67,7 +67,7 @@ class ServiceOrderController extends BaseController
             $item->parts_cost = intval($this->request->getPost('parts_cost'));
             $item->service_cost = intval($this->request->getPost('service_cost'));
             $item->other_cost = intval($this->request->getPost('other_cost'));
-            $item->total_cost = intval($this->request->getPost('total_cost'));
+            $item->total_cost = str_to_double((string)$this->request->getPost('total_cost'));
             $item->payment_status = intval($this->request->getPost('payment_status'));
 
             $item->notes = trim($this->request->getPost('notes'));
