@@ -110,8 +110,8 @@ class SalesOrderController extends BaseController
     public function edit($id)
     {
         $model = $this->getStockUpdateModel();
-        $data = $model->find($id);
-        if ($data->status != StockUpdate::STATUS_SAVED) {
+        $salesOrder = $model->find($id);
+        if ($salesOrder->status != StockUpdate::STATUS_SAVED) {
             return redirect()->to(base_url('sales-orders/view/' . $id));
         }
         
@@ -121,7 +121,7 @@ class SalesOrderController extends BaseController
                 p.uom, p.name
             from stock_update_details sud
             inner join products p on p.id = sud.product_id
-            where sud.parent_id=$data->id
+            where sud.parent_id=$salesOrder->id
             order by sud.id asc
         ")->getResultObject();
 
@@ -135,22 +135,22 @@ class SalesOrderController extends BaseController
         if ($this->request->getMethod() == 'post') {
             $action = $this->request->getPost('action');
             if ($action == 'complete') {
-                $data->status = StockUpdate::STATUS_COMPLETED;
+                $salesOrder->status = StockUpdate::STATUS_COMPLETED;
             }
             else if ($action == 'cancel') {
-                $data->status = StockUpdate::STATUS_CANCELED;
+                $salesOrder->status = StockUpdate::STATUS_CANCELED;
             }
             else if ($action == 'complete_and_paid') {
-                $data->status = StockUpdate::STATUS_COMPLETED;
-                $data->payment_status = StockUpdate::PAYMENTSTATUS_FULLYPAID;
+                $salesOrder->status = StockUpdate::STATUS_COMPLETED;
+                $salesOrder->payment_status = StockUpdate::PAYMENTSTATUS_FULLYPAID;
             }
 
-            $data->fill($this->request->getPost());
-            if (!$data->party_id) {
-                $data->party_id = null;
+            $salesOrder->fill($this->request->getPost());
+            if (!$salesOrder->party_id) {
+                $salesOrder->party_id = null;
             }
 
-            $data->datetime = datetime_from_input($data->datetime);
+            $salesOrder->datetime = datetime_from_input($salesOrder->datetime);
 
             $products_by_ids = [];
             foreach ($products as $product) {
@@ -167,8 +167,8 @@ class SalesOrderController extends BaseController
             if (empty($errors)) {
                 $items = [];
                 $i = 0;
-                $data->total_cost = 0;
-                $data->total_price = 0;
+                $salesOrder->total_cost = 0;
+                $salesOrder->total_price = 0;
                 foreach ($quantities as $product_id => $qty) {
                     $product = $products_by_ids[$product_id];
                     $item = new stdClass();
@@ -183,24 +183,24 @@ class SalesOrderController extends BaseController
                     $item->subtotal_cost = abs($item->cost * $item->quantity);
                     $item->subtotal_price = abs($item->price * $item->quantity);
 
-                    $data->total_cost += $item->subtotal_cost;
-                    $data->total_price += $item->subtotal_price;
+                    $salesOrder->total_cost += $item->subtotal_cost;
+                    $salesOrder->total_price += $item->subtotal_price;
                     $items[] = $item;
                 }
 
                 $this->db->transBegin();
 
-                $data->lastmod_at = date('Y-m-d H:i:s');
-                $data->lastmod_by = current_user()->username;
-                $data->total_bill = abs($data->total_price) + $data->expedition_cost + $data->other_cost;
+                $salesOrder->lastmod_at = date('Y-m-d H:i:s');
+                $salesOrder->lastmod_by = current_user()->username;
+                $salesOrder->total_bill = abs($salesOrder->total_price) + $salesOrder->expedition_cost + $salesOrder->other_cost;
                 if ($action == 'complete_and_paid') {
-                    $data->total_paid = $data->total_bill;
+                    $salesOrder->total_paid = $salesOrder->total_bill;
                     $paymentModel = new OrderPaymentModel();
-                    $paymentModel->addPayment($data->id, date('Y-m-d'), $data->total_bill);
+                    $paymentModel->addPayment($salesOrder->id, date('Y-m-d'), $salesOrder->total_bill);
                 }
-                $model->save($data);
+                $model->save($salesOrder);
 
-                $this->db->query('delete from stock_update_details where parent_id=' . $data->id);
+                $this->db->query('delete from stock_update_details where parent_id=' . $salesOrder->id);
 
                 foreach ($items as $item) {
                     $this->db->query(
@@ -208,7 +208,7 @@ class SalesOrderController extends BaseController
                         ( parent_id , id , product_id , quantity , cost , price ) values
                         (:parent_id:,:id:,:product_id:,:quantity:,:cost:,:price:)
                         ", [
-                            'parent_id' => $data->id,
+                            'parent_id' => $salesOrder->id,
                             'id' => $item->num,
                             'product_id' => $item->id,
                             'quantity' => $item->quantity,
@@ -216,9 +216,8 @@ class SalesOrderController extends BaseController
                             'price' => $item->price
                         ]);
 
-                    $product = $products_by_ids[$product_id];
-                    if ($data->status == StockUpdate::STATUS_COMPLETED &&
-                        $product->type == Product::TYPE_STOCKED) {                    
+                    $product = $products_by_ids[$item->id];
+                    if ($salesOrder->status == StockUpdate::STATUS_COMPLETED && $product->type == Product::TYPE_STOCKED) {
                         $this->db->query("
                             update products set
                             stock=stock+$item->quantity
@@ -229,12 +228,12 @@ class SalesOrderController extends BaseController
 
                 $this->db->transCommit();
 
-                if ($data->status != StockUpdate::STATUS_SAVED) {
-                    return redirect()->to(base_url("sales-orders/view/$data->id"))
+                if ($salesOrder->status != StockUpdate::STATUS_SAVED) {
+                    return redirect()->to(base_url("sales-orders/view/$salesOrder->id"))
                         ->with('info', "Order telah selesai");
                 }
 
-                return redirect()->to(base_url("sales-orders/edit/$data->id"))
+                return redirect()->to(base_url("sales-orders/edit/$salesOrder->id"))
                     ->with('info', "Order telah disimpan");
             }
         }
@@ -242,7 +241,7 @@ class SalesOrderController extends BaseController
         $customers = $this->getPartyModel()->getAllCustomers();
 
         return view('sales-order/edit', [
-            'data' => $data,
+            'data' => $salesOrder,
             'customers' => $customers,
             'products' => $products,
             'items' => $items,
