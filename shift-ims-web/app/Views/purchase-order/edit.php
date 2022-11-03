@@ -260,7 +260,7 @@ $this->extend('_layouts/default')
                 + `<td>${item.uom}</td>`
                 + `<td class="text-center"><input style="width:7rem;text-align:right;" type="number" id="item-cost-${item.id}" name=costs[${item.id}] value="${item.cost}" max="999999999999"></td>`
                 + `<td class="text-center"><input style="width:7rem;text-align:right;" type="number" id="item-price-${item.id}" name=prices[${item.id}] value="${item.price}" max="999999999999"></td>`
-                + `<td id="item-subtotal-${item.id}" class="text-right">${formatNumber(item.cost)}</td>`                
+                + `<td id="item-subtotal-${item.id}" class="text-right">${formatNumber(item.quantity * item.cost)}</td>`                
                 + `<td><button id="remove-item-${item.id}" class="btn btn-xs btn-danger" type="button"><i class="fa fa-trash"></i></button></td>`
                 + `</tr>`
             );
