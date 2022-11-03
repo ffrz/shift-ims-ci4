@@ -8,6 +8,11 @@ $this->navActive = 'purchase-order';
 $this->menuActive = 'purchase-order';
 $this->extend('_layouts/default');
 ?>
+<?= $this->section('right-menu') ?>
+<li class="nav-item">
+    <a href="<?= base_url('purchase-orders/add') ?>" class="btn plus-btn btn-primary mr-1" title="Baru"><i class="fa fa-plus"></i></a>
+</li>
+<?= $this->endSection() ?>
 <?= $this->section('content') ?>
 <div class="card card-primary card-tabs">
     <div class="card-header p-0 pt-1">
