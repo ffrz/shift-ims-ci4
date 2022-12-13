@@ -50,11 +50,6 @@ $this->navActive = 'service-order';
                         <td>:</td>
                         <td>Rp. <?= format_number($data->down_payment) ?></td>
                     </tr>
-                    <tr>
-                        <th>TTD, Petugas</th>
-                        <td>:</td>
-                        <td></td>
-                    </tr>
                 </table>
             </div>
         </div>
@@ -92,16 +87,10 @@ $this->navActive = 'service-order';
                         <td>:</td>
                         <td><?= esc($data->notes) ?></td>
                     </tr>
-                    <tr>
-                        <th>TTD</th>
-                        <td>:</td>
-                        <td></td>
-                    </tr>
                 </table>
             </div>
         </div>
     </div>
-    <p><small>Dicetak: <?= current_user()->username ?> | <?= date('Y-m-d H:i:s') ?> - <?= APP_NAME . 'v' . APP_VERSION_STR ?></small></p>
     <script>
         window.addEventListener("load", window.print());
     </script>
