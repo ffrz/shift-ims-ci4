@@ -140,6 +140,12 @@ $this->navActive = 'product';
             </div>
         </div>
         <div class="card-footer">
+            <?php if ($data->id == 0): ?>
+            <div class="custom-control custom-checkbox mb-2">
+                <input type="checkbox" class="custom-control-input " id="addProductAfterSave" name="add_product_after_save" value="1" <?= $addProductAfterSave ? 'checked="checked"' : '' ?>>
+                <label class="custom-control-label" for="addProductAfterSave">Tambah produk lagi setelah menyimpan</label>
+            </div>
+            <?php endif ?>
             <a href="<?= base_url('/products') ?>" class="btn btn-default mr-2"><i class="fas fa-arrow-left mr-2"></i> Kembali</a>
             <button type="submit" class="btn btn-primary"><i class="fas fa-save mr-2"></i> Simpan</button>
         </div>

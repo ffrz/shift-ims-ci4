@@ -61,6 +61,7 @@ class ProductController extends BaseController
     public function edit($id, $duplicate = false)
     {
         $model = $this->getProductModel();
+        $addProductAfterSave = $this->request->getPost('add_product_after_save');
 
         if ($id == 0) {
             $item = new Product();
@@ -115,6 +116,10 @@ class ProductController extends BaseController
                 }
 
                 $this->db->transCommit();
+                
+                if ($addProductAfterSave == 1) {
+                    return redirect()->to(base_url('products/edit/0'))->with('info', 'Berhasil disimpan.');
+                }
 
                 return redirect()->to(base_url('products'))->with('info', 'Berhasil disimpan.');
             }
@@ -122,6 +127,7 @@ class ProductController extends BaseController
         
         return view('product/edit', [
             'duplicate' => $duplicate,
+            'addProductAfterSave' => $addProductAfterSave,
             'data' => $item,
             'errors' => $errors,
             'categories' => $this->getProductCategoryModel()->getAll(),
